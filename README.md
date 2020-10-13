@@ -22,7 +22,7 @@
 
 Регистрируем нового пользователя или логиним существующего.
 
-![Login screen](docs/Login screen.jpg)
+![Login screen](docs/LoginScreen.jpg)
 
 2. Экран создания/редактирования профиля
 
@@ -30,7 +30,7 @@
 
 TODO: по возможности тут надо сделать не чекбоксы, а раскрывающиеся деревья. Реализовать «вес» интересов.
 
-![Profile screen](docs/Profile screen.jpg)
+![Profile screen](docs/ProfileScreen.jpg)
 
 3. Лента пользователей
 
@@ -39,7 +39,7 @@ TODO: по возможности тут надо сделать не чекбо
 - Возраст
 - Город
 
-![User feed](docs/User feed.jpg)
+![User feed](docs/UserFeed.jpg)
 
 4. Мэтчи
 
@@ -51,11 +51,11 @@ TODO: по возможности тут надо сделать не чекбо
 
 Сюда можно перейти из экрана мэтчей. Можно заново просмотреть всю информацию, но именно после взаимного лайка – увидеть список оставленных пользователем контактов.
 
-![Profile screen 2](docs/Profile screen 2.jpg)
+![Profile screen 2](docs/ProfileScreen2.jpg)
 
 **Схема переходов между экранами:**
 
-![Screen scheme](docs/Screen scheme.jpg)
+![Screen scheme](docs/ScreenScheme.jpg)
 
 **Разработчики:**
 
