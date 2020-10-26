@@ -83,7 +83,7 @@ public class FeedFragment extends Fragment {
 
 
 
-    // TODO: add all info here and everywherefurther, no deep or serious modifications
+    // TODO: add all info here and everywhere further, no deep or serious modifications
 
     class MyHolder extends RecyclerView.ViewHolder {
         TextView profDescription;
