@@ -7,13 +7,21 @@
     android:orientation="vertical"
     android:layout_gravity="bottom">
     <FrameLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        >
+        <LinearLayout
+            android:id="@+id/placeholder"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottomBarHeight"
+        android:layout_weight="0"
         app:menu="@menu/bottom_navigation_menu"
         />
 

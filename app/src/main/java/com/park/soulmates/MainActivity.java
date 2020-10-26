@@ -1,8 +1,11 @@
 package com.park.soulmates;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.Application;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,19 +26,42 @@ public class MainActivity extends AppCompatActivity {
                                                          @Override
                                                          public boolean onNavigationItemSelected(final MenuItem menuItem) {
                                                              String s = "default";
+                                                             FragmentManager fm;
+                                                             FragmentTransaction ft;
                                                              switch (menuItem.getItemId()) {
                                                                  case (R.id.tabFeed):
                                                                      s = "tab1";
+                                                                     FeedFragment feedFragment = new FeedFragment();
+                                                                     fm = getFragmentManager();
+                                                                     ft = fm.beginTransaction();
+
+                                                                     ft.replace(R.id.placeholder, feedFragment);
+                                                                     // ft.addToBackStack(null); - will be able in history by backButton
+                                                                     ft.commit();
                                                                      break;
                                                                  case (R.id.tabMatches):
                                                                      s = "tab2";
+                                                                     MatchesFragment matchesFragment = new MatchesFragment();
+                                                                     fm = getFragmentManager();
+                                                                     ft = fm.beginTransaction();
+
+                                                                     ft.replace(R.id.placeholder, matchesFragment);
+                                                                     // ft.addToBackStack(null);
+                                                                     ft.commit();
                                                                      break;
                                                                  case (R.id.tabProfile):
                                                                      s = "tab3";
+                                                                     ProfileFragment profileFragment = new ProfileFragment();
+                                                                     fm = getFragmentManager();
+                                                                     ft = fm.beginTransaction();
+
+                                                                     ft.replace(R.id.placeholder, profileFragment);
+                                                                     // ft.addToBackStack(null);
+                                                                     ft.commit();
                                                                      break;
                                                              }
                                                              Toast msg = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG);
-                                                             msg.show();
+                                                             // msg.show(); - debug toast for tabs
                                                              return true;
                                                          }
                                                      }
