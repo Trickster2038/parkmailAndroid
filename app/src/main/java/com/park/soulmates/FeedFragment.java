@@ -1,20 +1,14 @@
 package com.park.soulmates;
 
 import android.app.Fragment;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,12 +21,10 @@ public class FeedFragment extends Fragment {
     }
 
     private RecyclerView feedRecycler;
-    //private RecyclerView listNumber;
-    //private Button addButton;
-    public int elemCnt= 100;
+    public int elemCnt= 42;
     private ArrayList<Data> resource = new ArrayList<>();
     private MyAdapter adapter = new MyAdapter(resource);
-    private final String CNT_STATE="savedInt";
+    // private final String CNT_STATE="savedField";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +35,7 @@ public class FeedFragment extends Fragment {
         resource.clear();
 
         for (int j = 1; j <= elemCnt; j++)
-            resource.add(new Data(Integer.toString(j).concat("Lorem ipsum 1")));
+            resource.add(new Data(Integer.toString(j).concat(" Lorem ipsum")));
 
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         return view;
@@ -52,12 +44,11 @@ public class FeedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //addButton = view.findViewById(R.id.addBtn);
         feedRecycler = view.findViewById(R.id.recyclerFeed);
         feedRecycler.setAdapter(adapter);
-        //context, LinearLayoutManager.VERTICAL, false
+
         feedRecycler.setLayoutManager(new LinearLayoutManager(null, LinearLayoutManager.VERTICAL, false));
+        // TODO: fix null context
 
 //        addButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -94,7 +85,7 @@ public class FeedFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-            holder.profView.setText(data.get(position).numberText);
+            holder.profView.setText(data.get(position).textDescription);
         }
 
         @Override
@@ -127,10 +118,10 @@ public class FeedFragment extends Fragment {
     }
 
     class Data {
-        String numberText;
+        String textDescription;
 
-        public Data(String numberTxt) {
-            this.numberText = numberTxt;
+        public Data(String text) {
+            this.textDescription = text;
         }
     }
 
