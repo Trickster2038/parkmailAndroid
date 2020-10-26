@@ -3,12 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFeed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
         android:text="feed tab"
         android:textColor="@color/colorPrimary"
-        android:textSize="150sp" />
+        android:textSize="150sp"/>-->
 </RelativeLayout>
