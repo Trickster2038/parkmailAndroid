@@ -3,4 +3,5 @@
     <string name="tabFeed">feed</string>
     <string name="tabMatches">matches</string>
     <string name="tabProfile">profile</string>
+    <string name="like">like</string>
 </resources>

@@ -9,26 +9,49 @@
 <LinearLayout
     android:id="@+id/profFeedCard"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:orientation="vertical">
+    android:layout_height="@dimen/cardHeight"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/smallMargin">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/feedAvatarHeight"
+        android:src="@mipmap/ic_banner"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hLine"
+        android:background="@color/colorDarkGrey"/>
     <TextView
         android:id="@+id/profTitle"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="Title of prof"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40sp"/>
+        android:gravity="start"
+        android:text="Ivan Ivanov, 20 y.o."
+        android:textSize="@dimen/title"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hLine"
+        android:background="@color/colorDarkGrey"/>
     <TextView
+        android:layout_margin="@dimen/smallMargin"
         android:id="@+id/profDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="descrip. of prof"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40sp"/>
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:text="Lorem ipsum is a nice kind \n
+of text to fill some design placeholders as Artemii Lebedev should say,
+so let's go to the next feed card"
+        android:textSize="@dimen/contentText"/>
+
+     <Button
+          android:background="@color/colorRed"
+          android:textColor="@color/colorWhite"
+          android:text="@string/like"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/contentText"/>
+
 </LinearLayout>
 
 </LinearLayout>

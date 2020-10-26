@@ -38,7 +38,9 @@ public class FeedFragment extends Fragment {
         resource.clear();
 
         for (int j = 1; j <= elemCnt; j++)
-            resource.add(new Data(Integer.toString(j).concat(" Lorem ipsum")));
+            resource.add(new Data(Integer.toString(j).concat(" Lorem ipsum is a nice kind \n" +
+                    "of text to fill some design placeholders as Artemii Lebedev should say,\n" +
+                    "so let's go to the next feed card")));
 
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         return view;
