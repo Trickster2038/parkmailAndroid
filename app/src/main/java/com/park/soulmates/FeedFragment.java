@@ -21,17 +21,14 @@ public class FeedFragment extends Fragment {
     }
 
     private RecyclerView feedRecycler;
-    public int elemCnt= 42;
+    public int elemCnt = 3;
     private ArrayList<Data> resource = new ArrayList<>();
     private MyAdapter adapter = new MyAdapter(resource);
-    // private final String CNT_STATE="savedField";
 
+    // TODO: change placeholders
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        if (savedInstanceState != null ) {
-//            elemCnt = savedInstanceState.getInt(CNT_STATE);
-//        }
         resource.clear();
 
         for (int j = 1; j <= elemCnt; j++)
@@ -41,6 +38,7 @@ public class FeedFragment extends Fragment {
         return view;
     }
 
+    // no modifications
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -49,23 +47,8 @@ public class FeedFragment extends Fragment {
 
         feedRecycler.setLayoutManager(new LinearLayoutManager(null, LinearLayoutManager.VERTICAL, false));
         // TODO: fix null context
-
-//        addButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                elemCnt++;
-//                resource.add(new Data(Integer.toString(elemCnt)));
-//                adapter.notifyItemInserted(elemCnt);
-//            }
-//        });
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(CNT_STATE, elemCnt);
-
-        super.onSaveInstanceState(outState);
-    }
 
 
     class MyAdapter extends RecyclerView.Adapter<MyHolder> {
@@ -75,6 +58,7 @@ public class FeedFragment extends Fragment {
             this.data = dataArg;
         }
 
+        // no modifications
         @NonNull
         @Override
         public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -83,37 +67,30 @@ public class FeedFragment extends Fragment {
             return holder;
         }
 
+
+        // TODO: add all info
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-            holder.profView.setText(data.get(position).textDescription);
+            holder.profDescription.setText(data.get(position).textDescription);
         }
 
+        // TODO: we really need it?
         @Override
         public int getItemCount() {
             return data.size();
         }
     }
 
+
+
+    // TODO: add all info here and everywherefurther, no deep or serious modifications
+
     class MyHolder extends RecyclerView.ViewHolder {
-        TextView profView;
+        TextView profDescription;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            profView = itemView.findViewById(R.id.profDescription);
-//            numberView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    String txt = numberView.getText().toString();
-//                    androidx.fragment.app.Fragment numFragment = new ShowFragment(txt);
-//
-//                    FragmentManager fm = getFragmentManager();
-//                    FragmentTransaction ft = fm.beginTransaction();
-//
-//                    ft.replace(R.id.frameFragLayout, numFragment);
-//                    ft.addToBackStack(null);
-//                    ft.commit();
-//                }
-//            });
+            profDescription = itemView.findViewById(R.id.profDescription);
         }
     }
 
@@ -124,8 +101,4 @@ public class FeedFragment extends Fragment {
             this.textDescription = text;
         }
     }
-
-
-
-
 }
