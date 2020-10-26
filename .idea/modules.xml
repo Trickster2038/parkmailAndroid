@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soulmates.iml" filepath="$PROJECT_DIR$/.idea/modules/Soulmates.iml" group="Soulmates" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Soulmates-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Soulmates-app.iml" group="Soulmates/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Soulmates/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/parkmailAndroid-Soulmates.iml" filepath="$PROJECT_DIR$/.idea/modules/parkmailAndroid-Soulmates.iml" group="Soulmates" />
     </modules>
   </component>
 </project>
