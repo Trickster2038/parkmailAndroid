@@ -14,6 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+@interface Completed{
+    String author();
+}
+
+
+
 public class FeedFragment extends Fragment {
 
     public FeedFragment() {
@@ -25,7 +31,7 @@ public class FeedFragment extends Fragment {
     private ArrayList<Data> resource = new ArrayList<>();
     private MyAdapter adapter = new MyAdapter(resource);
 
-    // TODO: change placeholders
+    // TODO: change placeholders - Serge
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class FeedFragment extends Fragment {
         return view;
     }
 
-    // no modifications
+    @Completed(author = "Serge")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,7 +64,7 @@ public class FeedFragment extends Fragment {
             this.data = dataArg;
         }
 
-        // no modifications
+        @Completed(author = "Serge")
         @NonNull
         @Override
         public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,13 +74,13 @@ public class FeedFragment extends Fragment {
         }
 
 
-        // TODO: add all info
+        // TODO: add all info - Serge
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
             holder.profDescription.setText(data.get(position).textDescription);
         }
 
-        // TODO: we really need it?
+        // TODO: we really need it? - Serge
         @Override
         public int getItemCount() {
             return data.size();
@@ -83,7 +89,7 @@ public class FeedFragment extends Fragment {
 
 
 
-    // TODO: add all info here and everywhere further, no deep or serious modifications
+    // TODO: add all info here and everywhere further, no deep or serious modifications - Serge
 
     class MyHolder extends RecyclerView.ViewHolder {
         TextView profDescription;
