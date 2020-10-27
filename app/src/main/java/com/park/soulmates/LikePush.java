@@ -16,7 +16,7 @@ public class LikePush {
         if(MatchPush.check(userAuth, userGetterUID, like)){
             MatchPush.push(userAuth, userGetterUID);
         }
-        Log.d("DB_status","like pushed");
+        Log.d("log DB_status","like pushed");
     }
 }
 

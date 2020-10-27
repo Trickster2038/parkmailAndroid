@@ -115,7 +115,7 @@ public class FeedFragment extends Fragment {
                 public void onClick(View v) {
                     TextView textUid = itemView.findViewById(R.id.cardUID);
                     LikePush.push(auth, textUid.getText().toString());
-                    Log.d("DB_status","db_feed - OK");
+                    Log.d("log DB_status","db_feed - OK");
                 }
             });
         }

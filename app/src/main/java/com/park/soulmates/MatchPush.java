@@ -28,37 +28,39 @@ public class MatchPush {
         Match matchObj = new Match();
         ref1.setValue(matchObj);
         ref2.setValue(matchObj);
-        Log.d("DB_status","match pushed");
+        Log.d("log DB_status","match pushed");
     }
     public static boolean check(final FirebaseAuth userAuth, String userGetterUID, Like like){
-        Log.d("DB_status","match checking");
+        Log.d("log DB_status","match checking");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
-        myRef = myRef.child("users").child(userGetterUID).child(userAuth.getUid()).child("exist");
+        myRef = myRef.child("users").child(userGetterUID).child("likes").child(userAuth.getUid()).child("exist");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Integer value =  dataSnapshot.getValue(Integer.class);
                 if(value != null){
-                    match = value.equals(1);
-                    Log.d("DB obj search", value.toString());
+                    // equals() goes wrong, maybe hashCode unindentity
+                    match = (value == 1);
+                    Log.d("log DB obj search", value.toString());
                 } else {
+                    Log.d("log DB", "back like is null");
                     match = false;
                 }
-                Log.d("DB current user", userAuth.getUid());
+                Log.d("log DB current user", userAuth.getUid());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("DB", "onCancelled: Something went wrong! Error:" + databaseError.getMessage() );
+                Log.e("log DB", "onCancelled: Something went wrong! Error:" + databaseError.getMessage() );
 
             }
         });
 
         if(match){
-            Log.d("Match", "its a match");
+            Log.d("log Match", "its a match");
         } else {
-            Log.d("Match", "its NOT a match");
+            Log.d("log Match", "its NOT a match");
         }
 
         return match;

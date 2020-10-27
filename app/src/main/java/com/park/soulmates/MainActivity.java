@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser() != null) {
             // Already signed in
             // Do nothing
-            Log.d("Auth_status","already login");
+            Log.d("log Auth_status","already login");
             Toast msg = Toast.makeText(getApplicationContext(), "already signed", Toast.LENGTH_LONG);
-            msg.show();
+            //msg.show();
         } else {
             auth.signInWithEmailAndPassword("fzastahov@gmail.com", "testpass")
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // User signed in successfully
-                                Log.d("Auth_status","new succces login");
+                                Log.d("log Auth_status","new succces login");
                                 Toast msg = Toast.makeText(getApplicationContext(), "sign as fz..@gmail.com", Toast.LENGTH_LONG);
-                                msg.show();
+                                //msg.show();
                             }
                         }
                     });
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference("users/".concat(auth.getUid().concat("/Bio"))); // Key
         ref.setValue("This is a test bio-message"); // Value
-        Log.d("DB_status","db_main - OK");
+        Log.d("log DB_status","db_main - OK");
 
         // end of tests, +- normal code start
         BottomNavigationView bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation);
