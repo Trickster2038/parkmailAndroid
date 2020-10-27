@@ -1,26 +1,16 @@
 package com.park.soulmates;
 
 public class Match {
-    String userUid1, userUid2;
+    Integer exist;
 
-    Match(String uid1, String uid2) {
-        this.userUid1 = uid1;
-        this.userUid2 = uid2;
+    Match() {
+        this.exist = 1;
     }
 
-    public String getUserUid2() {
-        return userUid2;
+    public Integer getExist() {
+        return exist;
     }
-
-    public String getUserUid1() {
-        return userUid1;
-    }
-
-    public void setUserUid2(String userUid2) {
-        this.userUid2 = userUid2;
-    }
-
-    public void setUserUid1(String userUid1) {
-        this.userUid1 = userUid1;
+    public void setExist(String userGetter) {
+        this.exist = 1;
     }
 }

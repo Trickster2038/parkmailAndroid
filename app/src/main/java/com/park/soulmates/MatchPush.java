@@ -22,23 +22,30 @@ public class MatchPush {
 
     public static void push(FirebaseAuth userAuth, String userGetterUID){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("matches/".concat(userAuth.getUid()).concat(userGetterUID));
-        Match match = new Match(userAuth.getUid(), userGetterUID);
-        ref.setValue(match);
+        DatabaseReference ref1 = db.getReference("users/".concat(userAuth.getUid()).concat("/matches/").concat(userGetterUID));
+        DatabaseReference ref2 = db.getReference("users/".concat(userGetterUID).concat("/matches/").concat(userAuth.getUid()));
+        //DatabaseReference ref = db.getReference("matches/".concat(userAuth.getUid()).concat(userGetterUID));
+        Match matchObj = new Match();
+        ref1.setValue(matchObj);
+        ref2.setValue(matchObj);
         Log.d("DB_status","match pushed");
     }
     public static boolean check(final FirebaseAuth userAuth, String userGetterUID, Like like){
         Log.d("DB_status","match checking");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
-        myRef = myRef.child("likes").child(userGetterUID.concat(userAuth.getUid())).child("userGetter");
+        myRef = myRef.child("users").child(userGetterUID).child(userAuth.getUid()).child("exist");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value =  dataSnapshot.getValue(String.class);
-                match = value.equals(userAuth.getUid());
-                Log.d("DB obj search", value);
+                Integer value =  dataSnapshot.getValue(Integer.class);
+                if(value != null){
+                    match = value.equals(1);
+                    Log.d("DB obj search", value.toString());
+                } else {
+                    match = false;
+                }
                 Log.d("DB current user", userAuth.getUid());
             }
             @Override

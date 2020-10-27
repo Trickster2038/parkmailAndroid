@@ -10,8 +10,8 @@ public class LikePush {
 
     public static void push(FirebaseAuth userAuth, String userGetterUID){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("likes/".concat(userAuth.getUid()).concat(userGetterUID)); // Key
-        Like like = new Like(userAuth.getUid(), userGetterUID);
+        DatabaseReference ref = db.getReference("users/".concat(userAuth.getUid()).concat("/likes/").concat(userGetterUID)); // Key
+        Like like = new Like();
         ref.setValue(like);
         if(MatchPush.check(userAuth, userGetterUID, like)){
             MatchPush.push(userAuth, userGetterUID);
