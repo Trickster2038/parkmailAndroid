@@ -8,6 +8,7 @@ import android.app.Application;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: this is simple test of firebase-auth, make individual activity later - Serge
         FirebaseApp.initializeApp(getApplicationContext());
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        final FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // Already signed in
             // Do nothing
@@ -48,9 +51,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
         }
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference("users/".concat(auth.getUid().concat("/Bio"))); // Key
+        ref.setValue("This is a test bio-message"); // Value
+        Log.d("DB_status","db_main - OK");
 
-
-
+        // end of tests, +- normal code start
         BottomNavigationView bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                                                          @Override
@@ -58,10 +64,12 @@ public class MainActivity extends AppCompatActivity {
                                                              String s = "default";
                                                              FragmentManager fm;
                                                              FragmentTransaction ft;
+
+                                                             // TODO: make code DRY (use function for transaction)
                                                              switch (menuItem.getItemId()) {
                                                                  case (R.id.tabFeed):
                                                                      s = "tab1";
-                                                                     FeedFragment feedFragment = new FeedFragment();
+                                                                     FeedFragment feedFragment = new FeedFragment(auth);
                                                                      fm = getFragmentManager();
                                                                      ft = fm.beginTransaction();
 
@@ -76,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                                                                      ft = fm.beginTransaction();
 
                                                                      ft.replace(R.id.placeholder, matchesFragment);
-                                                                     // ft.addToBackStack(null);
                                                                      ft.commit();
                                                                      break;
                                                                  case (R.id.tabProfile):
@@ -86,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                                                                      ft = fm.beginTransaction();
 
                                                                      ft.replace(R.id.placeholder, profileFragment);
-                                                                     // ft.addToBackStack(null);
                                                                      ft.commit();
                                                                      break;
                                                              }

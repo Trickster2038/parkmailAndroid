@@ -1,16 +1,23 @@
 package com.park.soulmates;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -20,10 +27,12 @@ import java.util.ArrayList;
 
 
 
+@SuppressLint("ValidFragment")
 public class FeedFragment extends Fragment {
+    private FirebaseAuth auth;
 
-    public FeedFragment() {
-
+    public FeedFragment(FirebaseAuth acc) {
+        this.auth = acc;
     }
 
     private RecyclerView feedRecycler;
@@ -96,9 +105,19 @@ public class FeedFragment extends Fragment {
     class MyHolder extends RecyclerView.ViewHolder {
         TextView profDescription;
 
-        public MyHolder(@NonNull View itemView) {
+        @Completed(author = "Serge")
+        public MyHolder(@NonNull final View itemView) {
             super(itemView);
             profDescription = itemView.findViewById(R.id.profDescription);
+            Button likeButton = itemView.findViewById(R.id.likeBtn);
+            likeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView textUid = itemView.findViewById(R.id.cardUID);
+                    LikePush.push(auth, textUid.getText().toString());
+                    Log.d("DB_status","db_feed - OK");
+                }
+            });
         }
     }
 
