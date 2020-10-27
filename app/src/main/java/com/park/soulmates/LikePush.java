@@ -11,9 +11,11 @@ public class LikePush {
     public static void push(FirebaseAuth userAuth, String userGetterUID){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference("likes/".concat(userAuth.getUid()).concat(userGetterUID)); // Key
-        ref.setValue("This is a test bio-message"); // Value
         Like like = new Like(userAuth.getUid(), userGetterUID);
         ref.setValue(like);
+        if(MatchPush.check(userAuth, userGetterUID, like)){
+            MatchPush.push(userAuth, userGetterUID);
+        }
         Log.d("DB_status","like pushed");
     }
 }

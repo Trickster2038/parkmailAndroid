@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser() != null) {
             // Already signed in
             // Do nothing
+            Log.d("Auth_status","already login");
             Toast msg = Toast.makeText(getApplicationContext(), "already signed", Toast.LENGTH_LONG);
             msg.show();
         } else {
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // User signed in successfully
+                                Log.d("Auth_status","new succces login");
                                 Toast msg = Toast.makeText(getApplicationContext(), "sign as fz..@gmail.com", Toast.LENGTH_LONG);
                                 msg.show();
                             }
