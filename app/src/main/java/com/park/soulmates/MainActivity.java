@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
             } else if (itemId == R.id.tabProfile) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new ProfileFragment()).commit();
                 Log.d("Tab", "Tab 3");
+
+                // test of user push
+                // UserPusher.push("testName","testSurname","testBio", true, new Boolean[]{true,false,true,false,false});
+
                 return true;
             }
             return false;
