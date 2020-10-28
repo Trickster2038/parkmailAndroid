@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -79,7 +77,7 @@ public class FeedFragment extends Fragment {
         @NonNull
         @Override
         public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feed_prof, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feed_profile, parent, false);
             MyHolder holder = new MyHolder(view);
             return holder;
         }
@@ -88,7 +86,7 @@ public class FeedFragment extends Fragment {
         // TODO: add all info - Serge
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-            holder.profDescription.setText(data.get(position).textDescription);
+            holder.profileDescription.setText(data.get(position).textDescription);
         }
 
         // TODO: we really need it? - Serge
@@ -103,12 +101,12 @@ public class FeedFragment extends Fragment {
     // TODO: add all info here and everywhere further, no deep or serious modifications - Serge
 
     class MyHolder extends RecyclerView.ViewHolder {
-        TextView profDescription;
+        TextView profileDescription;
 
         @Completed(author = "Serge")
         public MyHolder(@NonNull final View itemView) {
             super(itemView);
-            profDescription = itemView.findViewById(R.id.profDescription);
+            profileDescription = itemView.findViewById(R.id.profileDescription);
             Button likeButton = itemView.findViewById(R.id.likeBtn);
             likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override

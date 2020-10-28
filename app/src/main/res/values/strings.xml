@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Soulmates</string>
-    <string name="tabFeed">feed</string>
-    <string name="tabMatches">matches</string>
-    <string name="tabProfile">profile</string>
-    <string name="like">like</string>
+    <string name="tab_feed">feed</string>
+    <string name="tab_matches">matches</string>
+    <string name="tab_profile">profile</string>
+    <string name="button_like">like</string>
     <string name="textHint_email">E-mail address</string>
     <string name="textHint_pass">Password</string>
     <string name="button_login">Log In</string>
