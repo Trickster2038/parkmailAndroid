@@ -36,7 +36,7 @@
         android:textSize="@dimen/contentText"
         android:text="@string/nameInput" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
         android:text="@string/surnameInput" />
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextSurname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:textSize="@dimen/contentText"
         android:text="Birth date" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         android:textSize="@dimen/contentText"
         android:text="Bio" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextBio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,9 +1,11 @@
 
 package com.park.soulmates;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,13 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         // "person.class")to appropriate view in Card 
         // view (here "person.xml") 
         holder.bio.setText(model.getBio());
+
+        Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
+        likeButton.setOnClickListener(v -> {
+            TextView textUid = holder.itemView.findViewById(R.id.cardUID);
+            LikePush.push(textUid.getText().toString());
+            Log.d("log DB_status", "db_feed - OK");
+            });
     }
 
     // Function to tell the class about the Card view (here 
