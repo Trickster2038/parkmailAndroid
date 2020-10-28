@@ -4,6 +4,7 @@ public class AdvancedUserModel {
     public String name, surname, bio;
     boolean romanticSearch;
     String birthdate;
+    String contacts;
     InterestsModel interests;
 
     public AdvancedUserModel(){
@@ -14,13 +15,22 @@ public class AdvancedUserModel {
         interests = new InterestsModel();
     }
 
-    public AdvancedUserModel(String iName, String iSurname, String iBio, String iBirth, Boolean iRomanticSearch,  Boolean[] iInterests){
+    public AdvancedUserModel(String iName, String iSurname, String iBio, String iBirth, String iContacts, Boolean iRomanticSearch,  Boolean[] iInterests){
         this.name = iName;
         this.surname = iSurname;
         this.bio = iBio;
         this.birthdate = iBirth;
+        this.contacts = iContacts;
         this.romanticSearch = iRomanticSearch;
         this.interests = new InterestsModel(iInterests);
+    }
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
     }
 
     public String getName() {

@@ -31,6 +31,7 @@ public class ProfileFragment extends Fragment {
             TextInputEditText editSurname = view.findViewById(R.id.editTextSurname);
             TextInputEditText editBio = view.findViewById(R.id.editTextBio);
             TextInputEditText editDate = view.findViewById(R.id.editTextDate);
+            TextInputEditText editContacts = view.findViewById(R.id.editTextContacts);
             RadioButton radioRomantic = view.findViewById(R.id.radioRomantic);
             CheckBox checkIT = view.findViewById(R.id.checkIT);
             CheckBox checkMusic = view.findViewById(R.id.checkMusic);
@@ -43,6 +44,7 @@ public class ProfileFragment extends Fragment {
                     editSurname.getText().toString(),
                     editBio.getText().toString(),
                     editDate.getText().toString(),
+                    editContacts.getText().toString(),
                     radioRomantic.isChecked(),
                     new Boolean[] {
                             checkIT.isChecked(),
@@ -54,7 +56,7 @@ public class ProfileFragment extends Fragment {
             );
             Log.d("log DB_status", "db_feed - OK");
         });
-
+        
         //TODO: add logout button listener
         return view;
     }

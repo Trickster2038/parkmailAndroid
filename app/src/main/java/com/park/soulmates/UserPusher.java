@@ -11,11 +11,11 @@ public class UserPusher {
 
     }
 
-    public static void push(String iName, String iSurname, String iBio, String iBirth, Boolean iRomanticSearch, Boolean[] iInterests){
+    public static void push(String iName, String iSurname, String iBio, String iBirth, String iContacts, Boolean iRomanticSearch, Boolean[] iInterests){
         FirebaseAuth userAuth = FirebaseAuth.getInstance();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference("users/".concat(userAuth.getUid())); // Key
-        AdvancedUserModel user = new AdvancedUserModel(iName, iSurname, iBio, iBirth, iRomanticSearch, iInterests);
+        AdvancedUserModel user = new AdvancedUserModel(iName, iSurname, iBio, iBirth, iContacts, iRomanticSearch, iInterests);
         ref.setValue(user);
         Log.d("log DB_status", "user pushed");
     }
