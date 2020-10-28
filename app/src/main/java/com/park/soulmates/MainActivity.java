@@ -1,36 +1,37 @@
 package com.park.soulmates;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.tabFeed);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.tabFeed) {
-                getFragmentManager().beginTransaction().replace(R.id.placeholder, new FeedFragment(mAuth)).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new FeedFragment()).commit();
+                Log.d("Tab", "Tab 1");
                 return true;
             } else if (itemId == R.id.tabMatches) {
-                getFragmentManager().beginTransaction().replace(R.id.placeholder, new MatchesFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new MatchesFragment()).commit();
+                Log.d("Tab", "Tab 2");
                 return true;
             } else if (itemId == R.id.tabProfile) {
-                getFragmentManager().beginTransaction().replace(R.id.placeholder, new ProfileFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new ProfileFragment()).commit();
+                Log.d("Tab", "Tab 3");
                 return true;
             }
             return false;
         });
+        bottomNavigationView.setSelectedItemId(R.id.tabFeed);
     }
 }
