@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Tab", "Tab 3");
 
                 // test of user push
-                // UserPusher.push("testName","testSurname","testBio", true, new Boolean[]{true,false,true,false,false});
+                // UserPusher.push("testName","testSurname","testBio", "02.02.2001", true, new Boolean[]{true,false,true,false,false});
 
                 return true;
             }

@@ -8,6 +8,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/hLine</item>
         <item name="android:background">@color/colorDarkGrey</item>
+        <item name="android:textSize">@dimen/contentText</item>
     </style>
 
 </resources>

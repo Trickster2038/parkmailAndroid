@@ -8,4 +8,7 @@
     <string name="textHint_pass">Password</string>
     <string name="button_login">Log In</string>
     <string name="button_signup">Sign Up</string>
+    <string name="nameInput">Your name</string>
+    <string name="surnameInput">Your surname</string>
+
 </resources>
