@@ -1,6 +1,7 @@
 package com.park.soulmates;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
     public ProfileFragment() {
@@ -59,7 +61,14 @@ public class ProfileFragment extends Fragment {
             Log.d("log DB_status", "db_feed - OK");
         });
 
-        //TODO: add logout button listener
+        // FIXME: catch signOut error if raised
+        Button logoutBtn = view.findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(inflater.getContext(), AuthActivity.class);
+            startActivity(intent);
+        });
+
         return view;
     }
 }
