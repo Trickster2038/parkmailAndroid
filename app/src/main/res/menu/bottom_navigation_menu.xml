@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="70dp"
+    android:layout_width="match_parent"
+    >
+    <item
+        android:id="@+id/tabFeed"
+        android:enabled="true"
+        android:icon="@drawable/ic_feed"
+        android:title="@string/tab_feed" />
+    <item
+        android:id="@+id/tabMatches"
+        android:enabled="true"
+        android:icon="@drawable/ic_heart"
+        android:title="@string/tab_matches" />
+    <item
+        android:id="@+id/tabProfile"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/tab_profile" />
+</menu>
