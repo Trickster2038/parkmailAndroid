@@ -55,6 +55,7 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter<
                                           AdvancedUserModel user = dataSnapshot.getValue(AdvancedUserModel.class);
                                           holder.title.setText(user.getName().concat(" ").concat(user.getSurname()));
                                           holder.uid.setText(user.getUid());
+                                          holder.contacts.setText(user.getContacts());
                                           Log.d("DB_matches","listener tick");
                                       }
                                       @Override
@@ -97,10 +98,11 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter<
     // view (here "person.xml")
     class personsViewholder
             extends RecyclerView.ViewHolder {
-        TextView title, uid, interestsField;
+        TextView title, uid, interestsField, contacts;
         public personsViewholder(@NonNull View itemView)
         {
             super(itemView);
+            contacts = itemView.findViewById(R.id.profileMatchesContacts);
             title = itemView.findViewById(R.id.profileMatchesTitle);
             uid  = itemView.findViewById(R.id.cardMatchUID);
             interestsField = itemView.findViewById(R.id.profileMatchesInterests);
