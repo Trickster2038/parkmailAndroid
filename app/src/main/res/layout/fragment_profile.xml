@@ -16,10 +16,12 @@
     android:isScrollContainer="true">
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_height="@dimen/feedAvatarHeight"
         android:src="@mipmap/ic_banner" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
@@ -27,18 +29,21 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextName"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="" />
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
         android:text="@string/surnameInput" />
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextSurname"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -46,6 +51,7 @@
         android:text="" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
@@ -53,12 +59,14 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextDate"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
@@ -66,6 +74,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextContacts"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -73,6 +82,7 @@
         android:inputType="textMultiLine" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
@@ -80,6 +90,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextBio"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -89,6 +100,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/smallMargin"
         android:textSize="@dimen/contentText"
         android:text="Search mode" />
     <RadioGroup
@@ -96,12 +108,14 @@
         android:layout_height="wrap_content" >
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:layout_margin="@dimen/smallMargin"
             android:id="@+id/radioRomantic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Romantic mode" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:layout_margin="@dimen/smallMargin"
             android:id="@+id/radioFriend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +123,7 @@
     </RadioGroup>
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/contentText"
@@ -120,12 +135,14 @@
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioMale"
+            android:layout_margin="@dimen/smallMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Male" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioFemale"
+            android:layout_margin="@dimen/smallMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Female" />
@@ -134,6 +151,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/smallMargin"
         android:textSize="@dimen/contentText"
         android:text="Interests" />
 
@@ -170,15 +188,17 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveChangesBtn"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="Save"
         android:textSize="@dimen/contentText" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutBtn"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="Logout"
         android:textSize="@dimen/contentText" />
