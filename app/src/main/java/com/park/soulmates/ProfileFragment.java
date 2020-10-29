@@ -33,6 +33,7 @@ public class ProfileFragment extends Fragment {
             TextInputEditText editDate = view.findViewById(R.id.editTextDate);
             TextInputEditText editContacts = view.findViewById(R.id.editTextContacts);
             RadioButton radioRomantic = view.findViewById(R.id.radioRomantic);
+            RadioButton radioMale = view.findViewById(R.id.radioMale);
             CheckBox checkIT = view.findViewById(R.id.checkIT);
             CheckBox checkMusic = view.findViewById(R.id.checkMusic);
             CheckBox checkSport = view.findViewById(R.id.checkSport);
@@ -46,6 +47,7 @@ public class ProfileFragment extends Fragment {
                     editDate.getText().toString(),
                     editContacts.getText().toString(),
                     radioRomantic.isChecked(),
+                    radioMale.isChecked(),
                     new Boolean[] {
                             checkIT.isChecked(),
                             checkMusic.isChecked(),

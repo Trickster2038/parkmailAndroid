@@ -97,6 +97,11 @@
         android:gravity="start|top"
         android:inputType="textMultiLine" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/contentText"
+        android:text="Search mode" />
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -112,6 +117,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Friend mode" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/contentText"
+        android:text="Gender" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Female" />
     </RadioGroup>
 
     <TextView

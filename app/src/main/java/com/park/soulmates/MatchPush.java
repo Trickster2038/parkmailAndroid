@@ -25,9 +25,10 @@ public class MatchPush {
         DatabaseReference ref1 = db.getReference("users/".concat(userAuth.getUid()).concat("/matches/").concat(userGetterUID));
         DatabaseReference ref2 = db.getReference("users/".concat(userGetterUID).concat("/matches/").concat(userAuth.getUid()));
         //DatabaseReference ref = db.getReference("matches/".concat(userAuth.getUid()).concat(userGetterUID));
-        Match matchObj = new Match();
-        ref1.setValue(matchObj);
-        ref2.setValue(matchObj);
+        Match matchObj1 = new Match(userGetterUID);
+        Match matchObj2 = new Match(userAuth.getUid());
+        ref1.setValue(matchObj1);
+        ref2.setValue(matchObj2);
         Log.d("log DB_status","match pushed");
     }
     public static boolean check(final FirebaseAuth userAuth, String userGetterUID, Like like){

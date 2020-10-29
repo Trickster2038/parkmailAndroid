@@ -1,28 +1,51 @@
 package com.park.soulmates;
 
 public class AdvancedUserModel {
-    public String name, surname, bio;
-    boolean romanticSearch;
+    public String uid, name, surname, bio;
+    boolean romanticSearch, male;
     String birthdate;
     String contacts;
     InterestsModel interests;
 
     public AdvancedUserModel(){
+        this.uid = "noUID";
         this.name = "no name";
         this.surname = "no surname";
+        this.contacts = "no contacts";
+        this.romanticSearch = false;
+        this.male = false;
         this.bio = "no bio";
-        birthdate = "01.01.2000";
-        interests = new InterestsModel();
+        this.birthdate = "01.01.2000";
+        this.interests = new InterestsModel();
     }
 
-    public AdvancedUserModel(String iName, String iSurname, String iBio, String iBirth, String iContacts, Boolean iRomanticSearch,  Boolean[] iInterests){
+    public AdvancedUserModel(String iUID, String iName, String iSurname, String iBio, String iBirth,
+                             String iContacts, Boolean iRomanticSearch, Boolean iMale, Boolean[] iInterests){
+        this.uid = iUID;
         this.name = iName;
         this.surname = iSurname;
         this.bio = iBio;
         this.birthdate = iBirth;
         this.contacts = iContacts;
         this.romanticSearch = iRomanticSearch;
+        this.male = iMale;
         this.interests = new InterestsModel(iInterests);
+    }
+
+    public boolean isMale() {
+        return male;
+    }
+
+    public void setMale(boolean male) {
+        this.male = male;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getContacts() {
