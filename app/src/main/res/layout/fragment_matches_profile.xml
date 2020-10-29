@@ -35,7 +35,7 @@
             android:textSize="@dimen/title" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/profileMatchesInterests"
+            android:id="@+id/profileMatchesContacts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/smallMargin"
@@ -45,7 +45,7 @@
             android:textSize="@dimen/contentText" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profileInterests"
+                android:id="@+id/profileMatchesInterests"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/smallMargin"
