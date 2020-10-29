@@ -183,7 +183,5 @@
         android:text="Logout"
         android:textSize="@dimen/contentText" />
 
-
-
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

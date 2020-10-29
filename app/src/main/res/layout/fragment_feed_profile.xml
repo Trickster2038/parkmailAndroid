@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/profileFeedCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
     android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_margin="@dimen/smallMargin"
+        android:id="@+id/profileFeedCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="vertical">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="match_parent"
+        android:layout_margin="@dimen/smallMargin"
+        android:layout_width="@dimen/feedAvatarHeight"
         android:layout_height="@dimen/feedAvatarHeight"
         android:src="@mipmap/ic_banner" />
 
-    <View style="@style/Divider" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_margin="@dimen/smallMargin"
         android:id="@+id/profileTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/smallMargin"
         android:gravity="start"
         android:text="Ivan Ivanov, 20 y.o."
         android:textSize="@dimen/title" />
 
-    <View style="@style/Divider" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profileInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/smallMargin"
+            android:layout_weight="2"
+            android:gravity="start"
+            android:text="(for additional info)"
+            android:textSize="@dimen/contentText" />
+
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/profileDescription"
+        android:id="@+id/profileBio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/smallMargin"
@@ -36,8 +51,21 @@ of text to fill some design placeholders as Artemii Lebedev should say,
 so let's go to the next feed card"
         android:textSize="@dimen/contentText" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profileDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/smallMargin"
+            android:layout_weight="2"
+            android:gravity="start"
+            android:text="e.g. IT, Music"
+            android:textSize="@dimen/contentText" />
+
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likeBtn"
+        android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_weight="0"
@@ -50,5 +78,5 @@ so let's go to the next feed card"
         android:layout_height="wrap_content"
         android:text="defaultUID"
         android:visibility="gone" />
-
+    </LinearLayout>
 </LinearLayout>
