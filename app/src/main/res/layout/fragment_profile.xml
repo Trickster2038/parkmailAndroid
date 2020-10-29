@@ -29,12 +29,12 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextName"
+        android:text="testName"
         android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
+        android:inputType="textPersonName" />
     <com.google.android.material.textview.MaterialTextView
         android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
@@ -43,12 +43,12 @@
         android:text="@string/surnameInput" />
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextSurname"
+        android:text="testSur"
         android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
+        android:inputType="textPersonName" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_margin="@dimen/smallMargin"
@@ -59,6 +59,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextDate"
+        android:text="1111"
         android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextContacts"
+        android:text="testContacts"
         android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,6 +92,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextBio"
+        android:text="testBio"
         android:layout_margin="@dimen/smallMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,6 +120,7 @@
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:layout_margin="@dimen/smallMargin"
             android:id="@+id/radioFriend"
+            android:checked="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Friend mode" />
@@ -135,6 +139,7 @@
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioMale"
+            android:checked="true"
             android:layout_margin="@dimen/smallMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,6 +162,7 @@
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkIT"
+        android:checked="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="IT" />
