@@ -37,6 +37,9 @@ public class MatchPush {
         DatabaseReference myRef = database.getReference();
         myRef = myRef.child("users").child(userGetterUID).child("likes").child(userAuth.getUid()).child("exist");
 
+        // FIXME: extremely unstable because works asynchroniously
+        //  (changes "match" after a while in backround, where takes data from DB),
+        //  check match some other way
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

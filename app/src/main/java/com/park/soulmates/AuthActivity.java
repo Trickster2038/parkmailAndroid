@@ -26,6 +26,7 @@ public class AuthActivity extends AppCompatActivity {
             // Already logged in
             // Do nothing
             Log.d("AuthStatus", "Already logged in as " + mAuth.getCurrentUser().getEmail());
+            Log.d("DB_auth_start_uid", mAuth.getUid());
             startActivity(intent);
             finish();
         } else {
@@ -39,6 +40,7 @@ public class AuthActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success
                             Log.d("AuthStatus", "Logged in as " + mAuth.getCurrentUser().getEmail());
+                            Log.d("DB_auth_onPress_uid", mAuth.getUid());
                             Toast.makeText(AuthActivity.this, "Logged in as " + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
                             startActivity(intent);
                             finish();

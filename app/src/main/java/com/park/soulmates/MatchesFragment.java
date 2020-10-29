@@ -12,18 +12,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class MatchesFragment extends Fragment {
+    private FirebaseAuth mAuth;
     private DatabaseReference mbase;
     private RecyclerMatchesAdapter adapter;
     private final int ELEM_COUNT = 3;
     private ArrayList<UserModel> mResource;
     private RecycleViewAdapter mAdapter;
     private RecyclerView mMatchesRecycler;
+
+//    public MatchesFragment(FirebaseAuth iAuth) {
+//        super();
+//        this.mAuth = iAuth;
+//    }
 
     // TODO: change placeholders - Serge
     @Override
@@ -45,9 +52,9 @@ public class MatchesFragment extends Fragment {
         mMatchesRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
         mMatchesRecycler.setAdapter(mAdapter);
 
-        // FIXME: change entrance point to Mactches
+        FirebaseAuth userAuth = FirebaseAuth.getInstance();
         mbase
-                = FirebaseDatabase.getInstance().getReference().child("users");
+                = FirebaseDatabase.getInstance().getReference().child("users").child(userAuth.getUid()).child("matches");
 
         Log.d("DBrefFeed", mbase.toString());
 
@@ -55,9 +62,9 @@ public class MatchesFragment extends Fragment {
 
         // It is a class provide by the FirebaseUI to make a
         // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<AdvancedUserModel> options
-                = new FirebaseRecyclerOptions.Builder<AdvancedUserModel>()
-                .setQuery(mbase, AdvancedUserModel.class)
+        FirebaseRecyclerOptions<Match> options
+                = new FirebaseRecyclerOptions.Builder<Match>()
+                .setQuery(mbase, Match.class)
                 .build();
         // Connecting object of required Adapter class to
         // the Adapter class itself

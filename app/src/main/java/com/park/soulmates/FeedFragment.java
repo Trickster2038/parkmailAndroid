@@ -45,7 +45,6 @@ public class FeedFragment extends Fragment {
         mFeedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
         mFeedRecycler.setAdapter(mAdapter);
 
-        // FIXME: change entrance point to real DATASET, write and swap to ADVANCED USER MODEL!!!
         mbase
                 = FirebaseDatabase.getInstance().getReference().child("users");
 

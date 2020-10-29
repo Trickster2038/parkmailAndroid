@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
             Log.d("log DB_status", "db_feed - OK");
         });
 
-        // FIXME: catch signOut error if raised
+        // TODO: catch signOut error if raised
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
