@@ -47,7 +47,7 @@ public class FeedFragment extends Fragment {
 
         // FIXME: change entrance point to real DATASET, write and swap to ADVANCED USER MODEL!!!
         mbase
-                = FirebaseDatabase.getInstance().getReference().child("testUsers");
+                = FirebaseDatabase.getInstance().getReference().child("users");
 
         Log.d("DBrefFeed", mbase.toString());
 
@@ -55,9 +55,9 @@ public class FeedFragment extends Fragment {
 
         // It is a class provide by the FirebaseUI to make a
         // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<UserModel> options
-                = new FirebaseRecyclerOptions.Builder<UserModel>()
-                .setQuery(mbase, UserModel.class)
+        FirebaseRecyclerOptions<AdvancedUserModel> options
+                = new FirebaseRecyclerOptions.Builder<AdvancedUserModel>()
+                .setQuery(mbase, AdvancedUserModel.class)
                 .build();
         // Connecting object of required Adapter class to
         // the Adapter class itself

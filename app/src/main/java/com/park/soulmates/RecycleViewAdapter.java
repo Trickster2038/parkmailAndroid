@@ -19,10 +19,10 @@ import com.park.soulmates.R;
 // database contents in a Recycler View
 
 public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
-       UserModel, RecycleViewAdapter.personsViewholder> {
+       AdvancedUserModel, RecycleViewAdapter.personsViewholder> {
 
     public RecycleViewAdapter(
-            @NonNull FirebaseRecyclerOptions<UserModel> options)
+            @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options)
     {
         super(options);
     }
@@ -32,13 +32,15 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
     // model class(here "person.class") 
     @Override
     protected void onBindViewHolder(@NonNull personsViewholder holder,
-                     int position, @NonNull UserModel model)
+                     int position, @NonNull AdvancedUserModel model)
     {
 
         // Add firstname from model class (here 
         // "person.class")to appropriate view in Card 
         // view (here "person.xml") 
         holder.bio.setText(model.getBio());
+        holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
+        holder.uid.setText(model.getUid());
 
         Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
         likeButton.setOnClickListener(v -> {
@@ -68,12 +70,15 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
     // view (here "person.xml") 
     class personsViewholder
             extends RecyclerView.ViewHolder {
-        TextView bio;
+        TextView bio, title, uid, interestsField;
         public personsViewholder(@NonNull View itemView)
         {
             super(itemView);
             bio
-                    = itemView.findViewById(R.id.profileDescription);
+                    = itemView.findViewById(R.id.profileBio);
+            title = itemView.findViewById(R.id.profileTitle);
+            uid  = itemView.findViewById(R.id.cardUID);
+            interestsField = itemView.findViewById(R.id.profileInterests);
         }
     }
 }

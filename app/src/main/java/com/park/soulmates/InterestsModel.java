@@ -17,6 +17,7 @@ public class InterestsModel {
         }
     }
 
+    // TODO: maybe change to arrayList(cant use literals to init, but clearer archS)
     public InterestsModel(Boolean[] iInterests){
         this.interests = new ArrayList<Boolean>(5);
         for(int i=0; i<5; i++){
@@ -28,10 +29,11 @@ public class InterestsModel {
         return interests;
     }
 
-    public void setInterests(Boolean[] iInterests) {
-        this.interests = new ArrayList<Boolean>(5);
-        for(int i=0; i<5; i++){
-            interests.add(iInterests[i]);
-        }
+    public void setInterests(ArrayList<Boolean> iInterests) {
+//        this.interests = new ArrayList<Boolean>(5);
+//        for(int i=0; i<5; i++){
+//            interests.add(iInterests[i]);
+//        }
+        this.interests = iInterests;
     }
 }
