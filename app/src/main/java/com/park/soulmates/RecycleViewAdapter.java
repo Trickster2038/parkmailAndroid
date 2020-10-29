@@ -42,6 +42,7 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
         holder.uid.setText(model.getUid());
 
+        // TODO: disable after click + add simple filter using "gone" view attribute
         Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
         likeButton.setOnClickListener(v -> {
             TextView textUid = holder.itemView.findViewById(R.id.cardUID);

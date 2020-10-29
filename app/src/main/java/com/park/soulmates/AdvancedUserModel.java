@@ -3,6 +3,7 @@ package com.park.soulmates;
 public class AdvancedUserModel {
     public String uid, name, surname, bio;
     boolean romanticSearch, male;
+    // FIXME: fix troubles with birthdate input
     String birthdate;
     String contacts;
     InterestsModel interests;
