@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
             );
             Log.d("log DB_status", "db_feed - OK");
         });
-        
+
         //TODO: add logout button listener
         return view;
     }

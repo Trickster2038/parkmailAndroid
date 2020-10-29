@@ -42,7 +42,7 @@ public class MatchPush {
                 Integer value =  dataSnapshot.getValue(Integer.class);
                 if(value != null){
                     // equals() goes wrong, maybe hashCode unindentity
-                    match = (value == 1);
+                    match = (value == 1); // almost always true
                     Log.d("log DB obj search", value.toString());
                 } else {
                     Log.d("log DB", "back like is null");
