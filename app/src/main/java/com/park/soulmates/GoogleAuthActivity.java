@@ -73,6 +73,10 @@ public class GoogleAuthActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
         // this.finishActivity(0);
+
+        // WE NEED LOGOUT TO DISCARD DEFAULT GOOGLE ACCOUNT PREFERENCE
+        signOut();
+
         signIn();
 
     }

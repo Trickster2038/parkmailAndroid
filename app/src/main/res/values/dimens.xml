@@ -9,4 +9,5 @@
     <dimen name="cardHeight">640dp</dimen>
     <dimen name="matchAvatarSize">128dp</dimen>
     <dimen name="extraSmallMargin">2dp</dimen>
+    <dimen name="bannerText">80dp</dimen>
 </resources>
