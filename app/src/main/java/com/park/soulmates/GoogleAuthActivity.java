@@ -139,7 +139,8 @@ public class GoogleAuthActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.d("dev_g_auth", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Google auth to firebase failed", Toast.LENGTH_LONG);
+                            Toast failToast = Toast.makeText(getApplicationContext(), "Google auth to firebase failed", Toast.LENGTH_LONG);
+                            failToast.show();
                             mIntentSuccess = new Intent(currentActivity, AuthActivity.class);
                             startActivity(mIntentSuccess);
                             currentActivity.finish();
