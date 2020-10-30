@@ -1,20 +1,17 @@
 package com.park.soulmates;
 
-public class Match {
+public class LikeModel {
     Integer exist;
     String targetUID;
 
-    Match() {
+    LikeModel() {
         this.exist = 1;
         this.targetUID = "noUID";
     }
-    Match(String targUID){
+
+    LikeModel(String targUID){
         this.exist = 1;
         this.targetUID = targUID;
-    }
-
-    public void setExist(Integer exist) {
-        this.exist = exist;
     }
 
     public String getTargetUID() {
@@ -25,6 +22,9 @@ public class Match {
         this.targetUID = targetUID;
     }
 
+    public void setExist(Integer exist) {
+        this.exist = exist;
+    }
     public Integer getExist() {
         return exist;
     }

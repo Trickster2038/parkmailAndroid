@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-// FirebaseRecyclerAdapter is a class provided by 
-// FirebaseUI. it provides functions to bind, adapt and show 
+// FirebaseRecyclerAdapter is a class provided by
+// FirebaseUI. it provides functions to bind, adapt and show
 // database contents in a Recycler View
 
-public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
-       AdvancedUserModel, RecycleViewAdapter.personsViewholder> {
+public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
+        AdvancedUserModel, RecyclerFeedAdapter.personsViewholder> {
 
-    public RecycleViewAdapter(
+    public RecyclerFeedAdapter(
             @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options)
     {
         super(options);
@@ -28,7 +28,7 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
 
     @Override
     protected void onBindViewHolder(@NonNull personsViewholder holder,
-                     int position, @NonNull AdvancedUserModel model)
+                                    int position, @NonNull AdvancedUserModel model)
     {
         holder.bio.setText(model.getBio());
         holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
@@ -38,9 +38,9 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
         likeButton.setOnClickListener(v -> {
             TextView textUid = holder.itemView.findViewById(R.id.cardUID);
-            LikePush.push(textUid.getText().toString());
+            LikePusher.push(textUid.getText().toString());
             Log.d("dev_DB_status", "db_feed - OK");
-            });
+        });
     }
 
     @NonNull
@@ -52,7 +52,7 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_feed_profile, parent, false);
-        return new RecycleViewAdapter.personsViewholder(view);
+        return new RecyclerFeedAdapter.personsViewholder(view);
     }
 
     class personsViewholder

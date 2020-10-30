@@ -15,25 +15,26 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class MatchPush {
+public class MatchPusher {
     static boolean match;
 
-    public MatchPush(){}
+    public MatchPusher(){}
 
     public static void push(FirebaseAuth userAuth, String userGetterUID){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref1 = db.getReference("users/".concat(userAuth.getUid()).concat("/matches/").concat(userGetterUID));
         DatabaseReference ref2 = db.getReference("users/".concat(userGetterUID).concat("/matches/").concat(userAuth.getUid()));
-        Match matchObj1 = new Match(userGetterUID);
-        Match matchObj2 = new Match(userAuth.getUid());
+        MatchModel matchObj1 = new MatchModel(userGetterUID);
+        MatchModel matchObj2 = new MatchModel(userAuth.getUid());
         ref1.setValue(matchObj1);
         ref2.setValue(matchObj2);
         Log.d("dev_DB_status","match pushed");
     }
-    public static boolean check(final FirebaseAuth userAuth, String userGetterUID, Like like){
+    public static boolean check(final FirebaseAuth userAuth, String userGetterUID, LikeModel like){
         Log.d("dev_DB_status","match checking");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
+        // TODO: check LikeModel.getExist() instead of this reference
         myRef = myRef.child("users").child(userGetterUID).child("likes").child(userAuth.getUid()).child("exist");
 
         // FIXME: extremely unstable because works asynchroniously

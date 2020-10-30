@@ -35,9 +35,9 @@ public class MatchesFragment extends Fragment {
 
         Log.d("dev_DbRefFeed", mbase.toString());
 
-        FirebaseRecyclerOptions<Match> options
-                = new FirebaseRecyclerOptions.Builder<Match>()
-                .setQuery(mbase, Match.class)
+        FirebaseRecyclerOptions<MatchModel> options
+                = new FirebaseRecyclerOptions.Builder<MatchModel>()
+                .setQuery(mbase, MatchModel.class)
                 .build();
 
         // Connecting object of required Adapter class to

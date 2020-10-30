@@ -20,17 +20,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter<
-        Match, RecyclerMatchesAdapter.personsViewholder> {
+        MatchModel, RecyclerMatchesAdapter.personsViewholder> {
 
     public RecyclerMatchesAdapter(
-            @NonNull FirebaseRecyclerOptions<Match> options)
+            @NonNull FirebaseRecyclerOptions<MatchModel> options)
     {
         super(options);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull RecyclerMatchesAdapter.personsViewholder holder,
-                                    int position, @NonNull Match model)
+                                    int position, @NonNull MatchModel model)
     {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference ref =

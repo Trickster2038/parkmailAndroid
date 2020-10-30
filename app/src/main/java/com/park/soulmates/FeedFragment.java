@@ -13,8 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FeedFragment extends Fragment {
     private DatabaseReference mbase;
-    private RecycleViewAdapter adapter;
-    private RecycleViewAdapter mAdapter;
+    private RecyclerFeedAdapter adapter;
+    //private RecycleViewAdapter mAdapter;
     private RecyclerView mFeedRecycler;
 
     @Override
@@ -23,7 +23,6 @@ public class FeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         mFeedRecycler = view.findViewById(R.id.recyclerFeed);
         mFeedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
-        mFeedRecycler.setAdapter(mAdapter);
 
         mbase = FirebaseDatabase.getInstance().getReference().child("users");
         //Log.d("dev_DbRefFeed", mbase.toString());
@@ -35,7 +34,7 @@ public class FeedFragment extends Fragment {
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new RecycleViewAdapter(options);
+        adapter = new RecyclerFeedAdapter(options);
         // Connecting Adapter class with the Recycler view*/
         mFeedRecycler.setAdapter(adapter);
         return view;
