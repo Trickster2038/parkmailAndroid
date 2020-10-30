@@ -33,7 +33,7 @@ public class GoogleAuthActivity extends AppCompatActivity {
 
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
-    private Intent mIntentSuccess = new Intent(getApplicationContext(), MainActivity.class);
+    private Intent mIntentSuccess = new Intent(this, MainActivity.class);
     private Intent mIntentDiscard = new Intent(this, AuthActivity.class);
     private GoogleAuthActivity currentActivity = this;
 
@@ -127,7 +127,9 @@ public class GoogleAuthActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("dev_g_auth", "signInWithCredential:success");
                             //currentActivity.finishActivity(0);
+                            mIntentSuccess = new Intent(currentActivity, MainActivity.class);
                             startActivity(mIntentSuccess);
+                            currentActivity.finish();
                             Log.d("dev_g_auth", "drop point OAuth -> main");
                             //updateUI(user);
                         } else {
