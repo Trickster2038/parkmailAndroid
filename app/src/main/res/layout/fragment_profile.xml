@@ -4,210 +4,204 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
-    android:orientation="vertical"
     android:isScrollContainer="true"
-    >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="@dimen/smallMargin"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="top"
-    android:orientation="vertical"
-    android:isScrollContainer="true">
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_height="@dimen/feedAvatarHeight"
-        android:src="@mipmap/ic_banner" />
+    android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/contentText"
-        android:text="@string/nameInput" />
+        android:layout_gravity="top"
+        android:layout_margin="16dp"
+        android:isScrollContainer="true"
+        android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextName"
-        android:text="testName"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/contentText"
-        android:text="@string/surnameInput" />
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextSurname"
-        android:text="testSur"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feedAvatarHeight"
+            android:src="@mipmap/ic_banner" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/contentText"
-        android:text="Birth date" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextDate"
-        android:text="1111"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/smallMargin"
+                android:ems="10"
+                android:hint="@string/nameInput"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/contentText"
-        android:text="Contacts" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextContacts"
-        android:text="testContacts"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/smallMargin"
+                android:ems="10"
+                android:hint="@string/surnameInput"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/contentText"
-        android:text="Bio" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextBio"
-        android:text="testBio"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/smallMargin"
+                android:ems="10"
+                android:hint="@string/birthdateInput"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/smallMargin"
-        android:textSize="@dimen/contentText"
-        android:text="Search mode" />
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:layout_margin="@dimen/smallMargin"
-            android:id="@+id/radioRomantic"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextContacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/smallMargin"
+                android:ems="10"
+                android:hint="@string/contactsInput"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextBio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/smallMargin"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/bioInput"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            style=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Romantic mode" />
+            android:layout_marginTop="@dimen/smallMargin"
+            android:text="Search mode"
+            android:textSize="12sp" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:layout_margin="@dimen/smallMargin"
-            android:id="@+id/radioFriend"
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioRomantic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Romantic mode" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioFriend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Friend mode" />
+        </RadioGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMargin"
+            android:text="Gender"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Male" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+        </RadioGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMargin"
+            android:text="Interests"
+            android:textSize="12sp" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkIT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:checked="true"
+            android:text="IT" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkMusic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Friend mode" />
-    </RadioGroup>
+            android:text="Music" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/contentText"
-        android:text="Gender" />
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioMale"
-            android:checked="true"
-            android:layout_margin="@dimen/smallMargin"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkSport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:text="Sport" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioFemale"
-            android:layout_margin="@dimen/smallMargin"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkGames"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Female" />
-    </RadioGroup>
+            android:text="Videogames" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/smallMargin"
-        android:textSize="@dimen/contentText"
-        android:text="Interests" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkReading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/smallMargin"
+            android:text="Reading" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkIT"
-        android:checked="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="IT" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveChangesBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMargin"
+            android:layout_weight="0"
+            android:text="Save"
+            android:textSize="@dimen/contentText" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkMusic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Music" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Logout"
+            android:textSize="@dimen/contentText" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkSport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sport" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkGames"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Videogames" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkReading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reading"
-        android:layout_marginBottom="@dimen/smallMargin"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveChangesBtn"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Save"
-        android:textSize="@dimen/contentText" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/logoutBtn"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Logout"
-        android:textSize="@dimen/contentText" />
-
-</LinearLayout>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>
