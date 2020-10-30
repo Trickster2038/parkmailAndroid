@@ -1,8 +1,6 @@
 package com.park.soulmates;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 
 // Changing constructor signature to ArrayList<> might be uneffective (on test/dev phase?)
@@ -17,7 +15,7 @@ public class InterestsModel {
         }
     }
 
-    // TODO: maybe change to arrayList(cant use literals to init, but clearer archS)
+    // TODO: maybe change to arrayList(cant use literals to init, but clearer arch)
     public InterestsModel(Boolean[] iInterests){
         this.interests = new ArrayList<Boolean>(5);
         for(int i=0; i<5; i++){
@@ -30,10 +28,6 @@ public class InterestsModel {
     }
 
     public void setInterests(ArrayList<Boolean> iInterests) {
-//        this.interests = new ArrayList<Boolean>(5);
-//        for(int i=0; i<5; i++){
-//            interests.add(iInterests[i]);
-//        }
         this.interests = iInterests;
     }
 }

@@ -19,19 +19,17 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.tabFeed) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new FeedFragment()).commit();
-                Log.d("Tab", "Tab 1");
+                Log.d("dev_Tab", "Tab 1");
                 return true;
             } else if (itemId == R.id.tabMatches) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new MatchesFragment()).commit();
-                Log.d("Tab", "Tab 2");
+                Log.d("dev_Tab", "Tab 2");
                 return true;
             } else if (itemId == R.id.tabProfile) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new ProfileFragment()).commit();
-                Log.d("Tab", "Tab 3");
+                Log.d("dev_Tab", "Tab 3");
 
-                // test of user push
-                // UserPusher.push("testName","testSurname","testBio", "02.02.2001", true, new Boolean[]{true,false,true,false,false});
-
+                // TODO: explain why we use this scheme
                 return true;
             }
             return false;

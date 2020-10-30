@@ -1,6 +1,5 @@
 package com.park.soulmates;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
-import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -58,7 +54,7 @@ public class ProfileFragment extends Fragment {
                             checkReading.isChecked(),
                     }
             );
-            Log.d("log DB_status", "db_feed - OK");
+            Log.d("dev_DB_status", "db_feed - OK");
         });
 
         // TODO: catch signOut error if raised

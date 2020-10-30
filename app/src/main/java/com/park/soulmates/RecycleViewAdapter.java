@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.park.soulmates.R;
 
 // FirebaseRecyclerAdapter is a class provided by 
 // FirebaseUI. it provides functions to bind, adapt and show 
@@ -27,17 +26,10 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         super(options);
     }
 
-    // Function to bind the view in Card view(here 
-    // "person.xml") iwth data in 
-    // model class(here "person.class") 
     @Override
     protected void onBindViewHolder(@NonNull personsViewholder holder,
                      int position, @NonNull AdvancedUserModel model)
     {
-
-        // Add firstname from model class (here 
-        // "person.class")to appropriate view in Card 
-        // view (here "person.xml") 
         holder.bio.setText(model.getBio());
         holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
         holder.uid.setText(model.getUid());
@@ -47,13 +39,10 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         likeButton.setOnClickListener(v -> {
             TextView textUid = holder.itemView.findViewById(R.id.cardUID);
             LikePush.push(textUid.getText().toString());
-            Log.d("log DB_status", "db_feed - OK");
+            Log.d("dev_DB_status", "db_feed - OK");
             });
     }
 
-    // Function to tell the class about the Card view (here 
-    // "person.xml")in 
-    // which the data will be shown 
     @NonNull
     @Override
     public personsViewholder
@@ -66,17 +55,13 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
         return new RecycleViewAdapter.personsViewholder(view);
     }
 
-
-    // Sub Class to create references of the views in Crad
-    // view (here "person.xml") 
     class personsViewholder
             extends RecyclerView.ViewHolder {
         TextView bio, title, uid, interestsField;
         public personsViewholder(@NonNull View itemView)
         {
             super(itemView);
-            bio
-                    = itemView.findViewById(R.id.profileBio);
+            bio = itemView.findViewById(R.id.profileBio);
             title = itemView.findViewById(R.id.profileTitle);
             uid  = itemView.findViewById(R.id.cardUID);
             interestsField = itemView.findViewById(R.id.profileInterests);

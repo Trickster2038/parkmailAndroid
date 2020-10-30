@@ -19,7 +19,7 @@ public class UserPusher {
         AdvancedUserModel user = new AdvancedUserModel(userAuth.getUid(), iName, iSurname, iBio,
                 iBirth, iContacts, iRomanticSearch, iMale, iInterests);
         ref.setValue(user);
-        Log.d("log DB_status", "user pushed");
+        Log.d("dev_DB_status", "user pushed");
     }
 
 }
