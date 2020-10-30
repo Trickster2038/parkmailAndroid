@@ -7,23 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.park.soulmates.R;
 
 // FirebaseRecyclerAdapter is a class provided by 
 // FirebaseUI. it provides functions to bind, adapt and show 
 // database contents in a Recycler View
 
-public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
-       AdvancedUserModel, RecycleViewAdapter.personsViewholder> {
+public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter
+        <UserModel, RecyclerViewHolder> {
 
-    public RecycleViewAdapter(
-            @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options)
-    {
+    public RecyclerFeedAdapter(
+            @NonNull FirebaseRecyclerOptions<UserModel> options) {
         super(options);
     }
 
@@ -31,10 +29,8 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
     // "person.xml") iwth data in 
     // model class(here "person.class") 
     @Override
-    protected void onBindViewHolder(@NonNull personsViewholder holder,
-                     int position, @NonNull AdvancedUserModel model)
-    {
-
+    protected void onBindViewHolder(@NonNull RecyclerViewHolder holder,
+                                    int position, @NonNull UserModel model) {
         // Add firstname from model class (here 
         // "person.class")to appropriate view in Card 
         // view (here "person.xml") 
@@ -53,33 +49,12 @@ public class RecycleViewAdapter extends FirebaseRecyclerAdapter<
 
     // Function to tell the class about the Card view (here 
     // "person.xml")in 
-    // which the data will be shown 
+    // which the data will be shown
     @NonNull
     @Override
-    public personsViewholder
-    onCreateViewHolder(@NonNull ViewGroup parent,
-                       int viewType)
-    {
-        View view
-                = LayoutInflater.from(parent.getContext())
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_feed_profile, parent, false);
-        return new RecycleViewAdapter.personsViewholder(view);
-    }
-
-
-    // Sub Class to create references of the views in Crad
-    // view (here "person.xml") 
-    class personsViewholder
-            extends RecyclerView.ViewHolder {
-        TextView bio, title, uid, interestsField;
-        public personsViewholder(@NonNull View itemView)
-        {
-            super(itemView);
-            bio
-                    = itemView.findViewById(R.id.profileBio);
-            title = itemView.findViewById(R.id.profileTitle);
-            uid  = itemView.findViewById(R.id.cardUID);
-            interestsField = itemView.findViewById(R.id.profileInterests);
-        }
+        return new RecyclerViewHolder(view);
     }
 }

@@ -1,31 +1,32 @@
 package com.park.soulmates;
 
 public class Like {
-    Integer exist;
-    String targetUID;
+    private Integer mExist;
+    private String mTargetUid;
 
     Like() {
-        this.exist = 1;
-        this.targetUID = "noUID";
+        this.mExist = 1;
+        this.mTargetUid = "noUID";
     }
 
-    Like(String targUID){
-        this.exist = 1;
-        this.targetUID = targUID;
+    Like(String targetUid) {
+        this.mExist = 1;
+        this.mTargetUid = targetUid;
     }
 
-    public String getTargetUID() {
-        return targetUID;
+    public String getTargetUid() {
+        return mTargetUid;
     }
 
-    public void setTargetUID(String targetUID) {
-        this.targetUID = targetUID;
+    public void setTargetUid(String targetUid) {
+        this.mTargetUid = targetUid;
+    }
+
+    public Integer getExist() {
+        return mExist;
     }
 
     public void setExist(Integer exist) {
-        this.exist = exist;
-    }
-    public Integer getExist() {
-        return exist;
+        this.mExist = exist;
     }
 }

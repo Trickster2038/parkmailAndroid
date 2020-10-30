@@ -1,39 +1,32 @@
 package com.park.soulmates;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 
 // Changing constructor signature to ArrayList<> might be uneffective (on test/dev phase?)
 public class InterestsModel {
     // IT, music, sport, videogames, reading
-    public ArrayList<Boolean> interests;
+    private ArrayList<Boolean> mInterests;
 
     public InterestsModel(){
-        this.interests = new ArrayList<Boolean>(5);
+        this.mInterests = new ArrayList<>(5);
         for(int i=0; i<5; i++){
-            interests.add(false);
+            mInterests.add(false);
         }
     }
 
     // TODO: maybe change to arrayList(cant use literals to init, but clearer archS)
-    public InterestsModel(Boolean[] iInterests){
-        this.interests = new ArrayList<Boolean>(5);
-        for(int i=0; i<5; i++){
-            interests.add(iInterests[i]);
-        }
+    public InterestsModel(Boolean[] interests) {
+        this.mInterests = new ArrayList<>(5);
+        mInterests.addAll(Arrays.asList(interests).subList(0, 5));
     }
 
     public ArrayList<Boolean> getInterests() {
-        return interests;
+        return mInterests;
     }
 
-    public void setInterests(ArrayList<Boolean> iInterests) {
-//        this.interests = new ArrayList<Boolean>(5);
-//        for(int i=0; i<5; i++){
-//            interests.add(iInterests[i]);
-//        }
-        this.interests = iInterests;
+    public void setInterests(ArrayList<Boolean> interests) {
+        this.mInterests = interests;
     }
 }
