@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageProfile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/feedAvatarHeight"
             android:src="@mipmap/ic_banner" />

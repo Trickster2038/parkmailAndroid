@@ -23,8 +23,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-//import com.google.firebase.quickstart.auth.R;
-//import com.google.firebase.quickstart.auth.databinding.ActivityGoogleBinding;
 
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.
@@ -42,21 +40,13 @@ public class GoogleAuthActivity extends AppCompatActivity {
     // [END declare_auth]
 
     private GoogleSignInClient mGoogleSignInClient;
-    //private ActivityGoogleBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_auth);
 
-//        mBinding = ActivityGoogleBinding.inflate(getLayoutInflater());
-//        setContentView(mBinding.getRoot());
-//        setProgressBar(mBinding.progressBar);
-//
-//        // Button listeners
-//        mBinding.signInButton.setOnClickListener(this);
-//        mBinding.signOutButton.setOnClickListener(this);
-//        mBinding.disconnectButton.setOnClickListener(this);
+
 
         // [START config_signin]
         // Configure Google Sign In
