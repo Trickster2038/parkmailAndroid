@@ -1,107 +1,106 @@
 package com.park.soulmates;
 
 public class AdvancedUserModel {
-    public String uid, name, surname, bio;
-    boolean romanticSearch, male;
+    private String mUid, mName, mSurname, mBio, mBirthdate, mContacts;
+    private InterestsModel mInterests;
+    private boolean mRomanticSearch, mGender; //mGender: false - female, true - male
     // FIXME: fix troubles with birthdate input
-    String birthdate;
-    String contacts;
-    InterestsModel interests;
 
-    public AdvancedUserModel(){
-        this.uid = "noUID";
-        this.name = "no name";
-        this.surname = "no surname";
-        this.contacts = "no contacts";
-        this.romanticSearch = false;
-        this.male = false;
-        this.bio = "no bio";
-        this.birthdate = "01.01.2000";
-        this.interests = new InterestsModel();
+
+    public AdvancedUserModel() {
+        this.mUid = "noUID";
+        this.mName = "no name";
+        this.mSurname = "no surname";
+        this.mContacts = "no contacts";
+        this.mRomanticSearch = false;
+        this.mGender = false;
+        this.mBio = "no bio";
+        this.mBirthdate = "01.01.2000";
+        this.mInterests = new InterestsModel();
     }
 
-    public AdvancedUserModel(String iUID, String iName, String iSurname, String iBio, String iBirth,
-                             String iContacts, Boolean iRomanticSearch, Boolean iMale, Boolean[] iInterests){
-        this.uid = iUID;
-        this.name = iName;
-        this.surname = iSurname;
-        this.bio = iBio;
-        this.birthdate = iBirth;
-        this.contacts = iContacts;
-        this.romanticSearch = iRomanticSearch;
-        this.male = iMale;
-        this.interests = new InterestsModel(iInterests);
+    public AdvancedUserModel(String uid, String name, String surname, String bio, String birthdate,
+                             String contacts, Boolean romanticSearch, Boolean gender, Boolean[] interests) {
+        this.mUid = uid;
+        this.mName = name;
+        this.mSurname = surname;
+        this.mBio = bio;
+        this.mBirthdate = birthdate;
+        this.mContacts = contacts;
+        this.mRomanticSearch = romanticSearch;
+        this.mGender = gender;
+        this.mInterests = new InterestsModel(interests);
     }
 
-    public boolean isMale() {
-        return male;
+    public boolean getGender() {
+        return mGender;
     }
 
-    public void setMale(boolean male) {
-        this.male = male;
+    public void setGender(boolean male) {
+        this.mGender = male;
     }
 
     public String getUid() {
-        return uid;
+        return mUid;
     }
 
     public void setUid(String uid) {
-        this.uid = uid;
+        this.mUid = uid;
     }
 
     public String getContacts() {
-        return contacts;
+        return mContacts;
     }
 
     public void setContacts(String contacts) {
-        this.contacts = contacts;
+        this.mContacts = contacts;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public String getSurname() {
-        return surname;
+        return mSurname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        this.mSurname = surname;
     }
 
     public String getBio() {
-        return bio;
+        return mBio;
     }
 
     public void setBio(String bio) {
-        this.bio = bio;
+        this.mBio = bio;
     }
 
-    public boolean isRomanticSearch() {
-        return romanticSearch;
+    public boolean getRomanticSearch() {
+        return mRomanticSearch;
     }
 
     public void setRomanticSearch(boolean romanticSearch) {
-        this.romanticSearch = romanticSearch;
+        this.mRomanticSearch = romanticSearch;
     }
 
     public InterestsModel getInterests() {
-        return interests;
+        return mInterests;
     }
 
     public void setInterests(InterestsModel interests) {
-        this.interests = interests;
+        this.mInterests = interests;
     }
 
     public String getBirthdate() {
-        return birthdate;
+        return mBirthdate;
     }
 
     public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
+        this.mBirthdate = birthdate;
     }
 }
