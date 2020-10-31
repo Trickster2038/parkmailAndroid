@@ -27,6 +27,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:text="defName"
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:text="defSur"
                 android:id="@+id/editTextSurname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,6 +59,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:text="1111"
                 android:id="@+id/editTextDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,6 +75,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:text="defContacts"
                 android:id="@+id/editTextContacts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,6 +91,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:text="defBio"
                 android:id="@+id/editTextBio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

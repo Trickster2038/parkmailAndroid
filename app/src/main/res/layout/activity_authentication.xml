@@ -21,7 +21,7 @@
             android:autofillHints="email"
             android:ems="15"
             android:inputType="textEmailAddress"
-            android:text="test@gmail.com"
+            android:text="test3@gmail.com"
             tools:text="somemail@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
