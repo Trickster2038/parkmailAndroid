@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,7 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter<
     {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference ref =
-                FirebaseDatabase.getInstance().getReference().child("users").child(model.targetUID);
+                FirebaseDatabase.getInstance().getReference().child("users").child(model.getTargetUID());
         Log.d("DB_matches_list_target", ref.toString());
         Log.d("DB_matches_list_account", mAuth.getUid());
 
