@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/feedAvatar"
         android:layout_width="@dimen/feedAvatarHeight"
         android:layout_height="@dimen/feedAvatarHeight"
         android:layout_margin="@dimen/smallMargin"
