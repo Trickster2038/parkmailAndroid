@@ -1,31 +1,32 @@
 package com.park.soulmates;
 
 public class MatchModel {
-    Integer exist;
-    String targetUID;
+    private Integer mExist;
+    private String mTargetUid;
 
     MatchModel() {
-        this.exist = 1;
-        this.targetUID = "noUID";
-    }
-    MatchModel(String targUID){
-        this.exist = 1;
-        this.targetUID = targUID;
+        this.mExist = 1;
+        this.mTargetUid = "noUID";
     }
 
-    public void setExist(Integer exist) {
-        this.exist = exist;
+    MatchModel(String targetUid) {
+        this.mExist = 1;
+        this.mTargetUid = targetUid;
     }
 
     public String getTargetUID() {
-        return targetUID;
+        return mTargetUid;
     }
 
-    public void setTargetUID(String targetUID) {
-        this.targetUID = targetUID;
+    public void setTargetUID(String targetUid) {
+        this.mTargetUid = targetUid;
     }
 
     public Integer getExist() {
-        return exist;
+        return mExist;
+    }
+
+    public void setExist(Integer exist) {
+        this.mExist = exist;
     }
 }

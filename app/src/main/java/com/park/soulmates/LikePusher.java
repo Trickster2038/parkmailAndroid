@@ -8,18 +8,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LikePusher {
 
-    public LikePusher() {
-    }
-
-    public static void push(String userGetterUID) {
+    public static void push(String userGetterUid) {
         FirebaseAuth userAuth = FirebaseAuth.getInstance();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("users/".concat(userAuth.getUid()).concat("/likes/").concat(userGetterUID));
-        LikeModel like = new LikeModel(userGetterUID);
+        DatabaseReference ref = db.getReference("users/".concat(userAuth.getUid()).concat("/likes/").concat(userGetterUid));
+        LikeModel like = new LikeModel(userGetterUid);
         ref.setValue(like);
-        Log.d("dev_DB_status", "like pushed");
-        if (MatchPusher.check(userAuth, userGetterUID, like)) {
-            MatchPusher.push(userAuth, userGetterUID);
+        Log.d("LikePusher", "Like pushed");
+        if (MatchPusher.check(userAuth, userGetterUid, like)) {
+            MatchPusher.push(userAuth, userGetterUid);
         }
     }
 }
