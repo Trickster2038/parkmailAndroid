@@ -40,44 +40,57 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
     protected void onBindViewHolder(@NonNull personsViewholder holder,
                                     int position, @NonNull AdvancedUserModel model)
     {
-        holder.bio.setText(model.getBio());
-        holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
-        holder.uid.setText(model.getUid());
-        holder.interestsField.setText(model.getInterests().toString());
+        // TODO: svae auth info in static class?
+        String currentUid = FirebaseAuth.getInstance().getUid();
 
-        // URL изображения, который мы получили выше
-        //String url="https://firebasestorage.googleapis.com/v0/b/retrieve-images-958e5.appspot.com/o/9.PNG?alt=media&token=6bd05383-0070-4c26-99cb-dcb17a23f7eb";
+        // check for auto-like, and other filters later
+        if(!currentUid.equals(model.getUid())) {
+            Log.d("dev_feed", "item is nice");
+            //Log.d("dev_feed_check2", "|" + model.getUid() + "|");
+            holder.bio.setText(model.getBio());
+            holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
+            holder.uid.setText(model.getUid());
+            holder.interestsField.setText(model.getInterests().toString());
 
-        //Glide.with(holder.avatarView).load(url).into(holder.avatarView);
+            // URL изображения, который мы получили выше
+            //String url="https://firebasestorage.googleapis.com/v0/b/retrieve-images-958e5.appspot.com/o/9.PNG?alt=media&token=6bd05383-0070-4c26-99cb-dcb17a23f7eb";
 
-        //FirebaseAuth userAuth = FirebaseAuth.getInstance();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReference().child("users/" + model.getUid() + "/avatar" );
+            //Glide.with(holder.avatarView).load(url).into(holder.avatarView);
 
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                try {
-                    Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
-                } catch (Exception e){
-                    Log.d("dev_avatar_download", "404");
+            //FirebaseAuth userAuth = FirebaseAuth.getInstance();
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageReference = storage.getReference().child("users/" + model.getUid() + "/avatar");
+
+            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    try {
+                        Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
+                    } catch (Exception e) {
+                        Log.d("dev_avatar_download", "404");
+                    }
+                    // Got the download URL for 'users/me/profile.png'
                 }
-                // Got the download URL for 'users/me/profile.png'
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
 
-        // TODO: disable after click + add simple filter using "gone" view attribute
-        Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
-        likeButton.setOnClickListener(v -> {
-            TextView textUid = holder.itemView.findViewById(R.id.cardUID);
-            LikePusher.push(textUid.getText().toString());
-            Log.d("dev_DB_status", "db_feed - OK");
-        });
+            // TODO: disable after click + add simple filter using "gone" view attribute
+            Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
+            likeButton.setOnClickListener(v -> {
+                TextView textUid = holder.itemView.findViewById(R.id.cardUID);
+                LikePusher.push(textUid.getText().toString());
+                Log.d("dev_DB_status", "db_feed - OK");
+            });
+        } else {
+            Log.d("dev_feed", "item is hidden");
+            // hot-fix to remove auto-likes
+            holder.card.setVisibility(View.GONE);
+            holder.card.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+        }
     }
 
     @NonNull
@@ -96,9 +109,11 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             extends RecyclerView.ViewHolder {
         TextView bio, title, uid, interestsField;
         ImageView avatarView;
+        View card;
         public personsViewholder(@NonNull View itemView)
         {
             super(itemView);
+            card = itemView;
             avatarView = itemView.findViewById(R.id.feedAvatar);
             bio = itemView.findViewById(R.id.profileBio);
             title = itemView.findViewById(R.id.profileTitle);
