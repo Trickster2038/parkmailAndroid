@@ -43,6 +43,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         holder.bio.setText(model.getBio());
         holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
         holder.uid.setText(model.getUid());
+        holder.interestsField.setText(model.getInterests().toString());
 
         // URL изображения, который мы получили выше
         //String url="https://firebasestorage.googleapis.com/v0/b/retrieve-images-958e5.appspot.com/o/9.PNG?alt=media&token=6bd05383-0070-4c26-99cb-dcb17a23f7eb";
