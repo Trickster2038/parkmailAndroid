@@ -1,10 +1,13 @@
 package com.park.soulmates;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,10 +29,12 @@ import com.google.firebase.storage.StorageReference;
 
 public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
         <MatchModel, RecyclerMatchesAdapter.personsViewHolder> {
+    private Context mContext;
 
     public RecyclerMatchesAdapter(
-            @NonNull FirebaseRecyclerOptions<MatchModel> options) {
+            @NonNull FirebaseRecyclerOptions<MatchModel> options, Context ctx) {
         super(options);
+        mContext = ctx;
     }
 
     @Override
@@ -77,6 +82,17 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("RecyclerMatchesAdapter", String.valueOf(databaseError.getCode()));
             }
+
+
+        });
+
+        View card = holder.itemView.findViewById(R.id.profileMatchesCard);
+        card.setOnClickListener(v -> {
+            // TODO: change null
+            Intent intent = new Intent(mContext, ChatActivity.class);
+            intent.putExtra("targetUID", model.getTargetUID());
+            mContext.startActivity(intent);
+            Log.d("dev_Chat", "chat intent sent");
         });
 
     }

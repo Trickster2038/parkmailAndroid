@@ -36,7 +36,8 @@ public class MatchesFragment extends Fragment {
                 .Builder<MatchModel>()
                 .setQuery(databaseReference, MatchModel.class)
                 .build();
-        mAdapter = new RecyclerMatchesAdapter(options);
+        mAdapter = new RecyclerMatchesAdapter(options, getActivity());
+
 
     }
 
