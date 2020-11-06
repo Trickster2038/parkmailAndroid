@@ -7,4 +7,5 @@
     <dimen name="smallMargin">8dp</dimen>
     <dimen name="matchAvatarSize">128dp</dimen>
     <dimen name="extraSmallMargin">2dp</dimen>
+    <dimen name="msg_width">250dp</dimen>
 </resources>
