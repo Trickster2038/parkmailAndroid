@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,9 @@ public class ChatActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        TextView title = findViewById(R.id.chatTitle);
+        title.setText(getIntent().getStringExtra("targetName"));
 
 
         FloatingActionButton fab =

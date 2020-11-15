@@ -91,6 +91,7 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
             // TODO: change null
             Intent intent = new Intent(mContext, ChatActivity.class);
             intent.putExtra("targetUID", model.getTargetUID());
+            intent.putExtra("targetName", holder.title.getText().toString());
             mContext.startActivity(intent);
             Log.d("dev_Chat", "chat intent sent");
         });

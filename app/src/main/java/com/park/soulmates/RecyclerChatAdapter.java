@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -53,10 +54,10 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
         if(model.getMessageUser().equals(currentUid)){
             Log.d("dev_chat_userMsg", model.getMessageUser() + " " + currentUid);
             // FIXME: remove hardcode to resources
-            holder.messageInnerCard.setBackgroundColor(Color.rgb(150,0,200));
+            holder.messageInnerCard.setCardBackgroundColor(Color.rgb(150,0,200));
             holder.messageText.setTextColor(Color.WHITE);
         } else {
-            holder.messageInnerCard.setBackgroundColor(Color.LTGRAY);
+            holder.messageInnerCard.setCardBackgroundColor(Color.LTGRAY);
             holder.messageSpace.setVisibility(View.GONE);
         }
         Log.d("dev_chat", "msg download tick");
@@ -76,7 +77,8 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
     static class messagesViewHolder extends RecyclerView.ViewHolder {
         TextView messageText, messageUser, messageTime;
         ViewGroup messageCard;
-        FrameLayout messageInnerCard, messageSpace;
+        FrameLayout messageSpace;
+        CardView messageInnerCard;
 
         public messagesViewHolder(@NonNull View v) {
             super(v);
