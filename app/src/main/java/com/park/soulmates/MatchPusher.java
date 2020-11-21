@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MatchPusher {
-    private static boolean sMatch;
+    private static volatile boolean sMatch;
 
     public static void push(FirebaseAuth userAuth, String userGetterUid) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();

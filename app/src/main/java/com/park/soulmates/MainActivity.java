@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("MainActivity", "Main activity started");
 
+        CurrentUser.init();
+
         NotificationsMatches.startListening(MainActivity.this, MainActivity.class);
 
         BottomNavigationView bottomNavigationView;

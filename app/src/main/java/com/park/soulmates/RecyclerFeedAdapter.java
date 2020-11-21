@@ -40,12 +40,22 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
     protected void onBindViewHolder(@NonNull personsViewholder holder,
                                     int position, @NonNull AdvancedUserModel model)
     {
-        // TODO: svae auth info in static class?
+        // TODO: save auth info in static class?
         String currentUid = FirebaseAuth.getInstance().getUid();
 
         // check for auto-like, and other filters later
-        if(!currentUid.equals(model.getUid())) {
+        CurrentUser.init();
+        //Log.d("dev_feed", CurrentUser.getData().getName());
+        if(!currentUid.equals(model.getUid())
+        && !((CurrentUser.getIsRomantic() || model.getRomanticSearch())
+                && CurrentUser.getGender() == model.getGender())) {
+            // FIXME: get normal gender from cards
+
+            String TAG = "dev_feed";
             Log.d("dev_feed", "item is nice");
+            Log.d("dev_romantic", Boolean.toString(CurrentUser.getIsRomantic() || model.getRomanticSearch()));
+            Log.d("dev_genders_eq", Boolean.toString(CurrentUser.getGender() == model.getGender()));
+
             //Log.d("dev_feed_check2", "|" + model.getUid() + "|");
             holder.bio.setText(model.getBio());
             holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
