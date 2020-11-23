@@ -1,5 +1,7 @@
 package com.park.soulmates;
 
+import com.park.soulmates.models.InterestsModel;
+
 public class AdvancedUserModel {
     private String mUid, mName, mSurname, mBio, mBirthdate, mContacts;
     private InterestsModel mInterests;

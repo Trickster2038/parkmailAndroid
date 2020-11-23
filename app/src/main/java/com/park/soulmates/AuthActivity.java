@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -19,17 +20,28 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // raises exception if called few times
+        if(savedInstanceState != null) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
+
         FirebaseApp.initializeApp(getApplicationContext());
+
         mAuth = FirebaseAuth.getInstance();
+
         if (mAuth.getCurrentUser() != null) {
             // Already logged in
             // Do nothing
             Log.d("AuthActivity", "Already logged in as " + mAuth.getCurrentUser().getEmail() + "with UID " + mAuth.getUid());
+
             startActivity(intent);
             finish();
         } else {
             setContentView(R.layout.activity_authentication);
+
             TextView email = findViewById(R.id.editTextEmail);
             TextView password = findViewById(R.id.editTextPassword);
             Button loginButton = findViewById(R.id.button_login);

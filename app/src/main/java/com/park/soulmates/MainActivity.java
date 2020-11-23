@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("MainActivity", "Main activity started");
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
         CurrentUser.init();
 
         NotificationsMatches.startListening(MainActivity.this, MainActivity.class);
