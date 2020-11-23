@@ -181,16 +181,4 @@ public class GoogleAuthActivity extends AppCompatActivity {
                 });
     }
 
-
-//    @Override
-//    public void onClick(View v) {
-//        int i = v.getId();
-//        if (i == R.id.signInButton) {
-//            signIn();
-//        } else if (i == R.id.signOutButton) {
-//            signOut();
-//        } else if (i == R.id.disconnectButton) {
-//            revokeAccess();
-//        }
-//    }
 }

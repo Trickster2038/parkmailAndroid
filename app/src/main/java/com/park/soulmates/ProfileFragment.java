@@ -74,7 +74,7 @@ public class ProfileFragment extends Fragment {
             CheckBox checkGames = view.findViewById(R.id.checkGames);
             CheckBox checkReading = view.findViewById(R.id.checkReading);
 
-            UserPusher.push(
+            FirebaseUtils.pushUser(
                     editName.getText().toString(),
                     editSurname.getText().toString(),
                     editBio.getText().toString(),

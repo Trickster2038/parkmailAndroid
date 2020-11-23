@@ -18,10 +18,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.park.soulmates.models.AdvancedUserModel;
 
 // FirebaseRecyclerAdapter is a class provided by
 // FirebaseUI. it provides functions to bind, adapt and show
@@ -92,7 +91,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
             likeButton.setOnClickListener(v -> {
                 TextView textUid = holder.itemView.findViewById(R.id.cardUID);
-                LikePusher.push(textUid.getText().toString());
+                FirebaseUtils.pushLike(textUid.getText().toString());
                 Log.d("dev_DB_status", "db_feed - OK");
             });
         } else {

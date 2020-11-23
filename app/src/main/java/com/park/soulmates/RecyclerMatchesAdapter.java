@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MatchModel;
 
 public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
