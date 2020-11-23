@@ -25,13 +25,15 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        prepareSending();
+        initAdapter();
+    }
+
+    private void prepareSending(){
         TextView title = findViewById(R.id.chatTitle);
         title.setText(getIntent().getStringExtra("targetName"));
-
-
         FloatingActionButton fab =
                 (FloatingActionButton)findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,64 +41,23 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .child("users")
-                        .child(FirebaseAuth.getInstance().getUid())
-                        .child("chats")
-                        .child(getIntent().getStringExtra("targetUID"))
-                        .push()
-                        .setValue(new MessageModel(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getUid())
-                        );
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .child("users")
-                        .child(getIntent().getStringExtra("targetUID"))
-                        .child("chats")
-                        .child(FirebaseAuth.getInstance().getUid())
-                        .push()
-                        .setValue(new MessageModel(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getUid())
-                        );
-
-                // Clear the input
+                FirebaseUtils.sendMessage( getIntent().getStringExtra("targetUID"), input.getText().toString());
                 input.setText("");
             }
         });
+    }
 
-
-        DatabaseReference base = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("users")
-                .child(FirebaseAuth.getInstance().getUid())
-                .child("chats")
-                .child(getIntent().getStringExtra("targetUID"));
+    private void initAdapter(){
         FirebaseRecyclerOptions<MessageModel> options
                 = new FirebaseRecyclerOptions.Builder<MessageModel>()
-                .setQuery(base, MessageModel.class)
+                .setQuery(FirebaseUtils.getChatReference(getIntent().getStringExtra("targetUID")), MessageModel.class)
                 .build();
         mAdapter = new RecyclerChatAdapter(options);
 
-        RecyclerView feedRecycler = findViewById(R.id.list_of_messages);
-        feedRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        feedRecycler.setAdapter(mAdapter);
+        RecyclerView chatRecycler = findViewById(R.id.list_of_messages);
+        chatRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        chatRecycler.setAdapter(mAdapter);
     }
-
-
-
-//    @Override
-//    public View onCreateView(ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        //View view = inflater.inflate(R.layout.activity_chat, container, false);
-//        RecyclerView feedRecycler = view.findViewById(R.id.list_of_messages);
-//        feedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
-//        feedRecycler.setAdapter(mAdapter);
-//        return view;
-//    }
 
     @Override
     public void onStart() {

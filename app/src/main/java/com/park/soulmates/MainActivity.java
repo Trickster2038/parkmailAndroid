@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "Main activity started");
 
         CurrentUser.init();
+        FirebaseUtils.init();
 
         NotificationsMatches.startListening(MainActivity.this, MainActivity.class);
 
