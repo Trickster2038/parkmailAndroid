@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.park.soulmates.models.LikeModel;
+import com.park.soulmates.models.MatchModel;
 
 public class MatchPusher {
     private static volatile boolean sMatch;

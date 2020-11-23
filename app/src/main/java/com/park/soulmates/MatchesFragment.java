@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.models.MatchModel;
 
 public class MatchesFragment extends Fragment {
     private RecyclerMatchesAdapter mAdapter;

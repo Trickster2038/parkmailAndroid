@@ -1,24 +1,24 @@
-package com.park.soulmates;
+package com.park.soulmates.models;
 
-public class MatchModel {
+public class LikeModel {
     private Integer mExist;
     private String mTargetUid;
 
-    MatchModel() {
+    public LikeModel() {
         this.mExist = 1;
         this.mTargetUid = "noUID";
     }
 
-    MatchModel(String targetUid) {
+    public LikeModel(String targUID) {
         this.mExist = 1;
-        this.mTargetUid = targetUid;
+        this.mTargetUid = targUID;
     }
 
-    public String getTargetUID() {
+    public String getTargetUid() {
         return mTargetUid;
     }
 
-    public void setTargetUID(String targetUid) {
+    public void setTargetUid(String targetUid) {
         this.mTargetUid = targetUid;
     }
 

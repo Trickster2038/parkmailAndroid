@@ -1,8 +1,13 @@
-package com.park.soulmates;
+package com.park.soulmates.models;
 
 public class UserModel {
     private String name;
     private Boolean romanticSearch;
+
+    public UserModel(){
+        name = "defaultName";
+        romanticSearch = true;
+    }
 
     public String getName() {
         return name;

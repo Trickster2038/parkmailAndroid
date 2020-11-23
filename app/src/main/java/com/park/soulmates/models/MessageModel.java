@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.models;
 
 import java.util.Date;
 
