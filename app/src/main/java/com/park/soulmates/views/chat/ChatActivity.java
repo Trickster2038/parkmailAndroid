@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.chat;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.R;
 import com.park.soulmates.models.MessageModel;
+import com.park.soulmates.utils.FirebaseUtils;
 
 public class ChatActivity extends AppCompatActivity {
     private RecyclerChatAdapter mAdapter;

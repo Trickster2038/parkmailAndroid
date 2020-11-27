@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.matches;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.R;
 import com.park.soulmates.models.MatchModel;
 
 public class MatchesFragment extends Fragment {

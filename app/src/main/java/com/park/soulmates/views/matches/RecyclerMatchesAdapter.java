@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.matches;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MatchModel;
+import com.park.soulmates.views.chat.ChatActivity;
 
 public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
         <MatchModel, RecyclerMatchesAdapter.personsViewHolder> {

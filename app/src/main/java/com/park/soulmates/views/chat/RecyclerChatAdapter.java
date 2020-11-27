@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.chat;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.park.soulmates.R;
 import com.park.soulmates.models.MessageModel;
 
 public class RecyclerChatAdapter extends FirebaseRecyclerAdapter

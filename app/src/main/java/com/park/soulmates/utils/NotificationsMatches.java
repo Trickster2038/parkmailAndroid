@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.utils;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.park.soulmates.R;
 import com.park.soulmates.models.MatchModel;
 
 public class NotificationsMatches {

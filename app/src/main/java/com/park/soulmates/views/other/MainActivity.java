@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.other;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,8 +6,12 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.views.feed.FeedFragment;
+import com.park.soulmates.views.matches.MatchesFragment;
+import com.park.soulmates.utils.NotificationsMatches;
+import com.park.soulmates.R;
+import com.park.soulmates.utils.CurrentUser;
+import com.park.soulmates.utils.FirebaseUtils;
 
 public class MainActivity extends AppCompatActivity {
     // private static final int NOTIFY_ID = 103;

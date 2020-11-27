@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.feed;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
 
 public class FeedFragment extends Fragment {

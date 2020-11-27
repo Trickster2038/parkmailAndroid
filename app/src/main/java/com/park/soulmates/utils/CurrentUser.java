@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.utils;
 
 import androidx.annotation.NonNull;
 

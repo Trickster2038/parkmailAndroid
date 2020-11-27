@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.other;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.R;
 
 public class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;

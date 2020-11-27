@@ -1,4 +1,4 @@
-package com.park.soulmates;
+package com.park.soulmates.views.other;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -19,21 +19,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.park.soulmates.R;
+import com.park.soulmates.utils.FirebaseUtils;
+import com.park.soulmates.views.other.AuthActivity;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 

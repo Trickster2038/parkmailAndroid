@@ -1,5 +1,5 @@
 
-package com.park.soulmates;
+package com.park.soulmates.views.feed;
 
 import android.net.Uri;
 import android.util.Log;
@@ -20,7 +20,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
+import com.park.soulmates.utils.CurrentUser;
+import com.park.soulmates.utils.FirebaseUtils;
 
 // FirebaseRecyclerAdapter is a class provided by
 // FirebaseUI. it provides functions to bind, adapt and show
