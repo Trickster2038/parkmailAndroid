@@ -65,10 +65,22 @@ public class FirebaseUtils {
     public static void pushUser(String name, String surname, String bio, String birthdate,
                             String contacts, Boolean romanticSearch, Boolean gender, Boolean[] interests) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("users/"+ uid); // Key
+
+        DatabaseReference ref = db.getReference("users/"+ uid);
         AdvancedUserModel user = new AdvancedUserModel(uid, name, surname, bio,
                 birthdate, contacts, romanticSearch, gender, interests);
-        ref.setValue(user);
+
+        ref.child("uid").setValue(user.getUid());
+        ref.child("name").setValue(user.getName());
+        ref.child("surname").setValue(user.getSurname());
+        ref.child("bio").setValue(user.getBio());
+        ref.child("birthdate").setValue(user.getBirthdate());
+        ref.child("contacts").setValue(user.getContacts());
+        ref.child("romanticSearch").setValue(user.getRomanticSearch());
+        ref.child("gender").setValue(user.getGender());
+        ref.child("interests").setValue(user.getInterests());
+
+        //ref.setValue(user);
         Log.d("dev_utils", "user pushed");
     }
 

@@ -23,9 +23,11 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // raises exception if called few times
-        if(savedInstanceState != null) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        }
+
+        // out-of-box bugged cache
+//        if(savedInstanceState != null) {
+//            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//        }
 
         Intent intent = new Intent(this, MainActivity.class);
 
