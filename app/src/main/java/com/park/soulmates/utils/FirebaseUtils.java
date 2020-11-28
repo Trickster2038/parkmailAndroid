@@ -20,12 +20,12 @@ public class FirebaseUtils {
     private static FirebaseAuth auth;
     private static String uid;
 
-    public static void init(){
+    public static void init() {
         auth = FirebaseAuth.getInstance();
         uid = auth.getUid();
     }
 
-    public static void sendMessage(String targetUser, String message){
+    public static void sendMessage(String targetUser, String message) {
 
         FirebaseDatabase.getInstance()
                 .getReference()
@@ -51,7 +51,7 @@ public class FirebaseUtils {
                 );
     }
 
-    public static DatabaseReference getChatReference(String targetUser){
+    public static DatabaseReference getChatReference(String targetUser) {
         DatabaseReference base = FirebaseDatabase
                 .getInstance()
                 .getReference()
@@ -63,10 +63,10 @@ public class FirebaseUtils {
     }
 
     public static void pushUser(String name, String surname, String bio, String birthdate,
-                            String contacts, Boolean romanticSearch, Boolean gender, Boolean[] interests) {
+                                String contacts, Boolean romanticSearch, Boolean gender, Boolean[] interests) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = db.getReference("users/"+ uid);
+        DatabaseReference ref = db.getReference("users/" + uid);
         AdvancedUserModel user = new AdvancedUserModel(uid, name, surname, bio,
                 birthdate, contacts, romanticSearch, gender, interests);
 
@@ -86,7 +86,7 @@ public class FirebaseUtils {
 
     public static void pushLike(String userGetterUid) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("users/"+ uid + "/likes/" + userGetterUid);
+        DatabaseReference ref = db.getReference("users/" + uid + "/likes/" + userGetterUid);
         LikeModel like = new LikeModel(userGetterUid);
         ref.setValue(like);
         Log.d("dev_utils", "Like pushed");
@@ -124,25 +124,25 @@ public class FirebaseUtils {
                 if (value != null) {
                     // equals() goes wrong, maybe hashCode unindentity
                     isMatch = (value == 1); // almost always true
-                    Log.d("MatchPusher", value.toString());
+                    Log.d("dev_MatchPusher", value.toString());
                 } else {
-                    Log.d("MatchPusher", "back like is null");
+                    Log.d("dev_MatchPusher", "back like is null");
                     isMatch = false;
                 }
-                Log.d("MatchPusher", userAuth.getUid());
+                Log.d("dev_MatchPusher", userAuth.getUid());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("MatchPusher", "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
+                Log.e("dev_MatchPusher", "onCancelled: Something went wrong! Error:" + databaseError.getMessage());
 
             }
         });
 
         if (isMatch) {
-            Log.d("MatchPusher", "its a match");
+            Log.d("dev_MatchPusher", "its a match");
         } else {
-            Log.d("MatchPusher", "its NOT a match");
+            Log.d("dev_MatchPusher", "its NOT a match");
         }
 
         return isMatch;

@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical">
-<!--    <com.google.android.material.textview.MaterialTextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="@string/google_OAuth_waiting"-->
-<!--        android:textSize="@dimen/bannerText"-->
-<!--        />-->
+    <!--    <com.google.android.material.textview.MaterialTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:text="@string/google_OAuth_waiting"-->
+    <!--        android:textSize="@dimen/bannerText"-->
+    <!--        />-->
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -20,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/smallMargin"
-        android:indeterminate="true"
-        />
+        android:indeterminate="true" />
 
 
 </LinearLayout>

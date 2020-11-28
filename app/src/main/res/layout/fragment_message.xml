@@ -1,57 +1,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/msg_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
     <FrameLayout
-        android:layout_weight="1"
         android:id="@+id/msg_space"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" />
 
     <androidx.cardview.widget.CardView
-        app:cardCornerRadius="@dimen/cornerRadius"
-        android:layout_weight="0"
         android:id="@+id/msg_inner_container"
-        android:layout_margin="@dimen/smallMargin"
         android:layout_width="@dimen/msg_width"
-        android:layout_height="wrap_content">
-<!--        android:orientation="vertical"-->
-
-
-    <TextView
-        tools:text="test author"
-        android:layout_margin="@dimen/smallMargin"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/message_user"
-        android:textStyle="normal|bold"
-        android:visibility="gone"/>
-
-    <TextView
-        tools:text="test msg"
         android:layout_margin="@dimen/smallMargin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:id="@+id/message_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18sp" />
+        android:layout_weight="0"
+        app:cardCornerRadius="@dimen/cornerRadius">
+        <!--        android:orientation="vertical"-->
+
 
         <TextView
-            android:visibility="gone"
+            android:id="@+id/message_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_margin="@dimen/smallMargin"
-            tools:text="test time"
+            android:textStyle="normal|bold"
+            android:visibility="gone"
+            tools:text="test author" />
+
+        <TextView
+            android:id="@+id/message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/smallMargin"
+            android:layout_marginTop="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:text="test msg" />
+
+        <TextView
+            android:id="@+id/message_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/message_user"
             android:layout_alignParentEnd="true"
-            android:id="@+id/message_time" />
+            android:layout_margin="@dimen/smallMargin"
+            android:visibility="gone"
+            tools:text="test time" />
     </androidx.cardview.widget.CardView>
 </LinearLayout>

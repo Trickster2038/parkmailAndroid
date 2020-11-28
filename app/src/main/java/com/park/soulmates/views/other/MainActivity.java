@@ -14,9 +14,7 @@ import com.park.soulmates.utils.CurrentUser;
 import com.park.soulmates.utils.FirebaseUtils;
 
 public class MainActivity extends AppCompatActivity {
-    // private static final int NOTIFY_ID = 103;
-    // Идентификатор канала
-    // private static String CHANNEL_ID = "t channel";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

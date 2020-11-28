@@ -39,10 +39,10 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
         //String currentUId = FirebaseAuth.getInstance().getUid();
         holder.messageText.setText(model.getMessageText());
         holder.messageUser.setText(model.getMessageUser());
-        if(model.getMessageUser().equals(currentUid)){
+        if (model.getMessageUser().equals(currentUid)) {
             Log.d("dev_chat_userMsg", model.getMessageUser() + " " + currentUid);
             // FIXME: remove hardcode to resources
-            holder.messageInnerCard.setCardBackgroundColor(Color.rgb(150,0,200));
+            holder.messageInnerCard.setCardBackgroundColor(Color.rgb(150, 0, 200));
             holder.messageText.setTextColor(Color.WHITE);
         } else {
             holder.messageInnerCard.setCardBackgroundColor(Color.LTGRAY);
@@ -72,10 +72,10 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
             super(v);
             messageSpace = v.findViewById(R.id.msg_space);
             messageInnerCard = v.findViewById(R.id.msg_inner_container);
-            messageCard  = v.findViewById(R.id.msg_container);
-            messageText = (TextView)v.findViewById(R.id.message_text);
-            messageUser = (TextView)v.findViewById(R.id.message_user);
-            messageTime = (TextView)v.findViewById(R.id.message_time);
+            messageCard = v.findViewById(R.id.msg_container);
+            messageText = (TextView) v.findViewById(R.id.message_text);
+            messageUser = (TextView) v.findViewById(R.id.message_user);
+            messageTime = (TextView) v.findViewById(R.id.message_time);
         }
     }
 }

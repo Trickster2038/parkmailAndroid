@@ -56,20 +56,21 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_signup"
-        android:layout_marginTop="@dimen/smallMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_login"
         android:layout_alignLeft="@id/editTextPasswordLayout"
         android:layout_alignRight="@id/editTextPasswordLayout"
+        android:layout_marginTop="@dimen/smallMargin"
         android:text="@string/button_signup" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_loginGoogle"
-        android:layout_marginTop="@dimen/smallMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_signup"
         android:layout_alignLeft="@id/editTextPasswordLayout"
         android:layout_alignRight="@id/editTextPasswordLayout"
+        android:layout_marginTop="@dimen/smallMargin"
         android:text="@string/loginGoogle" />
 </RelativeLayout>

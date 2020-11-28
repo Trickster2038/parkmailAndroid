@@ -23,13 +23,13 @@ public class InterestsModel {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String result = "";
         int i;
         Boolean flag;
         for (i = 0; i < 5; i++) {
             flag = mInterests.get(i);
-            if(flag){
+            if (flag) {
                 switch (i) {
                     case 0:
                         result += "#IT ";

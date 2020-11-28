@@ -22,17 +22,18 @@ import com.park.soulmates.R;
 import com.park.soulmates.models.MatchModel;
 
 public class NotificationsMatches {
-    private static int mCount=0;
+    private static int mCount = 0;
     // Идентификатор уведомления
     private static final int NOTIFY_ID = 101;
     // Идентификатор канала
     private static String CHANNEL_ID = "match channel";
     private static String CHANNEL_NAME = "m channel";
 
-    public NotificationsMatches(){}
+    public NotificationsMatches() {
+    }
 
     // MainActivity context and class
-    public static void startListening(Context context, Class contextClass){
+    public static void startListening(Context context, Class contextClass) {
         MatchModel match;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         //TODO: rewrite all paths in one style
@@ -45,26 +46,13 @@ public class NotificationsMatches {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 // fixes that first "DataChange" is just reading from DB, so meanless notification appears
-                if(mCount > 0) {
+                if (mCount > 0) {
                     NotificationsMatches.notify(context, contextClass);
                 }
                 mCount++;
 
-//                holder.title.setText(user.getName().concat(" ").concat(user.getSurname()));
-//                holder.uid.setText(user.getUid());
-//                holder.contacts.setText(user.getContacts());
-//                NotificationManagerCompat notificationManager =
-//                        NotificationManagerCompat.from(context);
-//                NotificationCompat.Builder builder =
-//                        new NotificationCompat.Builder(context, CHANNEL_ID)
-//                                .setSmallIcon(R.drawable.ic_heart)
-//                                .setContentTitle("Match")
-//                                .setContentText("You got a new match")
-//                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-//                                //.setContentIntent(contentIntent);
-//                notificationManager.notify(NOTIFY_ID, builder.build());
-//                Log.d("dev_notices","notices tick");
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("The read failed: ", String.valueOf(databaseError.getCode()));
@@ -72,7 +60,7 @@ public class NotificationsMatches {
         });
     }
 
-    public static void notify(Context ctx, Class contextClass){
+    public static void notify(Context ctx, Class contextClass) {
         NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // create channel in new versions of android

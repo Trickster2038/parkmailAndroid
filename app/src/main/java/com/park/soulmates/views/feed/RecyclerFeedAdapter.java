@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,43 +34,33 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         AdvancedUserModel, RecyclerFeedAdapter.personsViewholder> {
 
     public RecyclerFeedAdapter(
-            @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options)
-    {
+            @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options) {
         super(options);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull personsViewholder holder,
-                                    int position, @NonNull AdvancedUserModel model)
-    {
-        // TODO: save auth info in static class?
+                                    int position, @NonNull AdvancedUserModel model) {
         String currentUid = FirebaseAuth.getInstance().getUid();
 
-        // check for auto-like, and other filters later
+        // TODO: must be already init, but bugged sometimes
         CurrentUser.init();
-        //Log.d("dev_feed", CurrentUser.getData().getName());
-        if(!currentUid.equals(model.getUid())
-        && !((CurrentUser.getIsRomantic() || model.getRomanticSearch())
+
+        if (!currentUid.equals(model.getUid())
+                && !((CurrentUser.getIsRomantic() || model.getRomanticSearch())
                 && CurrentUser.getGender() == model.getGender())) {
-            // FIXME: get normal gender from cards
 
             String TAG = "dev_feed";
             Log.d("dev_feed", "item is nice");
             Log.d("dev_romantic", Boolean.toString(CurrentUser.getIsRomantic() || model.getRomanticSearch()));
             Log.d("dev_genders_eq", Boolean.toString(CurrentUser.getGender() == model.getGender()));
 
-            //Log.d("dev_feed_check2", "|" + model.getUid() + "|");
             holder.bio.setText(model.getBio());
             holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
             holder.uid.setText(model.getUid());
             holder.interestsField.setText(model.getInterests().toString());
 
-            // URL изображения, который мы получили выше
-            //String url="https://firebasestorage.googleapis.com/v0/b/retrieve-images-958e5.appspot.com/o/9.PNG?alt=media&token=6bd05383-0070-4c26-99cb-dcb17a23f7eb";
 
-            //Glide.with(holder.avatarView).load(url).into(holder.avatarView);
-
-            //FirebaseAuth userAuth = FirebaseAuth.getInstance();
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageReference = storage.getReference().child("users/" + model.getUid() + "/avatar");
 
@@ -81,7 +72,6 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                     } catch (Exception e) {
                         Log.d("dev_avatar_download", "404");
                     }
-                    // Got the download URL for 'users/me/profile.png'
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -90,7 +80,6 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 }
             });
 
-            // TODO: disable after click + add simple filter using "gone" view attribute
             Button likeButton = holder.itemView.findViewById(R.id.likeBtn);
             likeButton.setOnClickListener(v -> {
                 TextView textUid = holder.itemView.findViewById(R.id.cardUID);
@@ -99,6 +88,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             });
         } else {
             Log.d("dev_feed", "item is hidden");
+
             // hot-fix to remove auto-likes
             holder.card.setVisibility(View.GONE);
             holder.card.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
@@ -109,8 +99,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
     @Override
     public personsViewholder
     onCreateViewHolder(@NonNull ViewGroup parent,
-                       int viewType)
-    {
+                       int viewType) {
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_feed_profile, parent, false);
@@ -122,14 +111,14 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         TextView bio, title, uid, interestsField;
         ImageView avatarView;
         View card;
-        public personsViewholder(@NonNull View itemView)
-        {
+
+        public personsViewholder(@NonNull View itemView) {
             super(itemView);
             card = itemView;
             avatarView = itemView.findViewById(R.id.feedAvatar);
             bio = itemView.findViewById(R.id.profileBio);
             title = itemView.findViewById(R.id.profileTitle);
-            uid  = itemView.findViewById(R.id.cardUID);
+            uid = itemView.findViewById(R.id.cardUID);
             interestsField = itemView.findViewById(R.id.profileInterests);
         }
     }

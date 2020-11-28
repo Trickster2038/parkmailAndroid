@@ -60,17 +60,16 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
                 holder.interestsField.setText(user.getInterests().toString());
 
                 FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReference().child("users/" + user.getUid() + "/avatar" );
+                StorageReference storageReference = storage.getReference().child("users/" + user.getUid() + "/avatar");
 
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         try {
                             Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             Log.d("dev_avatar_download", "404");
                         }
-                        // Got the download URL for 'users/me/profile.png'
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -91,7 +90,6 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
 
         View card = holder.itemView.findViewById(R.id.profileMatchesCard);
         card.setOnClickListener(v -> {
-            // TODO: change null
             Intent intent = new Intent(mContext, ChatActivity.class);
             intent.putExtra("targetUID", model.getTargetUID());
             intent.putExtra("targetName", holder.title.getText().toString());

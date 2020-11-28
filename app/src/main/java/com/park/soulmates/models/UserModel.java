@@ -4,7 +4,7 @@ public class UserModel {
     private String name;
     private Boolean romanticSearch;
 
-    public UserModel(){
+    public UserModel() {
         name = "defaultName";
         romanticSearch = true;
     }

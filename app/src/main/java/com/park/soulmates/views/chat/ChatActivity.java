@@ -28,25 +28,25 @@ public class ChatActivity extends AppCompatActivity {
         initAdapter();
     }
 
-    private void prepareSending(){
+    private void prepareSending() {
         TextView title = findViewById(R.id.chatTitle);
         title.setText(getIntent().getStringExtra("targetName"));
         FloatingActionButton fab =
-                (FloatingActionButton)findViewById(R.id.fab);
+                (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText input = (EditText)findViewById(R.id.input);
+                EditText input = (EditText) findViewById(R.id.input);
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                FirebaseUtils.sendMessage( getIntent().getStringExtra("targetUID"), input.getText().toString());
+                FirebaseUtils.sendMessage(getIntent().getStringExtra("targetUID"), input.getText().toString());
                 input.setText("");
             }
         });
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
         FirebaseRecyclerOptions<MessageModel> options
                 = new FirebaseRecyclerOptions.Builder<MessageModel>()
                 .setQuery(FirebaseUtils.getChatReference(getIntent().getStringExtra("targetUID")), MessageModel.class)

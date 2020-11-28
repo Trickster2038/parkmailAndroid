@@ -16,7 +16,7 @@ public class MessageModel {
         messageTime = new Date().getTime();
     }
 
-    public MessageModel(){
+    public MessageModel() {
 
     }
 

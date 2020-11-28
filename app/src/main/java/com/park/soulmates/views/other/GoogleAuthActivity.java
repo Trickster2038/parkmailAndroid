@@ -45,7 +45,6 @@ public class GoogleAuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_google_auth);
 
 
-
         // [START config_signin]
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

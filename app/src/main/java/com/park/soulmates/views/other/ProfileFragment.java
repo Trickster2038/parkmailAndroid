@@ -45,6 +45,7 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class ProfileFragment extends Fragment {
                     editContacts.getText().toString(),
                     radioRomantic.isChecked(),
                     radioMale.isChecked(),
-                    new Boolean[] {
+                    new Boolean[]{
                             checkIT.isChecked(),
                             checkMusic.isChecked(),
                             checkSport.isChecked(),
@@ -120,16 +121,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 mImageView.setImageBitmap(bitmap);
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -138,13 +136,12 @@ public class ProfileFragment extends Fragment {
     private void uploadImage() {
 
         // filePatch.class == Uri
-        if(filePath != null)
-        {
+        if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("users/"+ FirebaseAuth.getInstance().getUid() + "/avatar");
+            StorageReference ref = storageReference.child("users/" + FirebaseAuth.getInstance().getUid() + "/avatar");
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -159,15 +156,15 @@ public class ProfileFragment extends Fragment {
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
                             Log.d("dev_img_upload_uri", filePath.getPath());
-                            Toast.makeText(getActivity(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
                         }
                     });
         }
