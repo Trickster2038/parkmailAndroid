@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,6 +34,8 @@ import com.park.soulmates.utils.FirebaseUtils;
 import com.park.soulmates.views.other.AuthActivity;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -106,6 +110,31 @@ public class ProfileFragment extends Fragment {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(inflater.getContext(), AuthActivity.class);
             startActivity(intent);
+        });
+
+        //DatePicker
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Select a birthdate");
+        final MaterialDatePicker datePicker = builder.build();
+        TextInputEditText editDate = view.findViewById(R.id.editTextDate);
+        Button datePickBtn = view.findViewById(R.id.datePick);
+
+        datePickBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePicker.show(getFragmentManager(),"DATE_PICKER");
+            }
+        });
+
+        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                long date_utc = Long.valueOf(datePicker.getSelection().toString());
+                Date date = new Date();
+                date.setTime(date_utc);
+                String formattedDate = new SimpleDateFormat("d.MM.yyyy").format(date);
+                editDate.setText(formattedDate);
+            }
         });
 
         return view;

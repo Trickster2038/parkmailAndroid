@@ -9,4 +9,5 @@
     <dimen name="matchAvatarSize">128dp</dimen>
     <dimen name="extraSmallMargin">2dp</dimen>
     <dimen name="msg_width">250dp</dimen>
+    <dimen name="textDateWidth">278dp</dimen>
 </resources>

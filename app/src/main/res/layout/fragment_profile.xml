@@ -53,22 +53,36 @@
                 android:text="defSur" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="@dimen/textDateWidth"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/smallMargin"
+                    android:ems="10"
+                    android:hint="@string/birthdateInput"
+                    android:inputType="date"
+                    android:text="03.08.2000" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/datePick"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Date"
                 android:layout_marginVertical="@dimen/smallMargin"
-                android:ems="10"
-                android:hint="@string/birthdateInput"
-                android:inputType="date"
-                android:text="1111" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:textSize="@dimen/contentText" />
+        </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
