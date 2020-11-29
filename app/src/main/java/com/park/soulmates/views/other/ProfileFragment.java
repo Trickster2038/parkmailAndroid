@@ -132,7 +132,7 @@ public class ProfileFragment extends Fragment {
                 long date_utc = Long.valueOf(datePicker.getSelection().toString());
                 Date date = new Date();
                 date.setTime(date_utc);
-                String formattedDate = new SimpleDateFormat("d.MM.yyyy").format(date);
+                String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
                 editDate.setText(formattedDate);
             }
         });

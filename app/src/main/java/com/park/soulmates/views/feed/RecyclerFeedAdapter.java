@@ -59,6 +59,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
             holder.uid.setText(model.getUid());
             holder.interestsField.setText(model.getInterests().toString());
+            holder.birthday.setText(model.getBirthdate().toString());
 
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -108,7 +109,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 
     class personsViewholder
             extends RecyclerView.ViewHolder {
-        TextView bio, title, uid, interestsField;
+        TextView bio, title, uid, interestsField, birthday;
         ImageView avatarView;
         View card;
 
@@ -119,6 +120,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             bio = itemView.findViewById(R.id.profileBio);
             title = itemView.findViewById(R.id.profileTitle);
             uid = itemView.findViewById(R.id.cardUID);
+            birthday = itemView.findViewById(R.id.profileInfo);
             interestsField = itemView.findViewById(R.id.profileInterests);
         }
     }

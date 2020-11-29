@@ -16,5 +16,6 @@
     <string name="loginGoogle">Sign in with google</string>
     <string name="google_signIn_client">527395143529-rktqpto2rddoa04cadlf16dhe1366bn9.apps.googleusercontent.com</string>
     <string name="google_OAuth_waiting">waiting...</string>
+    <string name="dateBtn">date</string>
 
 </resources>

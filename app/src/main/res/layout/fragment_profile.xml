@@ -71,16 +71,17 @@
                     android:ems="10"
                     android:hint="@string/birthdateInput"
                     android:inputType="date"
-                    android:text="03.08.2000" />
+                    android:text="01.01.2000" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/datePick"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Date"
                 android:layout_marginVertical="@dimen/smallMargin"
                 android:layout_marginLeft="@dimen/smallMargin"
+                android:padding="@dimen/extraSmallMargin"
+                android:text="@string/dateBtn"
                 android:textSize="@dimen/contentText" />
         </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
