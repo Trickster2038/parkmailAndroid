@@ -3,6 +3,9 @@ package com.park.soulmates.views.other;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,12 +33,15 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.park.soulmates.R;
+import com.park.soulmates.utils.CustomLocationListener;
 import com.park.soulmates.utils.FirebaseUtils;
 import com.park.soulmates.views.other.AuthActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -53,6 +59,26 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        CustomLocationListener.SetUpLocationListener(getContext(), getActivity());
+
+        // FIXME: another thread for location
+        if(CustomLocationListener.getCurrentLocation() != null) {
+            Log.d("dev_location", String.valueOf(CustomLocationListener.getCurrentLocation().getLongitude()));
+            double lat = CustomLocationListener.getCurrentLocation().getLatitude();
+            double lng = CustomLocationListener.getCurrentLocation().getLongitude();
+            //Location.distanceBetween(); - meters?
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+                Log.d("dev_location_area", addresses.get(0).getAdminArea().toString());
+                Log.d("dev_location_subarea", addresses.get(0).getSubAdminArea());
+            } catch (IOException e) {
+                Log.d("dev_location", "null area");
+            }
+        } else {
+            Log.d("dev_location", "null location");
+        }
+
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
