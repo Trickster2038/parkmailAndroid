@@ -29,8 +29,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void prepareSending() {
-        TextView title = findViewById(R.id.chatTitle);
-        title.setText(getIntent().getStringExtra("targetName"));
+        //TextView title = findViewById(R.id.chatTitle);
+        setTitle(getIntent().getStringExtra("targetName"));
         FloatingActionButton fab =
                 (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

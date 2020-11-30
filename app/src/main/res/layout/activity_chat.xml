@@ -9,19 +9,19 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center">-->
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/chatTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chat"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/title" />
-    </com.google.android.material.appbar.AppBarLayout>
+<!--        <com.google.android.material.textview.MaterialTextView-->
+<!--            android:id="@+id/chatTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Chat"-->
+<!--            android:textColor="@color/colorWhite"-->
+<!--            android:textSize="@dimen/title" />-->
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_messages"

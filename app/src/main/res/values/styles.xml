@@ -4,5 +4,9 @@
         <item name="android:textColor">@color/colorDarkGrey</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
     </style>
+    <style name="ChatTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+    </style>
 
 </resources>

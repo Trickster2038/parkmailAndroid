@@ -7,7 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +46,9 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
         if (model.getMessageUser().equals(currentUid)) {
             Log.d("dev_chat_userMsg", model.getMessageUser() + " " + currentUid);
             // FIXME: remove hardcode to resources
-            holder.messageInnerCard.setCardBackgroundColor(Color.rgb(150, 0, 200));
+            int myMsgColor = holder.messageCard.getContext().getResources().getColor(R.color.colorPrimary);
+            // Color.rgb(150, 0, 200)
+            holder.messageInnerCard.setCardBackgroundColor(myMsgColor);
             holder.messageText.setTextColor(Color.WHITE);
         } else {
             holder.messageInnerCard.setCardBackgroundColor(Color.LTGRAY);
