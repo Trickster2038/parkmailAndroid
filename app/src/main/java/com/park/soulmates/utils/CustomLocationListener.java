@@ -40,17 +40,20 @@ public class CustomLocationListener implements LocationListener {
 
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
-                    5000,
-                    10,
+                    1000,
+                    300,
                     locationListener); // здесь можно указать другие более подходящие вам параметры
 
             currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
     }
 
+    
     public static Location getCurrentLocation() {
         return currentLocation;
     }
+
+
 
     public static void setCurrentLocation(Location currentLocation) {
         CustomLocationListener.currentLocation = currentLocation;

@@ -81,6 +81,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 Log.d("dev_location_feed", "distance: " + distance.toString());
                 Integer distanceKm = Math.round(distance / 1000);
                 Log.d("dev_location_feed", "distance: " + distanceKm.toString() + " km");
+                holder.distance.setText(distanceKm.toString() + " km");
             }
 
 
@@ -131,7 +132,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 
     class personsViewholder
             extends RecyclerView.ViewHolder {
-        TextView bio, title, uid, interestsField, birthday;
+        TextView bio, title, uid, interestsField, birthday, distance;
         ImageView avatarView;
         View card;
 
@@ -144,6 +145,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             uid = itemView.findViewById(R.id.cardUID);
             birthday = itemView.findViewById(R.id.profileInfo);
             interestsField = itemView.findViewById(R.id.profileInterests);
+            distance =  itemView.findViewById(R.id.profileDistance);
         }
     }
 }
