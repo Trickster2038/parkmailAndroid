@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
@@ -48,11 +49,16 @@ public class CustomLocationListener implements LocationListener {
 
             LocationListener locationListener = new CustomLocationListener();
 
-            locationManager.requestLocationUpdates(
+//            locationManager.requestLocationUpdates(
+//                    LocationManager.GPS_PROVIDER,
+//                    190,
+//                    300,
+//                    locationListener); // здесь можно указать другие более подходящие вам параметры
+            locationManager.requestSingleUpdate(
                     LocationManager.GPS_PROVIDER,
-                    1000,
-                    300,
-                    locationListener); // здесь можно указать другие более подходящие вам параметры
+                    locationListener,
+                    Looper.getMainLooper()
+            );
 
             currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }

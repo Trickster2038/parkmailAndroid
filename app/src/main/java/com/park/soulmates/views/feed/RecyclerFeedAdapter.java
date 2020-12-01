@@ -59,6 +59,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 && !((CurrentUser.getIsRomantic() || model.getRomanticSearch())
                 && CurrentUser.getGender() == model.getGender())) {
 
+            holder.card.setVisibility(View.GONE);
             String TAG = "dev_feed";
             Log.d("dev_feed", "item is nice");
             Log.d("dev_romantic", Boolean.toString(CurrentUser.getIsRomantic() || model.getRomanticSearch()));
@@ -103,7 +104,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 public void run() {
                     //MyLocationListener.SetUpLocationListener(mainContext);
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(0);
                         if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
                             double cardLatitude = Double.parseDouble(model.getLatitude());
                             double cardLongitude = Double.parseDouble(model.getLongitude());
@@ -119,20 +120,20 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                                 @Override
                                 public void run() {
                                     holder.distance.setText(distanceKm.toString() + " km");
-                                    if((distanceKm > distanceVal * 10) && distanceOn){
-                                        holder.card.setVisibility(View.GONE);
+                                    if(!((distanceKm > distanceVal * 10) && distanceOn)){
+                                        holder.card.setVisibility(View.VISIBLE);
                                     }
                                 }
                             });
                         } else {
-//                            if(distanceOn){
-//                                CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        holder.card.setVisibility(View.GONE);
-//                                    }
-//                                });
-//                            }
+                            if(!distanceOn){
+                                CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        holder.card.setVisibility(View.VISIBLE);
+                                    }
+                                });
+                            }
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
