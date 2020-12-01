@@ -16,13 +16,23 @@ import androidx.core.content.ContextCompat;
 
 public class CustomLocationListener implements LocationListener {
     private static int REQUEST_CODE = 0;
+    private static Activity activity;
 
     static Location currentLocation; // здесь будет всегда доступна самая последняя информация о местоположении пользователя.
+
+    public static Activity getActivity() {
+        return activity;
+    }
+
+    public static void setActivity(Activity activity) {
+        CustomLocationListener.activity = activity;
+    }
 
     // FIXME: check permission
     @SuppressLint("MissingPermission")
     public static void SetUpLocationListener(Context context, Activity act) // это нужно запустить в самом начале работы программы
     {
+        activity = act;
         int permissionCheck = ContextCompat.checkSelfPermission(act,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -48,11 +58,10 @@ public class CustomLocationListener implements LocationListener {
         }
     }
 
-    
+
     public static Location getCurrentLocation() {
         return currentLocation;
     }
-
 
 
     public static void setCurrentLocation(Location currentLocation) {

@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        CustomLocationListener.SetUpLocationListener(getContext(), getActivity());
+        //CustomLocationListener.SetUpLocationListener(getContext(), getActivity());
 
         // FIXME: another thread for location
 //        if(CustomLocationListener.getCurrentLocation() != null) {

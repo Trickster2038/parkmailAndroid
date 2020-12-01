@@ -11,12 +11,16 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.park.soulmates.utils.CustomLocationListener;
 import com.park.soulmates.views.feed.FeedFragment;
 import com.park.soulmates.views.matches.MatchesFragment;
 import com.park.soulmates.utils.NotificationsMatches;
 import com.park.soulmates.R;
 import com.park.soulmates.utils.CurrentUser;
 import com.park.soulmates.utils.FirebaseUtils;
+
+import static com.park.soulmates.utils.CustomLocationListener.getActivity;
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 0;
@@ -41,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_CODE);
         }
+
+        CustomLocationListener.SetUpLocationListener(this, this);
 
 
         BottomNavigationView bottomNavigationView;

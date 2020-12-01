@@ -1,6 +1,7 @@
 
 package com.park.soulmates.views.feed;
 
+import android.content.Context;
 import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
@@ -68,21 +69,51 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 
 
             if(model.getLatitude()!=null && model.getLongitude()!=null) {
-                Log.d("dev_location_feed", model.getLatitude() + " " + model.getLongitude());
+                Log.d("dev_location_UI_feed", model.getLatitude() + " " + model.getLongitude());
             }
 
-            if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
-                double cardLatitude = Double.parseDouble(model.getLatitude());
-                double cardLongitude = Double.parseDouble(model.getLongitude());
-                Location cardLocation = new Location("point B");
-                cardLocation.setLatitude(cardLatitude);
-                cardLocation.setLongitude(cardLongitude);
-                Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
-                Log.d("dev_location_feed", "distance: " + distance.toString());
-                Integer distanceKm = Math.round(distance / 1000);
-                Log.d("dev_location_feed", "distance: " + distanceKm.toString() + " km");
-                holder.distance.setText(distanceKm.toString() + " km");
-            }
+//            if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
+//                double cardLatitude = Double.parseDouble(model.getLatitude());
+//                double cardLongitude = Double.parseDouble(model.getLongitude());
+//                Location cardLocation = new Location("point B");
+//                cardLocation.setLatitude(cardLatitude);
+//                cardLocation.setLongitude(cardLongitude);
+//                Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
+//                Log.d("dev_location_UI_feed", "distance: " + distance.toString());
+//                Integer distanceKm = Math.round(distance / 1000);
+//                Log.d("dev_location_UI_feed", "distance: " + distanceKm.toString() + " km");
+//                //holder.distance.setText(distanceKm.toString() + " km");
+//            }
+            //final Context mainContext = ;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //MyLocationListener.SetUpLocationListener(mainContext);
+                    try {
+                        Thread.sleep(2000);
+                        if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
+                            double cardLatitude = Double.parseDouble(model.getLatitude());
+                            double cardLongitude = Double.parseDouble(model.getLongitude());
+                            Location cardLocation = new Location("point B");
+                            cardLocation.setLatitude(cardLatitude);
+                            cardLocation.setLongitude(cardLongitude);
+                            Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
+                            Log.d("dev_location_notUI_feed", "distance: " + distance.toString());
+                            Integer distanceKm = Math.round(distance / 1000);
+                            Log.d("dev_location_notUI_feed", "distance: " + distanceKm.toString() + " km");
+                            //holder.distance.setText(distanceKm.toString() + " km");
+                            CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    holder.distance.setText(distanceKm.toString() + " km");
+                                }
+                            });
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
 
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
