@@ -119,8 +119,20 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                                 @Override
                                 public void run() {
                                     holder.distance.setText(distanceKm.toString() + " km");
+                                    if((distanceKm > distanceVal * 10) && distanceOn){
+                                        holder.card.setVisibility(View.GONE);
+                                    }
                                 }
                             });
+                        } else {
+//                            if(distanceOn){
+//                                CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        holder.card.setVisibility(View.GONE);
+//                                    }
+//                                });
+//                            }
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
