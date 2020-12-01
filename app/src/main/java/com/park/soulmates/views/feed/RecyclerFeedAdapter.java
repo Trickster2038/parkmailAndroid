@@ -1,7 +1,9 @@
 
 package com.park.soulmates.views.feed;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
@@ -37,10 +39,12 @@ import static java.lang.Math.round;
 
 public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         AdvancedUserModel, RecyclerFeedAdapter.personsViewholder> {
+    private Activity act;
 
     public RecyclerFeedAdapter(
-            @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options) {
+            @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options, Activity activity) {
         super(options);
+        act = activity;
     }
 
     @Override
@@ -85,6 +89,15 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 //                //holder.distance.setText(distanceKm.toString() + " km");
 //            }
             //final Context mainContext = ;
+
+            SharedPreferences prefs = act.getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
+            Boolean distanceOn = prefs.getBoolean("distanceOn", false);
+            Integer distanceVal = prefs.getInt("distanceVal", 1);
+
+            Log.d("dev_prefs_feed", "distanceOn: " + distanceOn.toString());
+            Log.d("dev_prefs_feed", "distanceVal: " + distanceVal.toString());
+
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {

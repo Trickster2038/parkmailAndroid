@@ -67,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // TODO: explain why we use this scheme
                 return true;
+            } else if (itemId == R.id.tabFilter){
+                getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new FiltersFragment()).commit();
+                Log.d("MainActivity", "Tab 4");
+
+                return true;
             }
             return false;
         });

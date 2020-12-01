@@ -27,12 +27,14 @@ public class FeedFragment extends Fragment {
                 = new FirebaseRecyclerOptions.Builder<AdvancedUserModel>()
                 .setQuery(base, AdvancedUserModel.class)
                 .build();
-        mAdapter = new RecyclerFeedAdapter(options);
+        mAdapter = new RecyclerFeedAdapter(options, getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //View view = inflater.inflate(R.layout.activity_google_auth, container, false);
+
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         RecyclerView feedRecycler = view.findViewById(R.id.recyclerFeed);
         feedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -43,6 +45,11 @@ public class FeedFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         mAdapter.startListening();
     }
 

@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallMargin"
             android:text="Gender"
-            android:textSize="12sp" />
+            android:textSize="@dimen/contentText" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -173,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallMargin"
             android:text="Interests"
-            android:textSize="12sp" />
+            android:textSize="@dimen/contentText" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkIT"
