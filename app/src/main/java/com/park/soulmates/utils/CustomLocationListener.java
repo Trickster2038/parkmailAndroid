@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -26,9 +27,11 @@ public class CustomLocationListener implements LocationListener {
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
             // ask permissions here using below code
-            ActivityCompat.requestPermissions(act,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_CODE);
+            Log.d("dev_location","no permission");
+
+//            ActivityCompat.requestPermissions(act,
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    REQUEST_CODE);
         } else {
             LocationManager locationManager = (LocationManager)
                     context.getSystemService(Context.LOCATION_SERVICE);

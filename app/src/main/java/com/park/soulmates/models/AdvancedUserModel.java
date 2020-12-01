@@ -3,10 +3,10 @@ package com.park.soulmates.models;
 import com.park.soulmates.models.InterestsModel;
 
 public class AdvancedUserModel {
+    private String latitude, longitude;
     private String mUid, mName, mSurname, mBio, mBirthdate, mContacts;
     private InterestsModel mInterests;
     private boolean mRomanticSearch, mGender; //mGender: false - female, true - male
-    // FIXME: fix troubles with birthdate input
 
 
     public AdvancedUserModel() {
@@ -104,5 +104,21 @@ public class AdvancedUserModel {
 
     public void setBirthdate(String birthdate) {
         this.mBirthdate = birthdate;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

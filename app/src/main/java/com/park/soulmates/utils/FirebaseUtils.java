@@ -79,6 +79,8 @@ public class FirebaseUtils {
         ref.child("romanticSearch").setValue(user.getRomanticSearch());
         ref.child("gender").setValue(user.getGender());
         ref.child("interests").setValue(user.getInterests());
+        ref.child("latitude").setValue(String.valueOf(CustomLocationListener.getCurrentLocation().getLatitude()));
+        ref.child("longitude").setValue(String.valueOf(CustomLocationListener.getCurrentLocation().getLongitude()));
 
         //ref.setValue(user);
         Log.d("dev_utils", "user pushed");

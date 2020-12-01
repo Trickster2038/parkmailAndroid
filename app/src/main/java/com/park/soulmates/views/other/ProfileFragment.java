@@ -62,22 +62,22 @@ public class ProfileFragment extends Fragment {
         CustomLocationListener.SetUpLocationListener(getContext(), getActivity());
 
         // FIXME: another thread for location
-        if(CustomLocationListener.getCurrentLocation() != null) {
-            Log.d("dev_location", String.valueOf(CustomLocationListener.getCurrentLocation().getLongitude()));
-            double lat = CustomLocationListener.getCurrentLocation().getLatitude();
-            double lng = CustomLocationListener.getCurrentLocation().getLongitude();
-            //Location.distanceBetween(); - meters?
-            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-            try {
-                List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
-                Log.d("dev_location_area", addresses.get(0).getAdminArea().toString());
-                Log.d("dev_location_subarea", addresses.get(0).getSubAdminArea());
-            } catch (IOException e) {
-                Log.d("dev_location", "null area");
-            }
-        } else {
-            Log.d("dev_location", "null location");
-        }
+//        if(CustomLocationListener.getCurrentLocation() != null) {
+//            Log.d("dev_location", String.valueOf(CustomLocationListener.getCurrentLocation().getLongitude()));
+//            double lat = CustomLocationListener.getCurrentLocation().getLatitude();
+//            double lng = CustomLocationListener.getCurrentLocation().getLongitude();
+//            //Location.distanceBetween(); - meters?
+//            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+//            try {
+//                List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+//                Log.d("dev_location_area", addresses.get(0).getAdminArea().toString());
+//                Log.d("dev_location_subarea", addresses.get(0).getSubAdminArea());
+//            } catch (IOException e) {
+//                Log.d("dev_location", "null area");
+//            }
+//        } else {
+//            Log.d("dev_location", "null location");
+//        }
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -122,6 +122,9 @@ public class ProfileFragment extends Fragment {
 
             Log.d("dev_DB_status", "db_feed - OK");
         });
+
+
+
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override

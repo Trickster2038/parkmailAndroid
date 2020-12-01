@@ -1,6 +1,7 @@
 
 package com.park.soulmates.views.feed;
 
+import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,10 @@ import com.google.firebase.storage.StorageReference;
 import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.utils.CurrentUser;
+import com.park.soulmates.utils.CustomLocationListener;
 import com.park.soulmates.utils.FirebaseUtils;
+
+import static java.lang.Math.round;
 
 // FirebaseRecyclerAdapter is a class provided by
 // FirebaseUI. it provides functions to bind, adapt and show
@@ -60,6 +64,24 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             holder.uid.setText(model.getUid());
             holder.interestsField.setText(model.getInterests().toString());
             holder.birthday.setText(model.getBirthdate().toString());
+
+
+
+            if(model.getLatitude()!=null && model.getLongitude()!=null) {
+                Log.d("dev_location_feed", model.getLatitude() + " " + model.getLongitude());
+            }
+
+            if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
+                double cardLatitude = Double.parseDouble(model.getLatitude());
+                double cardLongitude = Double.parseDouble(model.getLongitude());
+                Location cardLocation = new Location("point B");
+                cardLocation.setLatitude(cardLatitude);
+                cardLocation.setLongitude(cardLongitude);
+                Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
+                Log.d("dev_location_feed", "distance: " + distance.toString());
+                Integer distanceKm = Math.round(distance / 1000);
+                Log.d("dev_location_feed", "distance: " + distanceKm.toString() + " km");
+            }
 
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
