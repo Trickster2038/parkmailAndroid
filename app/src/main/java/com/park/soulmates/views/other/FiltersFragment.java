@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,7 @@ public class FiltersFragment extends Fragment {
     private SeekBar distanceSeek;
     private Switch nullDistanceSw;
     private Switch genderSw;
+    private TextView distEcho;
     //private View state;
 
 
@@ -43,6 +46,7 @@ public class FiltersFragment extends Fragment {
         distanceSeek = view.findViewById(R.id.DistanceFilterBar);
         nullDistanceSw = view.findViewById(R.id.distanceFilterNullSwitch);
         genderSw = view.findViewById(R.id.genderFilterSwitch);
+        distEcho = view.findViewById(R.id.distEcho);
 
         SharedPreferences prefs = getActivity().getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
         Boolean distanceOn = prefs.getBoolean("distanceOn", false);
@@ -55,6 +59,28 @@ public class FiltersFragment extends Fragment {
         distanceSeek.setProgress(distanceVal);
         nullDistanceSw.setChecked(distanceKnown);
         genderSw.setChecked(oppositeGender);
+        distEcho.setText(String.valueOf(distanceVal*10) + " km");
+
+        distanceSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                // TODO Auto-generated method stub
+                Integer distanceVal2 = distanceSeek.getProgress();
+                distEcho.setText(String.valueOf(distanceVal2*10) + " km");
+
+            }
+        });
 
         return view;
     }
