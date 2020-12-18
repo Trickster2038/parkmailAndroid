@@ -55,8 +55,11 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         // TODO: must be already init, but bugged sometimes
         CurrentUser.init();
 
+        SharedPreferences prefs = act.getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
+        Boolean oppositeGenderPref = prefs.getBoolean("oppositeGender", false);
+
         if (!currentUid.equals(model.getUid())
-                && !((CurrentUser.getIsRomantic() || model.getRomanticSearch())
+                && !((CurrentUser.getIsRomantic() || model.getRomanticSearch() || oppositeGenderPref)
                 && CurrentUser.getGender() == model.getGender())) {
 
             holder.card.setVisibility(View.GONE);
@@ -91,8 +94,9 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 //            }
             //final Context mainContext = ;
 
-            SharedPreferences prefs = act.getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
+
             Boolean distanceOn = prefs.getBoolean("distanceOn", false);
+            Boolean distanceKnown = prefs.getBoolean("distanceKnown", false);
             Integer distanceVal = prefs.getInt("distanceVal", 1);
 
             Log.d("dev_prefs_feed", "distanceOn: " + distanceOn.toString());
@@ -126,7 +130,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                                 }
                             });
                         } else {
-                            if(!distanceOn){
+                            if(!distanceKnown){
                                 CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
