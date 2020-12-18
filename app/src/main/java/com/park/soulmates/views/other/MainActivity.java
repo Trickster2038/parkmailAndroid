@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         //FirebaseAuth.getInstance().signOut();
 
-        CurrentUser.init();
+        CurrentUser.init(getApplicationContext());
         FirebaseUtils.init();
         NotificationsMatches.startListening(MainActivity.this, MainActivity.class);
 

@@ -1,13 +1,19 @@
 package com.park.soulmates.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.park.soulmates.models.InterestsModel;
 
+@Entity
 public class AdvancedUserModel {
+    @PrimaryKey @NonNull private String mUid;
     private String latitude, longitude;
-    private String mUid, mName, mSurname, mBio, mBirthdate, mContacts;
-    private InterestsModel mInterests;
+    private String mName, mSurname, mBio, mBirthdate, mContacts;
+    @Ignore private InterestsModel mInterests;
     private boolean mRomanticSearch, mGender; //mGender: false - female, true - male
-
 
     public AdvancedUserModel() {
         this.mUid = "noUID";
@@ -21,6 +27,7 @@ public class AdvancedUserModel {
         this.mInterests = new InterestsModel();
     }
 
+    @Ignore
     public AdvancedUserModel(String uid, String name, String surname, String bio, String birthdate,
                              String contacts, Boolean romanticSearch, Boolean gender, Boolean[] interests) {
         this.mUid = uid;

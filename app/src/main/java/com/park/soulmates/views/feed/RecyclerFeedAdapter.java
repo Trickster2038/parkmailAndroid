@@ -53,7 +53,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         String currentUid = FirebaseAuth.getInstance().getUid();
 
         // TODO: must be already init, but bugged sometimes
-        CurrentUser.init();
+        //CurrentUser.init();
 
         SharedPreferences prefs = act.getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
         Boolean oppositeGenderPref = prefs.getBoolean("oppositeGender", false);

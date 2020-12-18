@@ -1,6 +1,10 @@
 package com.park.soulmates.utils;
 
+import android.app.Activity;
+import android.content.Context;
+
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +43,11 @@ public class CurrentUser {
 //        Data = data;
 //    }
 
-    public static void init() {
+    public static void init(Context ctx) {
+        UserDB db = Room.databaseBuilder(ctx,
+            UserDB.class, "populus-database").build();
+
+
         Data = new AdvancedUserModel();
         DatabaseReference base = FirebaseDatabase.getInstance().getReference()
                 .child("users")
