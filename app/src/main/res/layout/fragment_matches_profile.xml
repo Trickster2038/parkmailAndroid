@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profileMatchesCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
         android:layout_margin="@dimen/smallMargin"
         android:layout_toRightOf="@id/profileMatchesPhoto"
         android:gravity="start"
-        android:text="e.g. \nIT, \nMusic"
+        tools:text="e.g. \nIT, \nMusic"
         android:textSize="@dimen/contentText" />
 
     <com.google.android.material.textview.MaterialTextView

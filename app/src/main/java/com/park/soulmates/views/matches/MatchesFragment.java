@@ -43,6 +43,7 @@ public class MatchesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FirebaseAuth userAuth = FirebaseAuth.getInstance();
         matchesAccounts = new ArrayList<AdvancedUserModel>();
 
@@ -106,7 +107,7 @@ public class MatchesFragment extends Fragment {
                     //dao.Insert(gg);
                     UserDB db = AppSingletone.getInstance().getDatabase();
                     UserDao dao = db.userDao();
-                    Thread.sleep(3000);
+                    Thread.sleep(500);
 
                     Log.d("dev_fb_thread", matchesAccounts.toString());
                     if(!matchesAccounts.isEmpty()){
@@ -144,11 +145,19 @@ public class MatchesFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(5000);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            View tempView = inflater.inflate(R.layout.fragment_wait, container, false);
+                        }
+                    });
+
+                    Thread.sleep(700);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             mMatchesRecycler.setAdapter(mCacheAdapter);
+                            View view = inflater.inflate(R.layout.fragment_feed, container, false);
                         }
                     });
                 } catch (InterruptedException e) {
