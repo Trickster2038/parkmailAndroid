@@ -43,6 +43,8 @@ public class MatchesFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseAuth userAuth = FirebaseAuth.getInstance();
+        matchesAccounts = new ArrayList<AdvancedUserModel>();
+
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
@@ -95,13 +97,23 @@ public class MatchesFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    AdvancedUserModel gg = new AdvancedUserModel();
+                    //AdvancedUserModel gg = new AdvancedUserModel();
+                    //dao.Insert(gg);
                     UserDB db = AppSingletone.getInstance().getDatabase();
                     UserDao dao = db.userDao();
-                    dao.Insert(gg);
-
                     Thread.sleep(5000);
+
                     Log.d("dev_fb_thread", matchesAccounts.toString());
+                    if(!matchesAccounts.isEmpty()){
+                        dao.deleteAll();
+                        for(AdvancedUserModel user : matchesAccounts){
+                            dao.Insert(user);
+                        }
+                    } else {
+                        // fill accs
+                    }
+
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
