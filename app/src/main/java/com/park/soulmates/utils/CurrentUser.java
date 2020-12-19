@@ -44,8 +44,8 @@ public class CurrentUser {
 //    }
 
     public static void init(Context ctx) {
-        UserDB db = Room.databaseBuilder(ctx,
-            UserDB.class, "populus-database").build();
+//        UserDB db = Room.databaseBuilder(ctx,
+//            UserDB.class, "populus-database").build();
 
 
         Data = new AdvancedUserModel();
@@ -53,19 +53,27 @@ public class CurrentUser {
                 .child("users")
                 .child(FirebaseAuth.getInstance().getUid().toString());
         //Log.d("dev_current", base.toString());
+
+        // HOTFIXes for new users
         base.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Data = snapshot.getValue(AdvancedUserModel.class);
-                isRomantic = Data.getRomanticSearch();
-                gender = Data.getGender();
+                if(Data != null) {
+                    isRomantic = Data.getRomanticSearch();
+                    gender = Data.getGender();
+                } else {
+                    isRomantic = false;
+                    gender = false;
+                }
                 //Log.d("dev_current_snap", Boolean.toString(Data.getRomanticSearch()));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                isRomantic = false;
+                gender = false;
             }
         });
     }
