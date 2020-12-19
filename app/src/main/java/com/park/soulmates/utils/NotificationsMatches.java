@@ -10,9 +10,12 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,15 +44,39 @@ public class NotificationsMatches {
                 FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("matches");
         Log.d("dev_notices_init_acc", mAuth.getUid());
 
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        ref.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                // fixes that first "DataChange" is just reading from DB, so meanless notification appears
+//                if (mCount > 0) {
+//                    NotificationsMatches.notify(context, contextClass);
+//                }
+//                mCount++;
+//
+//            }
 
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 // fixes that first "DataChange" is just reading from DB, so meanless notification appears
                 if (mCount > 0) {
                     NotificationsMatches.notify(context, contextClass);
                 }
                 mCount++;
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
 
