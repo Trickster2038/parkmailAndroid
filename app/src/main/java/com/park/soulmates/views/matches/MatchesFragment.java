@@ -36,6 +36,7 @@ import java.util.Map;
 
 public class MatchesFragment extends Fragment {
     private RecyclerMatchesAdapter mAdapter;
+    private CachedMatchesAdapter mCacheAdapter;
     ArrayList<AdvancedUserModel> matchesAccounts = new ArrayList<AdvancedUserModel>();
 
 
@@ -52,12 +53,15 @@ public class MatchesFragment extends Fragment {
                 .child(userAuth.getUid())
                 .child("matches");
         Log.d("MatchesFragment", databaseReference.toString());
-        FirebaseRecyclerOptions<MatchModel> options
-                = new FirebaseRecyclerOptions
-                .Builder<MatchModel>()
-                .setQuery(databaseReference, MatchModel.class)
-                .build();
-        mAdapter = new RecyclerMatchesAdapter(options, getActivity());
+//        FirebaseRecyclerOptions<MatchModel> options
+//                = new FirebaseRecyclerOptions
+//                .Builder<MatchModel>()
+//                .setQuery(databaseReference, MatchModel.class)
+//                .build();
+//        mAdapter = new RecyclerMatchesAdapter(options, getActivity());
+
+
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,6 +96,7 @@ public class MatchesFragment extends Fragment {
 //        UserDB db =  Room.databaseBuilder(getActivity().getApplicationContext(),
 //                UserDB.class, "database").build();
 
+        mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
 
         new Thread(new Runnable() {
             @Override
@@ -101,7 +106,7 @@ public class MatchesFragment extends Fragment {
                     //dao.Insert(gg);
                     UserDB db = AppSingletone.getInstance().getDatabase();
                     UserDao dao = db.userDao();
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
 
                     Log.d("dev_fb_thread", matchesAccounts.toString());
                     if(!matchesAccounts.isEmpty()){
@@ -114,6 +119,8 @@ public class MatchesFragment extends Fragment {
                         matchesAccounts = (ArrayList<AdvancedUserModel>) dao.getAll();
                         Log.d("dev_cache_thread", matchesAccounts.toString());
                     }
+
+                    mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
 
 
                 } catch (InterruptedException e) {
@@ -131,19 +138,38 @@ public class MatchesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         RecyclerView mMatchesRecycler = view.findViewById(R.id.recyclerFeed);
         mMatchesRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
-        mMatchesRecycler.setAdapter(mAdapter);
+        //mMatchesRecycler.setAdapter(mAdapter);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mMatchesRecycler.setAdapter(mCacheAdapter);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mAdapter.startListening();
+        //mAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mAdapter.stopListening();
+        //mAdapter.stopListening();
     }
 }

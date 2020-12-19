@@ -53,13 +53,12 @@ public class CachedMatchesAdapter extends RecyclerView.Adapter<CachedMatchesAdap
         AdvancedUserModel user = data.get(position);
 
 
-
-
-
         holder.title.setText(user.getName().concat(" ").concat(user.getSurname()));
         holder.uid.setText(user.getUid());
         holder.contacts.setText(user.getContacts());
-        holder.interestsField.setText(user.getInterests().toString());
+
+        //TODO: interests are not compatable with current Room annotations
+        //holder.interestsField.setText(user.getInterests().toString());
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference().child("users/" + user.getUid() + "/avatar");
