@@ -8,9 +8,11 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.park.soulmates.models.AdvancedUserModel;
+import com.park.soulmates.models.UserDao;
 
 @Database(entities = {AdvancedUserModel.class}, version = 1)
-public class UserDB extends RoomDatabase {
+public abstract class UserDB extends RoomDatabase {
+    public abstract UserDao userDao();
 
     @NonNull
     @Override

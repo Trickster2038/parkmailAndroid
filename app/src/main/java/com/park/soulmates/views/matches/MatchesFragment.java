@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseError;
@@ -23,7 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MatchModel;
+import com.park.soulmates.models.UserDao;
+import com.park.soulmates.utils.AppSingletone;
 import com.park.soulmates.utils.FirebaseUtils;
+import com.park.soulmates.utils.UserDB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,10 +87,19 @@ public class MatchesFragment extends Fragment {
             }
         });
 
+//        UserDB db =  Room.databaseBuilder(getActivity().getApplicationContext(),
+//                UserDB.class, "database").build();
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    AdvancedUserModel gg = new AdvancedUserModel();
+                    UserDB db = AppSingletone.getInstance().getDatabase();
+                    UserDao dao = db.userDao();
+                    dao.Insert(gg);
+
                     Thread.sleep(5000);
                     Log.d("dev_fb_thread", matchesAccounts.toString());
                 } catch (InterruptedException e) {
