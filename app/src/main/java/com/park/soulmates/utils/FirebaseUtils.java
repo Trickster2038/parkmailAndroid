@@ -1,5 +1,8 @@
 package com.park.soulmates.utils;
 
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,8 @@ import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.LikeModel;
 import com.park.soulmates.models.MatchModel;
 import com.park.soulmates.models.MessageModel;
+
+import java.util.ArrayList;
 
 public class FirebaseUtils {
     private static boolean isMatch;
@@ -148,6 +153,49 @@ public class FirebaseUtils {
         }
 
         return isMatch;
+    }
+
+    public static void getMatchesAcc(ArrayList<AdvancedUserModel> userList, String targetUid, Activity act) {
+        DatabaseReference ref = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(targetUid);
+        Log.d("dev_mathes_down", ref.toString());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                AdvancedUserModel user = snapshot.getValue(AdvancedUserModel.class);
+
+//                act.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        userList.add(user);
+//                    }
+//                });
+
+//                Handler mainHandler = new Handler(Looper.getMainLooper());
+//
+//                Runnable myRunnable = new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        userList.add(user); // This is your code
+//                        Log.d("dev_mathes_down", userList.toString());
+//                    }
+//                };
+//                mainHandler.post(myRunnable);
+
+                userList.add(user);
+                Log.d("dev_mathes_down", user.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //Log.d("dev_mathes_down", userList.toString());
     }
 
 }

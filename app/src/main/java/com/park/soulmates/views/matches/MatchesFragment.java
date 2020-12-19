@@ -6,20 +6,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.park.soulmates.R;
+import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MatchModel;
+import com.park.soulmates.utils.FirebaseUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MatchesFragment extends Fragment {
     private RecyclerMatchesAdapter mAdapter;
+    ArrayList<AdvancedUserModel> matchesAccounts = new ArrayList<AdvancedUserModel>();
 
 
     @Override
@@ -39,6 +52,48 @@ public class MatchesFragment extends Fragment {
                 .setQuery(databaseReference, MatchModel.class)
                 .build();
         mAdapter = new RecyclerMatchesAdapter(options, getActivity());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //List<AdvancedUserModel> matchesAccounts = (List<AdvancedUserModel>) dataSnapshot.getValue();
+                // Log.d("dev_fb_list", matchesAccounts.toString());
+                //notifyDataSetChanged();
+                Map<String, Object> td = (HashMap<String,Object>) dataSnapshot.getValue();
+
+                //List<Object> values = (List<Object>) td.values();
+                //Log.d("dev_fb_list", td.values().toString());
+                for(Object i : td.values()){
+                    Log.d("dev_fb_list", i.toString());
+                    String targetUid = i.toString().split("=")[2].replace("}", "");
+                    Log.d("dev_fb_list", targetUid);
+                    FirebaseUtils.getMatchesAcc(matchesAccounts, targetUid, getActivity());
+                    //Log.d("dev_fb_objs", matchesAccounts.toString());
+                    //MatchModel obj = (MatchModel) i;
+                    //Log.d("dev_fb_list", obj.toString());
+                }
+                //Log.d("dev_fb_objs", matchesAccounts.toString());
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    Log.d("dev_fb_thread", matchesAccounts.toString());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
 
     }
