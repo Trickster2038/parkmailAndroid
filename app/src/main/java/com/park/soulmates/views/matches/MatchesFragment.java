@@ -111,6 +111,8 @@ public class MatchesFragment extends Fragment {
                         }
                     } else {
                         // fill accs
+                        matchesAccounts = (ArrayList<AdvancedUserModel>) dao.getAll();
+                        Log.d("dev_cache_thread", matchesAccounts.toString());
                     }
 
 
