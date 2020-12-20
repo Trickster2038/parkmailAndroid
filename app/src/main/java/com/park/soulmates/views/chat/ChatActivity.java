@@ -1,6 +1,7 @@
 package com.park.soulmates.views.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -88,6 +89,15 @@ public class ChatActivity extends AppCompatActivity {
                                 chatRecycler.setAdapter(mAdapter);
                             } else {
                                 chatRecycler.setAdapter(cachedAdapter);
+                                TextView appBar = findViewById(R.id.chatReloadBar);
+                                appBar.setVisibility(View.VISIBLE);
+                                appBar.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = getIntent();
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         }
                     });
