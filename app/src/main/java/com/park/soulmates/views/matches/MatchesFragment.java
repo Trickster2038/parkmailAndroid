@@ -24,9 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MatchModel;
+import com.park.soulmates.models.MessageDao;
 import com.park.soulmates.models.UserDao;
 import com.park.soulmates.utils.AppSingletone;
 import com.park.soulmates.utils.FirebaseUtils;
+import com.park.soulmates.utils.MessageDB;
 import com.park.soulmates.utils.UserDB;
 
 import java.util.ArrayList;
@@ -62,11 +64,22 @@ public class MatchesFragment extends Fragment {
 //        mAdapter = new RecyclerMatchesAdapter(options, getActivity());
 
 
+        MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
+        MessageDao daoMsg = dbMsg.messageDao();
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                daoMsg.deleteAll();
+            }
+        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
                 //List<AdvancedUserModel> matchesAccounts = (List<AdvancedUserModel>) dataSnapshot.getValue();
                 // Log.d("dev_fb_list", matchesAccounts.toString());
                 //notifyDataSetChanged();
@@ -79,6 +92,7 @@ public class MatchesFragment extends Fragment {
                     String targetUid = i.toString().split("=")[2].replace("}", "");
                     Log.d("dev_fb_list", targetUid);
                     FirebaseUtils.getMatchesAcc(matchesAccounts, targetUid, getActivity());
+                    FirebaseUtils.cacheChat(targetUid, daoMsg);
                     //Log.d("dev_fb_objs", matchesAccounts.toString());
                     //MatchModel obj = (MatchModel) i;
                     //Log.d("dev_fb_list", obj.toString());

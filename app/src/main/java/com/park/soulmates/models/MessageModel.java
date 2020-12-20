@@ -1,13 +1,23 @@
 package com.park.soulmates.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity
 public class MessageModel {
+
+    //@PrimaryKey @NonNull private String msgUid;
+    private String secondUser;
 
     private String messageText;
     private String messageUser;
-    private long messageTime;
+    @PrimaryKey @NonNull private long messageTime;
 
+    @Ignore
     public MessageModel(String messageText, String messageUser) {
         this.messageText = messageText;
         this.messageUser = messageUser;
@@ -42,5 +52,13 @@ public class MessageModel {
 
     public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public String getSecondUser() {
+        return secondUser;
+    }
+
+    public void setSecondUser(String secondUser) {
+        this.secondUser = secondUser;
     }
 }
