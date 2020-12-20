@@ -103,47 +103,35 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             Log.d("dev_prefs_feed", "distanceVal: " + distanceVal.toString());
 
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //MyLocationListener.SetUpLocationListener(mainContext);
-                    try {
-                        Thread.sleep(0);
-                        if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
-                            double cardLatitude = Double.parseDouble(model.getLatitude());
-                            double cardLongitude = Double.parseDouble(model.getLongitude());
-                            Location cardLocation = new Location("point B");
-                            cardLocation.setLatitude(cardLatitude);
-                            cardLocation.setLongitude(cardLongitude);
-                            Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
-                            Log.d("dev_location_notUI_feed", "distance: " + distance.toString());
-                            Integer distanceKm = Math.round(distance / 1000);
-                            Log.d("dev_location_notUI_feed", "distance: " + distanceKm.toString() + " km");
-                            //holder.distance.setText(distanceKm.toString() + " km");
-                            CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    holder.distance.setText(distanceKm.toString() + " km");
-                                    if(!((distanceKm > distanceVal * 10) && distanceOn)){
-                                        holder.card.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                            });
-                        } else {
-                            if(!distanceKnown){
-                                CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        holder.card.setVisibility(View.VISIBLE);
-                                    }
-                                });
-                            }
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
+            if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
+                double cardLatitude = Double.parseDouble(model.getLatitude());
+                double cardLongitude = Double.parseDouble(model.getLongitude());
+                Location cardLocation = new Location("point B");
+                cardLocation.setLatitude(cardLatitude);
+                cardLocation.setLongitude(cardLongitude);
+                Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
+                Log.d("dev_location_notUI_feed", "distance: " + distance.toString());
+                Integer distanceKm = Math.round(distance / 1000);
+                Log.d("dev_location_notUI_feed", "distance: " + distanceKm.toString() + " km");
+                //holder.distance.setText(distanceKm.toString() + " km");
+
+                holder.distance.setText(distanceKm.toString() + " km");
+                if(!((distanceKm > distanceVal * 10) && distanceOn)){
+                    holder.card.setVisibility(View.VISIBLE);
                 }
-            }).start();
+
+            } else {
+                if(!distanceKnown){
+                    CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.card.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
+            }
+
 
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
