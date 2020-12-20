@@ -65,26 +65,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //CustomLocationListener.SetUpLocationListener(getContext(), getActivity());
-
-        // FIXME: another thread for location
-//        if(CustomLocationListener.getCurrentLocation() != null) {
-//            Log.d("dev_location", String.valueOf(CustomLocationListener.getCurrentLocation().getLongitude()));
-//            double lat = CustomLocationListener.getCurrentLocation().getLatitude();
-//            double lng = CustomLocationListener.getCurrentLocation().getLongitude();
-//            //Location.distanceBetween(); - meters?
-//            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-//            try {
-//                List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
-//                Log.d("dev_location_area", addresses.get(0).getAdminArea().toString());
-//                Log.d("dev_location_subarea", addresses.get(0).getSubAdminArea());
-//            } catch (IOException e) {
-//                Log.d("dev_location", "null area");
-//            }
-//        } else {
-//            Log.d("dev_location", "null location");
-//        }
-
+        
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 

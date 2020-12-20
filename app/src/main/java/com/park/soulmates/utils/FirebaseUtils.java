@@ -170,25 +170,6 @@ public class FirebaseUtils {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 AdvancedUserModel user = snapshot.getValue(AdvancedUserModel.class);
-
-//                act.runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        userList.add(user);
-//                    }
-//                });
-
-//                Handler mainHandler = new Handler(Looper.getMainLooper());
-//
-//                Runnable myRunnable = new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        userList.add(user); // This is your code
-//                        Log.d("dev_mathes_down", userList.toString());
-//                    }
-//                };
-//                mainHandler.post(myRunnable);
-
                 userList.add(user);
                 Log.d("dev_mathes_down", user.getName());
             }

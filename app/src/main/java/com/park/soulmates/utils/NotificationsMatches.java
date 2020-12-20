@@ -45,16 +45,6 @@ public class NotificationsMatches {
         Log.d("dev_notices_init_acc", mAuth.getUid());
 
         ref.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                // fixes that first "DataChange" is just reading from DB, so meanless notification appears
-//                if (mCount > 0) {
-//                    NotificationsMatches.notify(context, contextClass);
-//                }
-//                mCount++;
-//
-//            }
 
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

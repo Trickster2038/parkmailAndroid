@@ -69,11 +69,6 @@ public class FeedFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         mAdapter.startListening();
     }
 

@@ -80,21 +80,6 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 Log.d("dev_location_UI_feed", model.getLatitude() + " " + model.getLongitude());
             }
 
-//            if(model.getLatitude()!=null  && model.getLongitude()!=null && CustomLocationListener.getCurrentLocation() != null){
-//                double cardLatitude = Double.parseDouble(model.getLatitude());
-//                double cardLongitude = Double.parseDouble(model.getLongitude());
-//                Location cardLocation = new Location("point B");
-//                cardLocation.setLatitude(cardLatitude);
-//                cardLocation.setLongitude(cardLongitude);
-//                Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
-//                Log.d("dev_location_UI_feed", "distance: " + distance.toString());
-//                Integer distanceKm = Math.round(distance / 1000);
-//                Log.d("dev_location_UI_feed", "distance: " + distanceKm.toString() + " km");
-//                //holder.distance.setText(distanceKm.toString() + " km");
-//            }
-            //final Context mainContext = ;
-
-
             Boolean distanceOn = prefs.getBoolean("distanceOn", false);
             Boolean distanceKnown = prefs.getBoolean("distanceKnown", false);
             Integer distanceVal = prefs.getInt("distanceVal", 1);

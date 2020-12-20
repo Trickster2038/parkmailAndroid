@@ -69,27 +69,14 @@ public class MatchesFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
-                //List<AdvancedUserModel> matchesAccounts = (List<AdvancedUserModel>) dataSnapshot.getValue();
-                // Log.d("dev_fb_list", matchesAccounts.toString());
-                //notifyDataSetChanged();
                 Map<String, Object> td = (HashMap<String,Object>) dataSnapshot.getValue();
-
-                //List<Object> values = (List<Object>) td.values();
-                //Log.d("dev_fb_list", td.values().toString());
                 for(Object i : td.values()){
                     Log.d("dev_fb_list", i.toString());
                     String targetUid = i.toString().split("=")[2].replace("}", "");
                     Log.d("dev_fb_list", targetUid);
                     FirebaseUtils.getMatchesAcc(matchesAccounts, targetUid, getActivity());
                     FirebaseUtils.cacheChat(targetUid, messagesList);
-                    //Log.d("dev_fb_objs", matchesAccounts.toString());
-                    //MatchModel obj = (MatchModel) i;
-                    //Log.d("dev_fb_list", obj.toString());
                 }
-                //Log.d("dev_fb_objs", matchesAccounts.toString());
             }
 
 
@@ -100,17 +87,12 @@ public class MatchesFragment extends Fragment {
             }
         });
 
-//        UserDB db =  Room.databaseBuilder(getActivity().getApplicationContext(),
-//                UserDB.class, "database").build();
-
         mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    //AdvancedUserModel gg = new AdvancedUserModel();
-                    //dao.Insert(gg);
                     UserDB db = AppSingletone.getInstance().getDatabase();
                     UserDao dao = db.userDao();
 
@@ -139,7 +121,6 @@ public class MatchesFragment extends Fragment {
                     } else {
                         // fill chats
                         messagesList = (ArrayList<MessageModel>) daoMsg.getAll();
-                        //Log.d("dev_cache_thread", matchesAccounts.toString());
                     }
 
                     mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
