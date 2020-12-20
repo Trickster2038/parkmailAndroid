@@ -2,6 +2,7 @@ package com.park.soulmates.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.room.Room;
@@ -12,6 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.park.soulmates.models.AdvancedUserModel;
 
 public class CurrentUser {
@@ -43,9 +45,11 @@ public class CurrentUser {
 //        Data = data;
 //    }
 
-    public static void init(Context ctx) {
+    public static void init(Activity act) {
 //        UserDB db = Room.databaseBuilder(ctx,
 //            UserDB.class, "populus-database").build();
+
+
 
 
         Data = new AdvancedUserModel();
@@ -63,6 +67,14 @@ public class CurrentUser {
                 if(Data != null) {
                     isRomantic = Data.getRomanticSearch();
                     gender = Data.getGender();
+
+                    SharedPreferences prefs = act.getSharedPreferences("profilePrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor = prefs.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(Data);
+                    prefsEditor.putString("UserSettings", json);
+                    prefsEditor.apply();
+
                 } else {
                     isRomantic = false;
                     gender = false;

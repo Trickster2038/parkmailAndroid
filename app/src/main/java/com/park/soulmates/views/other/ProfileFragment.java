@@ -1,7 +1,9 @@
 package com.park.soulmates.views.other;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
@@ -32,13 +34,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.park.soulmates.R;
+import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.utils.CustomLocationListener;
 import com.park.soulmates.utils.FirebaseUtils;
 import com.park.soulmates.views.other.AuthActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -53,6 +58,7 @@ public class ProfileFragment extends Fragment {
     private ImageView mImageView;
 
     public ProfileFragment() {
+
 
     }
 
@@ -87,21 +93,26 @@ public class ProfileFragment extends Fragment {
 
         Button saveButton = view.findViewById(R.id.saveChangesBtn);
 
+        TextInputEditText editName = view.findViewById(R.id.editTextName);
+        TextInputEditText editSurname = view.findViewById(R.id.editTextSurname);
+        TextInputEditText editBio = view.findViewById(R.id.editTextBio);
+        TextInputEditText editDate = view.findViewById(R.id.editTextDate);
+        TextInputEditText editContacts = view.findViewById(R.id.editTextContacts);
+
+        RadioButton radioRomantic = view.findViewById(R.id.radioRomantic);
+        RadioButton radioFriend = view.findViewById(R.id.radioFriend);
+
+        RadioButton radioMale = view.findViewById(R.id.radioMale);
+        RadioButton radioFemale = view.findViewById(R.id.radioFemale);
+
+        CheckBox checkIT = view.findViewById(R.id.checkIT);
+        CheckBox checkMusic = view.findViewById(R.id.checkMusic);
+        CheckBox checkSport = view.findViewById(R.id.checkSport);
+        CheckBox checkGames = view.findViewById(R.id.checkGames);
+        CheckBox checkReading = view.findViewById(R.id.checkReading);
+
         saveButton.setOnClickListener(v -> {
             uploadImage();
-
-            TextInputEditText editName = view.findViewById(R.id.editTextName);
-            TextInputEditText editSurname = view.findViewById(R.id.editTextSurname);
-            TextInputEditText editBio = view.findViewById(R.id.editTextBio);
-            TextInputEditText editDate = view.findViewById(R.id.editTextDate);
-            TextInputEditText editContacts = view.findViewById(R.id.editTextContacts);
-            RadioButton radioRomantic = view.findViewById(R.id.radioRomantic);
-            RadioButton radioMale = view.findViewById(R.id.radioMale);
-            CheckBox checkIT = view.findViewById(R.id.checkIT);
-            CheckBox checkMusic = view.findViewById(R.id.checkMusic);
-            CheckBox checkSport = view.findViewById(R.id.checkSport);
-            CheckBox checkGames = view.findViewById(R.id.checkGames);
-            CheckBox checkReading = view.findViewById(R.id.checkReading);
 
             FirebaseUtils.pushUser(
                     editName.getText().toString(),
@@ -122,6 +133,52 @@ public class ProfileFragment extends Fragment {
 
             Log.d("dev_DB_status", "db_feed - OK");
         });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                SharedPreferences mPrefs = getActivity().getSharedPreferences("profilePrefs", Context.MODE_PRIVATE);
+                Gson gson = new Gson();
+                String json = mPrefs.getString("UserSettings", "no data");
+                Log.d("dev_prof", json);
+                if (!json.equals("no data")) {
+                    AdvancedUserModel userSettings = gson.fromJson(json, AdvancedUserModel.class);
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            editName.setText(userSettings.getName());
+                            editSurname.setText(userSettings.getSurname());
+                            if(userSettings.getBirthdate() != null) {
+                                editDate.setText(userSettings.getBirthdate());
+                            }
+                            editContacts.setText(userSettings.getContacts());
+                            editBio.setText(userSettings.getBio());
+
+                            radioRomantic.setChecked(userSettings.getRomanticSearch());
+                            radioFriend.setChecked(!userSettings.getRomanticSearch());
+
+                            radioMale.setChecked(userSettings.getGender());
+                            radioFemale.setChecked(!userSettings.getGender());
+
+                            ArrayList<Boolean> interests = userSettings.getInterests().getInterests();
+                            checkIT.setChecked(interests.get(0));
+                            checkMusic.setChecked(interests.get(1));
+                            checkSport.setChecked(interests.get(2));
+                            checkGames.setChecked(interests.get(3));
+                            checkReading.setChecked(interests.get(4));
+
+                        }
+                    });
+                }
+            }
+        }).start();
 
 
 
@@ -145,7 +202,7 @@ public class ProfileFragment extends Fragment {
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Select a birthdate");
         final MaterialDatePicker datePicker = builder.build();
-        TextInputEditText editDate = view.findViewById(R.id.editTextDate);
+        //TextInputEditText editDate = view.findViewById(R.id.editTextDate);
         Button datePickBtn = view.findViewById(R.id.datePick);
 
         datePickBtn.setOnClickListener(new View.OnClickListener() {
