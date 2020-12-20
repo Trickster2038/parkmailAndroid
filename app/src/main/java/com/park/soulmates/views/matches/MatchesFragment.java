@@ -25,6 +25,7 @@ import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MatchModel;
 import com.park.soulmates.models.MessageDao;
+import com.park.soulmates.models.MessageModel;
 import com.park.soulmates.models.UserDao;
 import com.park.soulmates.utils.AppSingletone;
 import com.park.soulmates.utils.FirebaseUtils;
@@ -40,6 +41,7 @@ public class MatchesFragment extends Fragment {
     private RecyclerMatchesAdapter mAdapter;
     private CachedMatchesAdapter mCacheAdapter;
     ArrayList<AdvancedUserModel> matchesAccounts = new ArrayList<AdvancedUserModel>();
+    ArrayList<MessageModel> messagesList = new ArrayList<MessageModel>();
 
 
     @Override
@@ -48,6 +50,7 @@ public class MatchesFragment extends Fragment {
 
         FirebaseAuth userAuth = FirebaseAuth.getInstance();
         matchesAccounts = new ArrayList<AdvancedUserModel>();
+        messagesList = new ArrayList<MessageModel>();
 
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance()
@@ -62,17 +65,6 @@ public class MatchesFragment extends Fragment {
 //                .setQuery(databaseReference, MatchModel.class)
 //                .build();
 //        mAdapter = new RecyclerMatchesAdapter(options, getActivity());
-
-
-        MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
-        MessageDao daoMsg = dbMsg.messageDao();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                daoMsg.deleteAll();
-            }
-        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,7 +84,7 @@ public class MatchesFragment extends Fragment {
                     String targetUid = i.toString().split("=")[2].replace("}", "");
                     Log.d("dev_fb_list", targetUid);
                     FirebaseUtils.getMatchesAcc(matchesAccounts, targetUid, getActivity());
-                    FirebaseUtils.cacheChat(targetUid, daoMsg);
+                    FirebaseUtils.cacheChat(targetUid, messagesList);
                     //Log.d("dev_fb_objs", matchesAccounts.toString());
                     //MatchModel obj = (MatchModel) i;
                     //Log.d("dev_fb_list", obj.toString());
@@ -121,6 +113,10 @@ public class MatchesFragment extends Fragment {
                     //dao.Insert(gg);
                     UserDB db = AppSingletone.getInstance().getDatabase();
                     UserDao dao = db.userDao();
+
+                    MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
+                    MessageDao daoMsg = dbMsg.messageDao();
+
                     Thread.sleep(500);
 
                     Log.d("dev_fb_thread", matchesAccounts.toString());
@@ -133,6 +129,17 @@ public class MatchesFragment extends Fragment {
                         // fill accs
                         matchesAccounts = (ArrayList<AdvancedUserModel>) dao.getAll();
                         Log.d("dev_cache_thread", matchesAccounts.toString());
+                    }
+
+                    if(!messagesList.isEmpty()){
+                        daoMsg.deleteAll();
+                        for(MessageModel msg : messagesList){
+                            daoMsg.Insert(msg);
+                        }
+                    } else {
+                        // fill chats
+                        messagesList = (ArrayList<MessageModel>) daoMsg.getAll();
+                        //Log.d("dev_cache_thread", matchesAccounts.toString());
                     }
 
                     mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());

@@ -201,7 +201,7 @@ public class FirebaseUtils {
         //Log.d("dev_mathes_down", userList.toString());
     }
 
-    public static void cacheChat(String targetUid, MessageDao chatDao){
+    public static void cacheChat(String targetUid, ArrayList<MessageModel> msgList){
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
@@ -226,13 +226,7 @@ public class FirebaseUtils {
                     msg.setMessageUser(parsed[5]);
                     msg.setSecondUser(targetUid);
 
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            chatDao.Insert(msg);
-                        }
-                    });
-
+                    msgList.add(msg);
                 }
             }
 
