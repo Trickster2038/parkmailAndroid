@@ -83,11 +83,12 @@ public class CachedMatchesAdapter extends RecyclerView.Adapter<CachedMatchesAdap
 
         View card = holder.itemView.findViewById(R.id.profileMatchesCard);
         card.setOnClickListener(v -> {
-        Intent intent = new Intent(mContext, ChatActivity.class);
-        intent.putExtra("targetUID", user.getUid());
-        intent.putExtra("targetName", holder.title.getText().toString());
-        mContext.startActivity(intent);
-        Log.d("dev_Chat", "chat intent sent");
+            Intent intent = new Intent(mContext, ChatActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.putExtra("targetUID", user.getUid());
+            intent.putExtra("targetName", holder.title.getText().toString());
+            mContext.startActivity(intent);
+            Log.d("dev_Chat", "chat intent sent");
         });
 
     }

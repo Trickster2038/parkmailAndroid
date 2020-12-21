@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        
+
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
