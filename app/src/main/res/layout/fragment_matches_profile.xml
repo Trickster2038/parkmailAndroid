@@ -1,65 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileMatchesCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
-    android:orientation="vertical">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_margin="@dimen/smallMargin"
-        android:id="@+id/profileFeedCard"
-        android:layout_width="match_parent"
+    android:layout_margin="@dimen/smallMargin"
+    android:orientation="horizontal">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileMatchesPhoto"
+        android:layout_width="@dimen/matchAvatarSize"
+        android:layout_height="@dimen/matchAvatarSize"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/extraSmallMargin"
+        android:src="@mipmap/ic_banner" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profileMatchesTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:orientation="horizontal">
+        android:layout_margin="@dimen/smallMargin"
+        android:layout_toRightOf="@id/profileMatchesPhoto"
+        android:text="Ivan Ivanov, 20 y.o."
+        android:textSize="@dimen/title" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_margin="@dimen/extraSmallMargin"
-            android:layout_width="@dimen/matchAvatarSize"
-            android:layout_height="@dimen/matchAvatarSize"
-            android:src="@mipmap/ic_banner" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profileMatchesContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileMatchesTitle"
+        android:layout_margin="@dimen/smallMargin"
+        android:layout_toRightOf="@id/profileMatchesPhoto"
+        android:text="(for contacts)"
+        android:textSize="@dimen/contentText" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_margin="@dimen/smallMargin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:orientation="vertical">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profileMatchesInterests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileMatchesContacts"
+        android:layout_margin="@dimen/smallMargin"
+        android:layout_toRightOf="@id/profileMatchesPhoto"
+        android:gravity="start"
+        tools:text="e.g. \nIT, \nMusic"
+        android:textSize="@dimen/contentText" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_margin="@dimen/smallMargin"
-            android:id="@+id/profileMatchesTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="Ivan Ivanov, 20 y.o."
-            android:textSize="@dimen/title" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/profileMatchesContacts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/smallMargin"
-            android:layout_weight="2"
-            android:gravity="start"
-            android:text="(for contacts)"
-            android:textSize="@dimen/contentText" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profileMatchesInterests"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/smallMargin"
-                android:layout_weight="2"
-                android:gravity="start"
-                android:text="e.g. \nIT, \nMusic"
-                android:textSize="@dimen/contentText" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/cardMatchUID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="defaultUID"
-                android:visibility="gone" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cardMatchUID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="defaultUID"
+        android:visibility="gone" />
+</RelativeLayout>

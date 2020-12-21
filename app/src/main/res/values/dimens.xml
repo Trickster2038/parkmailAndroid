@@ -5,8 +5,9 @@
     <dimen name="contentText">18sp</dimen>
     <dimen name="feedAvatarHeight">360dp</dimen>
     <dimen name="smallMargin">8dp</dimen>
-    <dimen name="hLine">2dp</dimen>
-    <dimen name="cardHeight">640dp</dimen>
+    <dimen name="cornerRadius">16dp</dimen>
     <dimen name="matchAvatarSize">128dp</dimen>
     <dimen name="extraSmallMargin">2dp</dimen>
+    <dimen name="msg_width">250dp</dimen>
+    <dimen name="textDateWidth">278dp</dimen>
 </resources>

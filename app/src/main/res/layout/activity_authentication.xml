@@ -17,11 +17,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:autofillHints="email"
             android:ems="15"
             android:inputType="textEmailAddress"
-            android:text="test@gmail.com"
+            android:text="test3@gmail.com"
             tools:text="somemail@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,7 +36,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:autofillHints="password"
             android:ems="15"
             android:inputType="textPassword"
@@ -51,7 +51,7 @@
         android:layout_below="@id/editTextPasswordLayout"
         android:layout_alignLeft="@id/editTextPasswordLayout"
         android:layout_alignRight="@id/editTextPasswordLayout"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/smallMargin"
         android:text="@string/button_login" />
 
     <com.google.android.material.button.MaterialButton
@@ -61,5 +61,16 @@
         android:layout_below="@id/button_login"
         android:layout_alignLeft="@id/editTextPasswordLayout"
         android:layout_alignRight="@id/editTextPasswordLayout"
+        android:layout_marginTop="@dimen/smallMargin"
         android:text="@string/button_signup" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_loginGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_signup"
+        android:layout_alignLeft="@id/editTextPasswordLayout"
+        android:layout_alignRight="@id/editTextPasswordLayout"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:text="@string/loginGoogle" />
 </RelativeLayout>

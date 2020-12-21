@@ -2,13 +2,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:textColor">@color/colorDarkGrey</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
     </style>
-
-    <style name="Divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/hLine</item>
-        <item name="android:background">@color/colorDarkGrey</item>
-        <item name="android:textSize">@dimen/contentText</item>
+    <style name="ChatTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
     </style>
-
 </resources>
