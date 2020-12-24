@@ -1,5 +1,7 @@
 package com.park.soulmates.models;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,9 +24,10 @@ public class InterestsModel {
         mInterests.addAll(Arrays.asList(interests).subList(0, 5));
     }
 
+    @NonNull
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int i;
         Boolean flag;
         for (i = 0; i < 5; i++) {
@@ -32,24 +35,24 @@ public class InterestsModel {
             if (flag) {
                 switch (i) {
                     case 0:
-                        result += "#IT ";
+                        result.append("#IT ");
                         break;
                     case 1:
-                        result += "#Music ";
+                        result.append("#Music ");
                         break;
                     case 2:
-                        result += "#Sport ";
+                        result.append("#Sport ");
                         break;
                     case 3:
-                        result += "#Videogames ";
+                        result.append("#Videogames ");
                         break;
                     case 4:
-                        result += "#Reading ";
+                        result.append("#Reading ");
                         break;
                 }
             }
         }
-        return result;
+        return result.toString();
     }
 
     public ArrayList<Boolean> getInterests() {
