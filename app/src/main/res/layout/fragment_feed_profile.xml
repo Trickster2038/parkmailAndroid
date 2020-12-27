@@ -13,7 +13,7 @@
         android:layout_width="@dimen/feedAvatarHeight"
         android:layout_height="@dimen/feedAvatarHeight"
         android:layout_margin="@dimen/smallMargin"
-        android:src="@mipmap/ic_banner" />
+        android:src="@mipmap/ic_avatar_default" />
 
 
     <com.google.android.material.textview.MaterialTextView
