@@ -62,7 +62,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 && !((CurrentUser.getIsRomantic() || model.getRomanticSearch() || oppositeGenderPref)
                 && CurrentUser.getGender() == model.getGender())) {
 
-            holder.card.setVisibility(View.GONE);
+            //holder.card.setVisibility(View.GONE);
             String TAG = "dev_feed";
             Log.d("dev_feed", "item is nice");
             Log.d("dev_romantic", Boolean.toString(CurrentUser.getIsRomantic() || model.getRomanticSearch()));
