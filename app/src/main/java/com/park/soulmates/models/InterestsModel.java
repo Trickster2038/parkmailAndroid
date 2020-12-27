@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 
 // Changing constructor signature to ArrayList<> might be uneffective (on test/dev phase?)
+//gggg
 public class InterestsModel {
     // IT, music, sport, videogames, reading
     private ArrayList<Boolean> mInterests;
