@@ -195,19 +195,25 @@ public class FirebaseUtils {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
-                for (Object i : td.values()) {
-                    Log.d("dev_chat", i.toString());
-                    //{messageText=2, messageTime=1606556691489, messageUser=VSLz6I1awOcWH8i9vWKg9uygvvJ2}
-                    String[] parsed = i.toString().replaceAll("[{}]","").split("[=,]");
+                if(td != null) {
+                    for (Object i : td.values()) {
+                        Log.d("dev_chat", i.toString());
+                        //{messageText=2, messageTime=1606556691489, messageUser=VSLz6I1awOcWH8i9vWKg9uygvvJ2}
+                        String[] parsed = i.toString().replaceAll("[{}]", "").split("[=,]");
+                        //Log.d("dev_chat", parsed.toString());
+                        for(String s: parsed){
+                            Log.d("dev_chat", s);
+                        }
 
-                    // messageText | 2 | messageTime |  1606556691489 | messageUser | VSLz6I1awOcWH8i9vWKg9uygvvJ2
-                    MessageModel msg = new MessageModel();
-                    msg.setMessageText(parsed[1]);
-                    msg.setMessageTime(Long.parseLong(parsed[3]));
-                    msg.setMessageUser(parsed[5]);
-                    msg.setSecondUser(targetUid);
+                        // messageText | 2 | messageTime |  1606556691489 | messageUser | VSLz6I1awOcWH8i9vWKg9uygvvJ2
+                        MessageModel msg = new MessageModel();
+                        msg.setMessageText(parsed[1]);
+                        msg.setMessageTime(Long.parseLong(parsed[3]));
+                        msg.setMessageUser(parsed[5]);
+                        msg.setSecondUser(targetUid);
 
-                    msgList.add(msg);
+                        msgList.add(msg);
+                    }
                 }
             }
 
