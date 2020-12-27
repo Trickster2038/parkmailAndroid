@@ -1,12 +1,16 @@
 package com.park.soulmates.views.feed;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,17 +43,32 @@ public class FeedFragment extends Fragment {
         RecyclerView feedRecycler = view.findViewById(R.id.recyclerFeed);
         feedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
         feedRecycler.setAdapter(mAdapter);
-        return view;
+
+
+        View altView = inflater.inflate(R.layout.fragment_reconnect, container, false);
+        Button retryBtn = altView.findViewById(R.id.feedReconnect);
+        Fragment currentFragment = this;
+
+        retryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(currentFragment).attach(currentFragment).commit();
+            }
+        });
+
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        Boolean connected =  cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+        if(connected) {
+            return view;
+        } else {
+            return altView;
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         mAdapter.startListening();
     }
 

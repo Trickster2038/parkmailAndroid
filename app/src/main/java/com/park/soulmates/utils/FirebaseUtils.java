@@ -1,5 +1,8 @@
 package com.park.soulmates.utils;
 
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,7 +16,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.LikeModel;
 import com.park.soulmates.models.MatchModel;
+import com.park.soulmates.models.MessageDao;
 import com.park.soulmates.models.MessageModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirebaseUtils {
     private static boolean isMatch;
@@ -148,6 +156,67 @@ public class FirebaseUtils {
         }
 
         return isMatch;
+    }
+
+    public static void getMatchesAcc(ArrayList<AdvancedUserModel> userList, String targetUid, Activity act) {
+        DatabaseReference ref = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(targetUid);
+        Log.d("dev_mathes_down", ref.toString());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                AdvancedUserModel user = snapshot.getValue(AdvancedUserModel.class);
+                userList.add(user);
+                Log.d("dev_mathes_down", user.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //Log.d("dev_mathes_down", userList.toString());
+    }
+
+    public static void cacheChat(String targetUid, ArrayList<MessageModel> msgList){
+        DatabaseReference databaseReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(FirebaseAuth.getInstance().getUid())
+                .child("chats")
+                .child(targetUid);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
+                for (Object i : td.values()) {
+                    Log.d("dev_chat", i.toString());
+                    //{messageText=2, messageTime=1606556691489, messageUser=VSLz6I1awOcWH8i9vWKg9uygvvJ2}
+                    String[] parsed = i.toString().replaceAll("[{}]","").split("[=,]");
+
+                    // messageText | 2 | messageTime |  1606556691489 | messageUser | VSLz6I1awOcWH8i9vWKg9uygvvJ2
+                    MessageModel msg = new MessageModel();
+                    msg.setMessageText(parsed[1]);
+                    msg.setMessageTime(Long.parseLong(parsed[3]));
+                    msg.setMessageUser(parsed[5]);
+                    msg.setSecondUser(targetUid);
+
+                    msgList.add(msg);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

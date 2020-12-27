@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.code.gson:gson:2.8.5'
+
     def room_version = "2.2.6"
 
     implementation "androidx.room:room-runtime:$room_version"
