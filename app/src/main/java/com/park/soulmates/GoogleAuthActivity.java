@@ -1,4 +1,4 @@
-package com.park.soulmates.views.other;
+package com.park.soulmates;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.park.soulmates.R;
+import com.park.soulmates.views.other.AuthActivity;
+import com.park.soulmates.views.other.MainActivity;
 
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.

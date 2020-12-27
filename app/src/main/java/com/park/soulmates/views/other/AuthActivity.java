@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.park.soulmates.GoogleAuthActivity;
 import com.park.soulmates.R;
 
 public class AuthActivity extends AppCompatActivity {
