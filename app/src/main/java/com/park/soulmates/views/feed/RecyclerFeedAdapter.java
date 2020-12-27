@@ -119,6 +119,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 
 
 
+
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageReference = storage.getReference().child("users/" + model.getUid() + "/avatar");
 

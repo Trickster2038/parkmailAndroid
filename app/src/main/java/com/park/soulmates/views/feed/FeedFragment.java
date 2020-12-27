@@ -3,6 +3,7 @@ package com.park.soulmates.views.feed;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.park.soulmates.models.AdvancedUserModel;
 
 public class FeedFragment extends Fragment {
     private RecyclerFeedAdapter mAdapter;
+    private RecyclerView feedRecycler;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,9 +42,11 @@ public class FeedFragment extends Fragment {
         //View view = inflater.inflate(R.layout.activity_google_auth, container, false);
 
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
-        RecyclerView feedRecycler = view.findViewById(R.id.recyclerFeed);
+        feedRecycler = view.findViewById(R.id.recyclerFeed);
         feedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
         feedRecycler.setAdapter(mAdapter);
+        feedRecycler.getLayoutManager().scrollToPosition(0);
+        Log.d("dev_feed", "recreate");
 
 
         View altView = inflater.inflate(R.layout.fragment_reconnect, container, false);
