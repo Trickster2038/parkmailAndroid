@@ -1,5 +1,7 @@
 package com.park.soulmates.views.matches;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,12 +72,14 @@ public class MatchesFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> td = (HashMap<String,Object>) dataSnapshot.getValue();
-                for(Object i : td.values()){
-                    Log.d("dev_fb_list", i.toString());
-                    String targetUid = i.toString().split("=")[2].replace("}", "");
-                    Log.d("dev_fb_list", targetUid);
-                    FirebaseUtils.getMatchesAcc(matchesAccounts, targetUid, getActivity());
-                    FirebaseUtils.cacheChat(targetUid, messagesList);
+                if(td != null) {
+                    for (Object i : td.values()) {
+                        Log.d("dev_fb_list", i.toString());
+                        String targetUid = i.toString().split("=")[2].replace("}", "");
+                        Log.d("dev_fb_list", targetUid);
+                        FirebaseUtils.getMatchesAcc(matchesAccounts, targetUid, getActivity());
+                        FirebaseUtils.cacheChat(targetUid, messagesList);
+                    }
                 }
             }
 
@@ -102,7 +106,11 @@ public class MatchesFragment extends Fragment {
                     Thread.sleep(500);
 
                     Log.d("dev_fb_thread", matchesAccounts.toString());
-                    if(!matchesAccounts.isEmpty()){
+
+                    ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    Boolean connected =  cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+
+                    if(connected){
                         dao.deleteAll();
                         for(AdvancedUserModel user : matchesAccounts){
                             dao.Insert(user);
@@ -113,7 +121,7 @@ public class MatchesFragment extends Fragment {
                         Log.d("dev_cache_thread", matchesAccounts.toString());
                     }
 
-                    if(!messagesList.isEmpty()){
+                    if(connected){
                         daoMsg.deleteAll();
                         for(MessageModel msg : messagesList){
                             daoMsg.Insert(msg);
