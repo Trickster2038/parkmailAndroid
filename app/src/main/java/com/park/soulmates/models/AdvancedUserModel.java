@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
 import com.park.soulmates.models.InterestsModel;
 
+// (git-merge checking comment)
 @Entity
 public class AdvancedUserModel {
     @PrimaryKey @NonNull private String mUid;
