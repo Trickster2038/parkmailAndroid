@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
-import androidx.room.Room;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,24 +16,24 @@ import com.google.gson.Gson;
 import com.park.soulmates.models.AdvancedUserModel;
 
 public class CurrentUser {
-    private static volatile AdvancedUserModel Data;
-    private static volatile Boolean isRomantic;
-    private static volatile Boolean gender;
+    private static volatile AdvancedUserModel sData;
+    private static volatile Boolean sIsRomantic;
+    private static volatile Boolean sGender;
 
     public static Boolean getGender() {
-        return gender;
+        return sGender;
     }
 
     public static void setGender(Boolean gender) {
-        CurrentUser.gender = gender;
+        CurrentUser.sGender = gender;
     }
 
     public static Boolean getIsRomantic() {
-        return isRomantic;
+        return sIsRomantic;
     }
 
     public static void setIsRomantic(Boolean isRomantic) {
-        CurrentUser.isRomantic = isRomantic;
+        CurrentUser.sIsRomantic = isRomantic;
     }
 
 //    public static AdvancedUserModel getData() {
@@ -49,13 +48,10 @@ public class CurrentUser {
 //        UserDB db = Room.databaseBuilder(ctx,
 //            UserDB.class, "populus-database").build();
 
-
-
-
-        Data = new AdvancedUserModel();
+        sData = new AdvancedUserModel();
         DatabaseReference base = FirebaseDatabase.getInstance().getReference()
                 .child("users")
-                .child(FirebaseAuth.getInstance().getUid().toString());
+                .child(FirebaseAuth.getInstance().getUid());
         //Log.d("dev_current", base.toString());
 
         // HOTFIXes for new users
@@ -63,29 +59,29 @@ public class CurrentUser {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Data = snapshot.getValue(AdvancedUserModel.class);
-                if(Data != null) {
-                    isRomantic = Data.getRomanticSearch();
-                    gender = Data.getGender();
+                sData = snapshot.getValue(AdvancedUserModel.class);
+                if (sData != null) {
+                    sIsRomantic = sData.getRomanticSearch();
+                    sGender = sData.getGender();
 
                     SharedPreferences prefs = act.getSharedPreferences("profilePrefs", Context.MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = prefs.edit();
                     Gson gson = new Gson();
-                    String json = gson.toJson(Data);
+                    String json = gson.toJson(sData);
                     prefsEditor.putString("UserSettings", json);
                     prefsEditor.apply();
 
                 } else {
-                    isRomantic = false;
-                    gender = false;
+                    sIsRomantic = false;
+                    sGender = false;
                 }
                 //Log.d("dev_current_snap", Boolean.toString(Data.getRomanticSearch()));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                isRomantic = false;
-                gender = false;
+                sIsRomantic = false;
+                sGender = false;
             }
         });
     }

@@ -11,16 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.park.soulmates.R;
@@ -29,14 +24,12 @@ import com.park.soulmates.views.chat.ChatActivity;
 
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
-
 public class CachedMatchesAdapter extends RecyclerView.Adapter<CachedMatchesAdapter.PersonsViewHolder> {
-    private ArrayList<AdvancedUserModel> data;
-    private Context mContext;
+    private final ArrayList<AdvancedUserModel> mData;
+    private final Context mContext;
 
     public CachedMatchesAdapter(ArrayList<AdvancedUserModel> dataArg, Context context) {
-        this.data = dataArg;
+        this.mData = dataArg;
         mContext = context;
     }
 
@@ -45,14 +38,12 @@ public class CachedMatchesAdapter extends RecyclerView.Adapter<CachedMatchesAdap
     public PersonsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_matches_profile, parent, false);
-        return new CachedMatchesAdapter.PersonsViewHolder(view);
+        return new PersonsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PersonsViewHolder holder, int position) {
-        AdvancedUserModel user = data.get(position);
-
-
+        AdvancedUserModel user = mData.get(position);
         holder.title.setText(user.getName().concat(" ").concat(user.getSurname()));
         holder.uid.setText(user.getUid());
         holder.contacts.setText(user.getContacts());
@@ -63,23 +54,16 @@ public class CachedMatchesAdapter extends RecyclerView.Adapter<CachedMatchesAdap
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference().child("users/" + user.getUid() + "/avatar");
 
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                try {
-                    Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
-                } catch (Exception e) {
-                    Log.d("dev_avatar_download", "404");
-                }
+        storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+            try {
+                Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
+            } catch (Exception e) {
+                Log.d("dev_avatar_download", "404");
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
+        }).addOnFailureListener(exception -> {
+            // Handle any errors
         });
         Log.d("RecyclerMatchesAdapter", "listener tick");
-
 
         View card = holder.itemView.findViewById(R.id.profileMatchesCard);
         card.setOnClickListener(v -> {
@@ -95,10 +79,10 @@ public class CachedMatchesAdapter extends RecyclerView.Adapter<CachedMatchesAdap
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mData.size();
     }
 
-    class PersonsViewHolder extends RecyclerView.ViewHolder {
+    static class PersonsViewHolder extends RecyclerView.ViewHolder {
         TextView title, uid, interestsField, contacts;
         ImageView avatarView;
 

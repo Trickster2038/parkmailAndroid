@@ -39,12 +39,12 @@ import static java.lang.Math.round;
 
 public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         AdvancedUserModel, RecyclerFeedAdapter.personsViewholder> {
-    private Activity act;
+    private final Activity mActivity;
 
     public RecyclerFeedAdapter(
             @NonNull FirebaseRecyclerOptions<AdvancedUserModel> options, Activity activity) {
         super(options);
-        act = activity;
+        mActivity = activity;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
         // TODO: must be already init, but bugged sometimes
         //CurrentUser.init();
 
-        SharedPreferences prefs = act.getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
+        SharedPreferences prefs = mActivity.getSharedPreferences("customPrefs", Context.MODE_PRIVATE);
         Boolean oppositeGenderPref = prefs.getBoolean("oppositeGender", false);
 
         if (!currentUid.equals(model.getUid())
@@ -72,20 +72,18 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             holder.title.setText(model.getName().concat(" ").concat(model.getSurname()));
             holder.uid.setText(model.getUid());
             holder.interestsField.setText(model.getInterests().toString());
-            holder.birthday.setText(model.getBirthdate().toString());
-
-
+            holder.birthday.setText(model.getBirthdate());
 
             if(model.getLatitude()!=null && model.getLongitude()!=null) {
                 Log.d("dev_location_UI_feed", model.getLatitude() + " " + model.getLongitude());
             }
 
-            Boolean distanceOn = prefs.getBoolean("distanceOn", false);
-            Boolean distanceKnown = prefs.getBoolean("distanceKnown", false);
-            Integer distanceVal = prefs.getInt("distanceVal", 1);
+            boolean distanceOn = prefs.getBoolean("distanceOn", false);
+            boolean distanceKnown = prefs.getBoolean("distanceKnown", false);
+            int distanceVal = prefs.getInt("distanceVal", 1);
 
-            Log.d("dev_prefs_feed", "distanceOn: " + distanceOn.toString());
-            Log.d("dev_prefs_feed", "distanceVal: " + distanceVal.toString());
+            Log.d("dev_prefs_feed", "distanceOn: " + distanceOn);
+            Log.d("dev_prefs_feed", "distanceVal: " + distanceVal);
 
 
 
@@ -95,8 +93,8 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
                 Location cardLocation = new Location("point B");
                 cardLocation.setLatitude(cardLatitude);
                 cardLocation.setLongitude(cardLongitude);
-                Float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
-                Log.d("dev_location_notUI_feed", "distance: " + distance.toString());
+                float distance =  CustomLocationListener.getCurrentLocation().distanceTo(cardLocation);
+                Log.d("dev_location_notUI_feed", "distance: " + distance);
                 Integer distanceKm = Math.round(distance / 1000);
                 Log.d("dev_location_notUI_feed", "distance: " + distanceKm.toString() + " km");
                 //holder.distance.setText(distanceKm.toString() + " km");
@@ -108,12 +106,7 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
 
             } else {
                 if(!distanceKnown){
-                    CustomLocationListener.getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            holder.card.setVisibility(View.VISIBLE);
-                        }
-                    });
+                    CustomLocationListener.getActivity().runOnUiThread(() -> holder.card.setVisibility(View.VISIBLE));
                 }
             }
 
@@ -122,20 +115,14 @@ public class RecyclerFeedAdapter extends FirebaseRecyclerAdapter<
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageReference = storage.getReference().child("users/" + model.getUid() + "/avatar");
 
-            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    try {
-                        Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
-                    } catch (Exception e) {
-                        Log.d("dev_avatar_download", "404");
-                    }
+            storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                try {
+                    Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
+                } catch (Exception e) {
+                    Log.d("dev_avatar_download", "404");
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle any errors
-                }
+            }).addOnFailureListener(exception -> {
+                // Handle any errors
             });
 
             Button likeButton = holder.itemView.findViewById(R.id.likeBtn);

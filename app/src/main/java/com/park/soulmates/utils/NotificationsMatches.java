@@ -20,17 +20,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.park.soulmates.R;
 import com.park.soulmates.models.MatchModel;
 
 public class NotificationsMatches {
-    private static int mCount = 0;
     // Идентификатор уведомления
     private static final int NOTIFY_ID = 101;
     // Идентификатор канала
-    private static String CHANNEL_ID = "match channel";
-    private static String CHANNEL_NAME = "m channel";
+    private static final String CHANNEL_ID = "match channel";
+    private static final String CHANNEL_NAME = "m channel";
+    private static int sCount = 0;
 
     public NotificationsMatches() {
     }
@@ -49,10 +48,10 @@ public class NotificationsMatches {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 // fixes that first "DataChange" is just reading from DB, so meanless notification appears
-                if (mCount > 0) {
+                if (sCount > 0) {
                     NotificationsMatches.notify(context, contextClass);
                 }
-                mCount++;
+                sCount++;
             }
 
             @Override

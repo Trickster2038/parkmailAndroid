@@ -17,8 +17,6 @@ public interface MessageDao {
     @Query("SELECT * FROM MessageModel")
     List<MessageModel> getAll();
 
-    @Query("SELECT * FROM MessageModel WHERE secondUser == :sideUser")
+    @Query("SELECT * FROM MessageModel WHERE mSecondUser == :sideUser")
     List<MessageModel> getDialog(String sideUser);
-
-
 }

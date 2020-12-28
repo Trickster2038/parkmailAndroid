@@ -7,11 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,12 +23,12 @@ import com.park.soulmates.models.MessageModel;
 
 public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
         <MessageModel, RecyclerChatAdapter.messagesViewHolder> {
-    private String currentUid;
+    private final String mCurrentUid;
 
     public RecyclerChatAdapter(
             @NonNull FirebaseRecyclerOptions<MessageModel> options) {
         super(options);
-        currentUid = FirebaseAuth.getInstance().getUid();
+        mCurrentUid = FirebaseAuth.getInstance().getUid();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -43,8 +39,8 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
         //String currentUId = FirebaseAuth.getInstance().getUid();
         holder.messageText.setText(model.getMessageText());
         holder.messageUser.setText(model.getMessageUser());
-        if (model.getMessageUser().equals(currentUid)) {
-            Log.d("dev_chat_userMsg", model.getMessageUser() + " " + currentUid);
+        if (model.getMessageUser().equals(mCurrentUid)) {
+            Log.d("dev_chat_userMsg", model.getMessageUser() + " " + mCurrentUid);
             // FIXME: remove hardcode to resources
             int myMsgColor = holder.messageCard.getContext().getResources().getColor(R.color.colorPrimary);
             // Color.rgb(150, 0, 200)
@@ -79,9 +75,9 @@ public class RecyclerChatAdapter extends FirebaseRecyclerAdapter
             messageSpace = v.findViewById(R.id.msg_space);
             messageInnerCard = v.findViewById(R.id.msg_inner_container);
             messageCard = v.findViewById(R.id.msg_container);
-            messageText = (TextView) v.findViewById(R.id.message_text);
-            messageUser = (TextView) v.findViewById(R.id.message_user);
-            messageTime = (TextView) v.findViewById(R.id.message_time);
+            messageText = v.findViewById(R.id.message_text);
+            messageUser = v.findViewById(R.id.message_user);
+            messageTime = v.findViewById(R.id.message_time);
         }
     }
 }

@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,28 +33,23 @@ import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
-import com.park.soulmates.utils.CustomLocationListener;
 import com.park.soulmates.utils.FirebaseUtils;
-import com.park.soulmates.views.other.AuthActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
-    private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     FirebaseStorage storage;
     StorageReference storageReference;
+    private Uri mFilePath;
     private ImageView mImageView;
 
     public ProfileFragment() {
-
 
     }
 
@@ -115,61 +106,50 @@ public class ProfileFragment extends Fragment {
             Log.d("dev_DB_status", "db_feed - OK");
         });
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-                SharedPreferences mPrefs = getActivity().getSharedPreferences("profilePrefs", Context.MODE_PRIVATE);
-                Gson gson = new Gson();
-                String json = mPrefs.getString("UserSettings", "no data");
-                Log.d("dev_prof", json);
-                if (!json.equals("no data")) {
-                    AdvancedUserModel userSettings = gson.fromJson(json, AdvancedUserModel.class);
+            SharedPreferences mPrefs = getActivity().getSharedPreferences("profilePrefs", Context.MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = mPrefs.getString("UserSettings", "no data");
+            Log.d("dev_prof", json);
+            if (!json.equals("no data")) {
+                AdvancedUserModel userSettings = gson.fromJson(json, AdvancedUserModel.class);
 
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            editName.setText(userSettings.getName());
-                            editSurname.setText(userSettings.getSurname());
-                            if(userSettings.getBirthdate() != null) {
-                                editDate.setText(userSettings.getBirthdate());
-                            }
-                            editContacts.setText(userSettings.getContacts());
-                            editBio.setText(userSettings.getBio());
-
-                            radioRomantic.setChecked(userSettings.getRomanticSearch());
-                            radioFriend.setChecked(!userSettings.getRomanticSearch());
-
-                            radioMale.setChecked(userSettings.getGender());
-                            radioFemale.setChecked(!userSettings.getGender());
-
-                            ArrayList<Boolean> interests = userSettings.getInterests().getInterests();
-                            checkIT.setChecked(interests.get(0));
-                            checkMusic.setChecked(interests.get(1));
-                            checkSport.setChecked(interests.get(2));
-                            checkGames.setChecked(interests.get(3));
-                            checkReading.setChecked(interests.get(4));
-
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        editName.setText(userSettings.getName());
+                        editSurname.setText(userSettings.getSurname());
+                        if (userSettings.getBirthdate() != null) {
+                            editDate.setText(userSettings.getBirthdate());
                         }
-                    });
-                }
+                        editContacts.setText(userSettings.getContacts());
+                        editBio.setText(userSettings.getBio());
+
+                        radioRomantic.setChecked(userSettings.getRomanticSearch());
+                        radioFriend.setChecked(!userSettings.getRomanticSearch());
+
+                        radioMale.setChecked(userSettings.getGender());
+                        radioFemale.setChecked(!userSettings.getGender());
+
+                        ArrayList<Boolean> interests = userSettings.getInterests().getInterests();
+                        checkIT.setChecked(interests.get(0));
+                        checkMusic.setChecked(interests.get(1));
+                        checkSport.setChecked(interests.get(2));
+                        checkGames.setChecked(interests.get(3));
+                        checkReading.setChecked(interests.get(4));
+
+                    }
+                });
             }
         }).start();
 
-
-
-
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
-            }
-        });
+        mImageView.setOnClickListener(v -> chooseImage());
 
         // TODO: catch signOut error if raised
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
@@ -186,22 +166,14 @@ public class ProfileFragment extends Fragment {
         //TextInputEditText editDate = view.findViewById(R.id.editTextDate);
         Button datePickBtn = view.findViewById(R.id.datePick);
 
-        datePickBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePicker.show(getFragmentManager(),"DATE_PICKER");
-            }
-        });
+        datePickBtn.setOnClickListener(v -> datePicker.show(getFragmentManager(), "DATE_PICKER"));
 
-        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-            @Override
-            public void onPositiveButtonClick(Object selection) {
-                long date_utc = Long.valueOf(datePicker.getSelection().toString());
-                Date date = new Date();
-                date.setTime(date_utc);
-                String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
-                editDate.setText(formattedDate);
-            }
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            long date_utc = Long.parseLong(datePicker.getSelection().toString());
+            Date date = new Date();
+            date.setTime(date_utc);
+            String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
+            editDate.setText(formattedDate);
         });
 
         return view;
@@ -219,9 +191,9 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
-            filePath = data.getData();
+            mFilePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mFilePath);
                 mImageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -232,36 +204,27 @@ public class ProfileFragment extends Fragment {
     private void uploadImage() {
 
         // filePatch.class == Uri
-        if (filePath != null) {
+        if (mFilePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
             StorageReference ref = storageReference.child("users/" + FirebaseAuth.getInstance().getUid() + "/avatar");
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Log.d("dev_img_upload", "uploaded");
-                            Toast.makeText(getActivity(), "Uploaded", Toast.LENGTH_SHORT).show();
-                        }
+            ref.putFile(mFilePath)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        progressDialog.dismiss();
+                        Log.d("dev_img_upload", "uploaded");
+                        Toast.makeText(getActivity(), "Uploaded", Toast.LENGTH_SHORT).show();
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Log.d("dev_img_upload_uri", filePath.getPath());
-                            Toast.makeText(getActivity(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    .addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Log.d("dev_img_upload_uri", mFilePath.getPath());
+                        Toast.makeText(getActivity(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
-                        }
+                    .addOnProgressListener(taskSnapshot -> {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                                .getTotalByteCount());
+                        progressDialog.setMessage("Uploaded " + (int) progress + "%");
                     });
         }
     }

@@ -10,17 +10,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.park.soulmates.utils.CustomLocationListener;
-import com.park.soulmates.views.feed.FeedFragment;
-import com.park.soulmates.views.matches.MatchesFragment;
-import com.park.soulmates.utils.NotificationsMatches;
 import com.park.soulmates.R;
 import com.park.soulmates.utils.CurrentUser;
+import com.park.soulmates.utils.CustomLocationListener;
 import com.park.soulmates.utils.FirebaseUtils;
-
-import static com.park.soulmates.utils.CustomLocationListener.getActivity;
-import static java.security.AccessController.getContext;
+import com.park.soulmates.utils.NotificationsMatches;
+import com.park.soulmates.views.feed.FeedFragment;
+import com.park.soulmates.views.matches.MatchesFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 0;
@@ -39,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             // ask permissions here using below code
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -47,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CustomLocationListener.SetUpLocationListener(this, this);
-
 
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // TODO: explain why we use this scheme
                 return true;
-            } else if (itemId == R.id.tabFilter){
+            } else if (itemId == R.id.tabFilter) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.placeholder, new FiltersFragment()).commit();
                 Log.d("MainActivity", "Tab 4");
 

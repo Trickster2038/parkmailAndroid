@@ -22,7 +22,6 @@
         app:cardCornerRadius="@dimen/cornerRadius">
         <!--        android:orientation="vertical"-->
 
-
         <TextView
             android:id="@+id/message_user"
             android:layout_width="wrap_content"

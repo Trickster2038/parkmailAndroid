@@ -12,33 +12,31 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 public class CustomLocationListener implements LocationListener {
-    private static int REQUEST_CODE = 0;
-    private static Activity activity;
-
-    static Location currentLocation; // здесь будет всегда доступна самая последняя информация о местоположении пользователя.
+    static Location sCurrentLocation; // здесь будет всегда доступна самая последняя информация о местоположении пользователя.
+    private static final int REQUEST_CODE = 0;
+    private static Activity sActivity;
 
     public static Activity getActivity() {
-        return activity;
+        return sActivity;
     }
 
     public static void setActivity(Activity activity) {
-        CustomLocationListener.activity = activity;
+        CustomLocationListener.sActivity = activity;
     }
 
     // FIXME: check permission
     @SuppressLint("MissingPermission")
     public static void SetUpLocationListener(Context context, Activity act) // это нужно запустить в самом начале работы программы
     {
-        activity = act;
+        sActivity = act;
         int permissionCheck = ContextCompat.checkSelfPermission(act,
                 Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             // ask permissions here using below code
-            Log.d("dev_location","no permission");
+            Log.d("dev_location", "no permission");
 
 //            ActivityCompat.requestPermissions(act,
 //                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -60,28 +58,34 @@ public class CustomLocationListener implements LocationListener {
                     Looper.getMainLooper()
             );
 
-            currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            sCurrentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
     }
 
 
     public static Location getCurrentLocation() {
-        return currentLocation;
+        return sCurrentLocation;
     }
 
 
     public static void setCurrentLocation(Location currentLocation) {
-        CustomLocationListener.currentLocation = currentLocation;
+        CustomLocationListener.sCurrentLocation = currentLocation;
     }
 
     @Override
     public void onLocationChanged(Location loc) {
-        currentLocation = loc;
+        sCurrentLocation = loc;
     }
+
     @Override
-    public void onProviderDisabled(String provider) {}
+    public void onProviderDisabled(String provider) {
+    }
+
     @Override
-    public void onProviderEnabled(String provider) {}
+    public void onProviderEnabled(String provider) {
+    }
+
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {}
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
 }

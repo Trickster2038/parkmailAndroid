@@ -1,27 +1,27 @@
 package com.park.soulmates.models;
 
 public class UserModel {
-    private String name;
-    private Boolean romanticSearch;
+    private String mName;
+    private Boolean mRomanticSearch;
 
     public UserModel() {
-        name = "defaultName";
-        romanticSearch = true;
+        mName = "defaultName";
+        mRomanticSearch = true;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public Boolean getRomanticSearch() {
-        return romanticSearch;
+        return mRomanticSearch;
     }
 
     public void setRomanticSearch(Boolean romanticSearch) {
-        this.romanticSearch = romanticSearch;
+        this.mRomanticSearch = romanticSearch;
     }
 }

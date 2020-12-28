@@ -5,14 +5,15 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.park.soulmates.models.InterestsModel;
-
 @Entity
 public class AdvancedUserModel {
-    @PrimaryKey @NonNull private String mUid;
+    @PrimaryKey
+    @NonNull
+    private String mUid;
     private String latitude, longitude;
     private String mName, mSurname, mBio, mBirthdate, mContacts;
-    @Ignore private InterestsModel mInterests;
+    @Ignore
+    private InterestsModel mInterests;
     private boolean mRomanticSearch, mGender; //mGender: false - female, true - male
 
     public AdvancedUserModel() {

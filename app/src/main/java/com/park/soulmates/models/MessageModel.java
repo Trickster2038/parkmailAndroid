@@ -1,6 +1,5 @@
 package com.park.soulmates.models;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -9,18 +8,17 @@ import java.util.Date;
 
 @Entity
 public class MessageModel {
-
     //@PrimaryKey @NonNull private String msgUid;
-    private String secondUser;
-
-    private String messageText;
-    private String messageUser;
-    @PrimaryKey @NonNull private long messageTime;
+    private String mSecondUser;
+    private String mMessageText;
+    private String mMessageUser;
+    @PrimaryKey
+    private long messageTime;
 
     @Ignore
     public MessageModel(String messageText, String messageUser) {
-        this.messageText = messageText;
-        this.messageUser = messageUser;
+        this.mMessageText = messageText;
+        this.mMessageUser = messageUser;
 
         // Initialize to current time
         messageTime = new Date().getTime();
@@ -31,19 +29,19 @@ public class MessageModel {
     }
 
     public String getMessageText() {
-        return messageText;
+        return mMessageText;
     }
 
     public void setMessageText(String messageText) {
-        this.messageText = messageText;
+        this.mMessageText = messageText;
     }
 
     public String getMessageUser() {
-        return messageUser;
+        return mMessageUser;
     }
 
     public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
+        this.mMessageUser = messageUser;
     }
 
     public long getMessageTime() {
@@ -55,10 +53,10 @@ public class MessageModel {
     }
 
     public String getSecondUser() {
-        return secondUser;
+        return mSecondUser;
     }
 
     public void setSecondUser(String secondUser) {
-        this.secondUser = secondUser;
+        this.mSecondUser = secondUser;
     }
 }

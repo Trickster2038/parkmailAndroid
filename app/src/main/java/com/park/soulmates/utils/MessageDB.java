@@ -7,10 +7,8 @@ import androidx.room.InvalidationTracker;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-import com.park.soulmates.models.AdvancedUserModel;
 import com.park.soulmates.models.MessageDao;
 import com.park.soulmates.models.MessageModel;
-import com.park.soulmates.models.UserDao;
 
 @Database(entities = {MessageModel.class}, version = 1)
 public abstract class MessageDB extends RoomDatabase {

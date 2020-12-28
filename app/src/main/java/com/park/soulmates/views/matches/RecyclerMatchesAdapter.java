@@ -32,7 +32,7 @@ import com.park.soulmates.views.chat.ChatActivity;
 
 public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
         <MatchModel, RecyclerMatchesAdapter.personsViewHolder> {
-    private Context mContext;
+    private final Context mContext;
 
     public RecyclerMatchesAdapter(
             @NonNull FirebaseRecyclerOptions<MatchModel> options, Context ctx) {
@@ -62,20 +62,14 @@ public class RecyclerMatchesAdapter extends FirebaseRecyclerAdapter
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageReference = storage.getReference().child("users/" + user.getUid() + "/avatar");
 
-                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        try {
-                            Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
-                        } catch (Exception e) {
-                            Log.d("dev_avatar_download", "404");
-                        }
+                storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    try {
+                        Glide.with(holder.avatarView).load(uri).into(holder.avatarView);
+                    } catch (Exception e) {
+                        Log.d("dev_avatar_download", "404");
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
+                }).addOnFailureListener(exception -> {
+                    // Handle any errors
                 });
                 Log.d("RecyclerMatchesAdapter", "listener tick");
             }

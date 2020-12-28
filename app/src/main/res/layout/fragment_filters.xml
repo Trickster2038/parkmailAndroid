@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/distanceFilterSwitch"
@@ -23,13 +22,12 @@
         android:min="1" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_margin="@dimen/smallMargin"
+        android:id="@+id/distEcho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/smallMargin"
         android:text="(set distance)"
-        android:id="@+id/distEcho"
-        android:textSize="@dimen/contentText"
-        />
+        android:textSize="@dimen/contentText" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/distanceFilterNullSwitch"
@@ -51,7 +49,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="1000dp"/>
+        android:layout_height="1000dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 

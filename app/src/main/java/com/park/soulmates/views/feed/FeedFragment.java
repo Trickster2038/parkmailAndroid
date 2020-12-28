@@ -44,22 +44,18 @@ public class FeedFragment extends Fragment {
         feedRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
         feedRecycler.setAdapter(mAdapter);
 
-
         View altView = inflater.inflate(R.layout.fragment_reconnect, container, false);
         Button retryBtn = altView.findViewById(R.id.feedReconnect);
         Fragment currentFragment = this;
 
-        retryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(currentFragment).attach(currentFragment).commit();
-            }
+        retryBtn.setOnClickListener(v -> {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(currentFragment).attach(currentFragment).commit();
         });
 
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        Boolean connected =  cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
-        if(connected) {
+        boolean connected = cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+        if (connected) {
             return view;
         } else {
             return altView;

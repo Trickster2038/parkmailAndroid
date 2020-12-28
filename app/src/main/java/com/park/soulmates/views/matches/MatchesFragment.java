@@ -11,10 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.park.soulmates.R;
 import com.park.soulmates.models.AdvancedUserModel;
-import com.park.soulmates.models.MatchModel;
 import com.park.soulmates.models.MessageDao;
 import com.park.soulmates.models.MessageModel;
 import com.park.soulmates.models.UserDao;
@@ -34,23 +30,21 @@ import com.park.soulmates.utils.UserDB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MatchesFragment extends Fragment {
+    ArrayList<AdvancedUserModel> matchesAccounts = new ArrayList<>();
+    ArrayList<MessageModel> messagesList = new ArrayList<>();
     private RecyclerMatchesAdapter mAdapter;
     private CachedMatchesAdapter mCacheAdapter;
-    ArrayList<AdvancedUserModel> matchesAccounts = new ArrayList<AdvancedUserModel>();
-    ArrayList<MessageModel> messagesList = new ArrayList<MessageModel>();
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FirebaseAuth userAuth = FirebaseAuth.getInstance();
-        matchesAccounts = new ArrayList<AdvancedUserModel>();
-        messagesList = new ArrayList<MessageModel>();
+        matchesAccounts = new ArrayList<>();
+        messagesList = new ArrayList<>();
 
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance()
@@ -69,8 +63,8 @@ public class MatchesFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Object> td = (HashMap<String,Object>) dataSnapshot.getValue();
-                for(Object i : td.values()){
+                Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
+                for (Object i : td.values()) {
                     Log.d("dev_fb_list", i.toString());
                     String targetUid = i.toString().split("=")[2].replace("}", "");
                     Log.d("dev_fb_list", targetUid);
@@ -78,8 +72,6 @@ public class MatchesFragment extends Fragment {
                     FirebaseUtils.cacheChat(targetUid, messagesList);
                 }
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -89,50 +81,44 @@ public class MatchesFragment extends Fragment {
 
         mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UserDB db = AppSingletone.getInstance().getDatabase();
-                    UserDao dao = db.userDao();
+        new Thread(() -> {
+            try {
+                UserDB db = AppSingletone.getInstance().getDatabase();
+                UserDao dao = db.userDao();
 
-                    MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
-                    MessageDao daoMsg = dbMsg.messageDao();
+                MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
+                MessageDao daoMsg = dbMsg.messageDao();
 
-                    Thread.sleep(500);
+                Thread.sleep(500);
 
-                    Log.d("dev_fb_thread", matchesAccounts.toString());
-                    if(!matchesAccounts.isEmpty()){
-                        dao.deleteAll();
-                        for(AdvancedUserModel user : matchesAccounts){
-                            dao.Insert(user);
-                        }
-                    } else {
-                        // fill accs
-                        matchesAccounts = (ArrayList<AdvancedUserModel>) dao.getAll();
-                        Log.d("dev_cache_thread", matchesAccounts.toString());
+                Log.d("dev_fb_thread", matchesAccounts.toString());
+                if (!matchesAccounts.isEmpty()) {
+                    dao.deleteAll();
+                    for (AdvancedUserModel user : matchesAccounts) {
+                        dao.Insert(user);
                     }
-
-                    if(!messagesList.isEmpty()){
-                        daoMsg.deleteAll();
-                        for(MessageModel msg : messagesList){
-                            daoMsg.Insert(msg);
-                        }
-                    } else {
-                        // fill chats
-                        messagesList = (ArrayList<MessageModel>) daoMsg.getAll();
-                    }
-
-                    mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
-
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } else {
+                    // fill accs
+                    matchesAccounts = (ArrayList<AdvancedUserModel>) dao.getAll();
+                    Log.d("dev_cache_thread", matchesAccounts.toString());
                 }
+
+                if (!messagesList.isEmpty()) {
+                    daoMsg.deleteAll();
+                    for (MessageModel msg : messagesList) {
+                        daoMsg.Insert(msg);
+                    }
+                } else {
+                    // fill chats
+                    messagesList = (ArrayList<MessageModel>) daoMsg.getAll();
+                }
+
+                mCacheAdapter = new CachedMatchesAdapter(matchesAccounts, getActivity());
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
-
-
     }
 
     @Override
@@ -143,31 +129,21 @@ public class MatchesFragment extends Fragment {
         mMatchesRecycler.setLayoutManager(new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false));
         //mMatchesRecycler.setAdapter(mAdapter);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            View tempView = inflater.inflate(R.layout.fragment_wait, container, false);
-                        }
-                    });
+        new Thread(() -> {
+            try {
+                getActivity().runOnUiThread(() -> {
+                    View tempView = inflater.inflate(R.layout.fragment_wait, container, false);
+                });
 
-                    Thread.sleep(700);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mMatchesRecycler.setAdapter(mCacheAdapter);
-                            View view = inflater.inflate(R.layout.fragment_feed, container, false);
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Thread.sleep(700);
+                getActivity().runOnUiThread(() -> {
+                    mMatchesRecycler.setAdapter(mCacheAdapter);
+                    View view1 = inflater.inflate(R.layout.fragment_feed, container, false);
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
-
 
         return view;
     }

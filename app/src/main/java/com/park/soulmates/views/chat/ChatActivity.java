@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,17 +42,14 @@ public class ChatActivity extends AppCompatActivity {
         //TextView title = findViewById(R.id.chatTitle);
         setTitle(getIntent().getStringExtra("targetName"));
         FloatingActionButton fab =
-                (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText input = (EditText) findViewById(R.id.input);
+                findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            EditText input = findViewById(R.id.input);
 
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
-                FirebaseUtils.sendMessage(getIntent().getStringExtra("targetUID"), input.getText().toString());
-                input.setText("");
-            }
+            // Read the input field and push a new instance
+            // of ChatMessage to the Firebase database
+            FirebaseUtils.sendMessage(getIntent().getStringExtra("targetUID"), input.getText().toString());
+            input.setText("");
         });
     }
 
@@ -69,43 +65,34 @@ public class ChatActivity extends AppCompatActivity {
 
         // FIXME: get msg list
         String targetUid = getIntent().getStringExtra("targetUID");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
-                    MessageDao daoMsg = dbMsg.messageDao();
-                    Thread.sleep(700);
+        new Thread(() -> {
+            try {
+                MessageDB dbMsg = AppSingletone.getInstance().getDatabaseMsg();
+                MessageDao daoMsg = dbMsg.messageDao();
+                Thread.sleep(700);
 
-                    // sleep here
-                    ArrayList<MessageModel> msgList = (ArrayList<MessageModel>) daoMsg.getDialog(targetUid);
-                    CachedChatAdapter cachedAdapter = new CachedChatAdapter(msgList);
+                // sleep here
+                ArrayList<MessageModel> msgList = (ArrayList<MessageModel>) daoMsg.getDialog(targetUid);
+                CachedChatAdapter cachedAdapter = new CachedChatAdapter(msgList);
 
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                            Boolean connected =  cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
-                            if(connected) {
-                                chatRecycler.setAdapter(mAdapter);
-                            } else {
-                                chatRecycler.setAdapter(cachedAdapter);
-                                TextView appBar = findViewById(R.id.chatReloadBar);
-                                appBar.setVisibility(View.VISIBLE);
-                                appBar.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = getIntent();
-                                        startActivity(intent);
-                                    }
-                                });
-                            }
-                        }
-                    });
+                getActivity().runOnUiThread(() -> {
+                    ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    boolean connected = cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+                    if (connected) {
+                        chatRecycler.setAdapter(mAdapter);
+                    } else {
+                        chatRecycler.setAdapter(cachedAdapter);
+                        TextView appBar = findViewById(R.id.chatReloadBar);
+                        appBar.setVisibility(View.VISIBLE);
+                        appBar.setOnClickListener(v -> {
+                            Intent intent = getIntent();
+                            startActivity(intent);
+                        });
+                    }
+                });
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
     }

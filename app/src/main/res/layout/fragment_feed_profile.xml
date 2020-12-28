@@ -67,7 +67,6 @@ so let's go to the next feed card"
         android:text="e.g. IT, Music"
         android:textSize="@dimen/contentText" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likeBtn"
         android:layout_width="match_parent"
