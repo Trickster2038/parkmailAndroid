@@ -60,14 +60,13 @@ public class FirebaseUtils {
     }
 
     public static DatabaseReference getChatReference(String targetUser) {
-        DatabaseReference base = FirebaseDatabase
+        return FirebaseDatabase
                 .getInstance()
                 .getReference()
                 .child("users")
                 .child(uid)
                 .child("chats")
                 .child(targetUser);
-        return base;
     }
 
     public static void pushUser(String name, String surname, String bio, String birthdate,
