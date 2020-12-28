@@ -14,7 +14,7 @@
         android:layout_height="@dimen/matchAvatarSize"
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/extraSmallMargin"
-        android:src="@mipmap/ic_banner" />
+        android:src="@mipmap/ic_avatar_default" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/profileMatchesTitle"

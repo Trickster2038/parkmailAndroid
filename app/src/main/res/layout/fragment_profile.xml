@@ -19,7 +19,7 @@
             android:id="@+id/imageProfile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/feedAvatarHeight"
-            android:src="@mipmap/ic_banner" />
+            android:src="@mipmap/ic_avatar_default" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
